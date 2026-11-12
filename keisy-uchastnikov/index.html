@@ -543,13 +543,17 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 /* кейс 4: площадка Tesla */
 #case14 .lead { max-width: none; font-size: 24px; }
 #case14 .body { margin-top: 44px; }
-.tp-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 256px; gap: 40px; align-items: start; }
+.sec-tall { height: calc(1540px * var(--k, .5)); }
+.sec-tall .slide { height: 1540px; }
+.tp-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 400px; gap: 40px; align-items: start; }
 .tp-row .shot { height: auto; }
-.tp-row .pic { flex: none; height: 384px; --ph: 384px; }
+.tp-row .pic { flex: none; height: 440px; --ph: 440px; }
 .tp-row .cap { margin-top: 18px; }
-.tp-ph .phone { width: 256px; }
-.tp-ph .ph-cap { margin-top: 18px; }
-.tp-q { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 256px; gap: 40px; margin-top: 36px; }
+.tp-q { display: flex; flex-direction: column; gap: 40px; padding-top: 24px; }
+.tp-low { display: grid; grid-template-columns: 270px minmax(0,560px); gap: 48px; align-items: center; margin-top: 72px; }
+.tp-low .phone { width: 270px; }
+.tp-low .ph-cap { margin-top: 0; font-size: 32px; letter-spacing: -0.02em; }
+.tp-low .ph-cap small { margin-top: 12px; font-size: 21px; line-height: 1.55; }
 .lq { padding-left: 22px; border-left: 3px solid var(--gold); }
 .lq q { display: block; font: 600 22px/1.4 var(--display); letter-spacing: -0.01em; quotes: "«" "»"; }
 .lq > span { display: block; margin-top: 10px; font: 500 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); }
@@ -624,8 +628,13 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   #case14 .body { margin-top: 28px; }
   .tp-row { grid-template-columns: minmax(0,1fr); gap: 24px; }
   .tp-row .pic { height: 230px; --ph: 230px; aspect-ratio: auto !important; }
-  .tp-ph .phone { width: 210px; margin: 0 auto; }
-  .tp-q { grid-template-columns: minmax(0,1fr); gap: 20px; margin-top: 28px; padding-right: 0; }
+  .sec-tall { height: auto; }
+  .sec-tall .slide { height: auto; }
+  .tp-q { gap: 20px; padding-top: 0; }
+  .tp-low { grid-template-columns: minmax(0,1fr); gap: 16px; margin-top: 32px; }
+  .tp-low .phone { width: 210px; margin: 0 auto; }
+  .tp-low .ph-cap { font-size: 18px; }
+  .tp-low .ph-cap small { font-size: 14px; }
   .lq q { font-size: 16px; }
   .lq > span { font-size: 10.5px; }
   .c2 { gap: 32px; }
@@ -828,7 +837,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 12. Кейс 4: площадка Tesla -->
-<section class="sec" id="case14"><div class="slide">
+<section class="sec sec-tall" id="case14"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 4 · площадка Tesla, Киев</span><span class="uk">Кейс 4 · майданчик Tesla, Київ</span></div>
   <h2 class="title"><span class="ru">Два лендинга, ролик и новое позиционирование</span><span class="uk">Два лендинги, ролик і нове позиціонування</span></h2>
   <p class="lead"><span class="ru">Бизнес: площадка в Киеве, где в наличии больше 50 Tesla. За неделю – два лендинга, первый ролик и разбор маркетинга.</span><span class="uk">Бізнес: майданчик у Києві, де в наявності понад 50 Tesla. За тиждень – два лендинги, перший ролик і розбір маркетингу.</span></p>
@@ -836,9 +845,9 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
     <div class="tp-row">
       <div><a class="shot" href="https://tpark-vizytka.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tpark-vizytka.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-vizytka-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Лендинг на видео с площадки</span><span class="uk">Лендинг на відео з майданчика</span><small><span class="ru">Все видео на сайте сняты на своей площадке, чтобы клиент сразу доверял.</span><span class="uk">Усі відео на сайті зняті на власному майданчику, щоб клієнт одразу довіряв.</span></small></div></div>
       <div><a class="shot" href="https://tpark-demo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tpark-demo.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-demo-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Первый лендинг новичка</span><span class="uk">Перший лендинг новачка</span><small><span class="ru">Вторая участница знакома с AI на базовом уровне.</span><span class="uk">Друга учасниця знайома з AI на базовому рівні.</span></small></div></div>
-      <div class="tp-ph"><div class="phone"><div class="phone-screen"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="ph-cap"><span class="ru">Первый ролик</span><span class="uk">Перший ролик</span><small><span class="ru">Цены на топливо против 100&nbsp;км на Tesla и приглашение на тест-драйв.</span><span class="uk">Ціни на пальне проти 100&nbsp;км на Tesla і запрошення на тест-драйв.</span></small></div></div>
+      <div class="tp-q"><div class="lq"><q><span class="ru">Окупил обучение с одного голосового! Полная смена позиционирования в маркетинге</span><span class="uk">Окупив навчання з одного голосового! Повна зміна позиціонування в маркетингу</span></q><span><span class="ru">участник, после разбора сайта</span><span class="uk">учасник, після розбору сайту</span></span></div><div class="lq"><q><span class="ru">Очень круто все выходит, все достаточно просто</span><span class="uk">Дуже круто все виходить, все досить просто</span></q><span><span class="ru">участница, о первом ролике</span><span class="uk">учасниця, про перший ролик</span></span></div></div>
     </div>
-    <div class="tp-q"><div class="lq"><q><span class="ru">Окупил обучение с одного голосового! Полная смена позиционирования в маркетинге</span><span class="uk">Окупив навчання з одного голосового! Повна зміна позиціонування в маркетингу</span></q><span><span class="ru">участник, после разбора сайта</span><span class="uk">учасник, після розбору сайту</span></span></div><div class="lq"><q><span class="ru">Очень круто все выходит, все достаточно просто</span><span class="uk">Дуже круто все виходить, все досить просто</span></q><span><span class="ru">участница, о первом ролике</span><span class="uk">учасниця, про перший ролик</span></span></div></div>
+    <div class="tp-low"><div class="phone"><div class="phone-screen"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="ph-cap"><span class="ru">Первый ролик</span><span class="uk">Перший ролик</span><small><span class="ru">Цены на топливо против 100&nbsp;км на Tesla и приглашение на тест-драйв.</span><span class="uk">Ціни на пальне проти 100&nbsp;км на Tesla і запрошення на тест-драйв.</span></small></div></div>
   </div>
 </div></section>
 
