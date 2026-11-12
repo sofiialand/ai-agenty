@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сайты для показа</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}
+(function(){var l='ru';try{var q=new URLSearchParams(location.search).get('lang');if(q==='uk'||q==='ru'){l=q}else if(localStorage.getItem('lang')==='uk'){l='uk'}}catch(e){}document.documentElement.setAttribute('lang',l)})();</script>
+<style>
+:root {
+  --bg: #0b0c0e;
+
+  --glass: rgba(255,255,255,0.035);
+  --glass-strong: rgba(255,255,255,0.055);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-border-bright: rgba(255,255,255,0.16);
+  --soft-out: 14px 14px 34px rgba(0,0,0,0.58), -10px -10px 26px rgba(255,255,255,0.022);
+  --soft-in: inset 0 1px 0 rgba(255,255,255,0.07);
+
+  --text: #f4efe7;
+  --text-mid: rgba(244,239,231,0.68);
+  --text-dim: rgba(244,239,231,0.42);
+  --text-faint: rgba(244,239,231,0.22);
+
+  --gold: #fdd506;
+  --gold-rgb: 253,213,6;
+  --cream: #f4efe7;
+  --cool: #c2ccd2;
+  --cool-rgb: 194,204,210;
+  --navy-rgb: 38,56,84;
+
+  --shot-bg: #121418;
+
+  --display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --sans: "Inter", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 78% -10%, rgba(var(--navy-rgb),0.55), transparent 70%),
+    radial-gradient(700px 520px at 100% 100%, rgba(var(--gold-rgb),0.06), transparent 70%),
+    radial-gradient(600px 500px at 20% 60%, rgba(var(--navy-rgb),0.22), transparent 70%);
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; }
+
+/* ---------- layout ---------- */
+.layout { position: relative; z-index: 1; min-height: 100vh; }
+.main { padding: 48px 32px 64px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* ---------- glass blocks ---------- */
+.glass {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--soft-out), var(--soft-in);
+}
+
+.hero { min-height: 560px; padding: 56px 52px 52px; border-radius: 28px; overflow: hidden; display: flex; align-items: center; }
+.hero::after {
+  content: ""; position: absolute; right: -120px; top: -140px; width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--gold-rgb),0.12), transparent 65%);
+  pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero-text { max-width: 47%; }
+.hero .hero-wall { position: absolute; z-index: 0; top: 0; right: 0; bottom: 0; width: 58%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 46%); mask-image: linear-gradient(90deg, transparent 8%, #000 46%); }
+.hw-in { position: absolute; top: -45%; bottom: -45%; left: 4%; right: -12%; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; transform: rotate(-9deg); }
+.hw-col { overflow: hidden; }
+.hw-track { display: flex; flex-direction: column; gap: 16px; animation: hwUp 70s linear infinite; will-change: transform; }
+.hw-col:nth-child(2) .hw-track { animation-name: hwDown; animation-duration: 85s; }
+.hw-col:nth-child(3) .hw-track { animation-duration: 78s; }
+@keyframes hwUp { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 8px)); } }
+@keyframes hwDown { from { transform: translateY(calc(-50% - 8px)); } to { transform: translateY(0); } }
+.hw-t { flex: none; aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: var(--shot-bg); border: 1px solid var(--glass-border-bright); box-shadow: 0 22px 44px -22px rgba(0,0,0,0.75); }
+.hw-t.is-phone { aspect-ratio: 9 / 15; border-radius: 18px; }
+.hw-t img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.hero-stat { display: flex; align-items: baseline; gap: 14px; margin-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .hw-track { animation: none; } }
+.eyebrow {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+  text-shadow: 0 0 14px rgba(var(--gold-rgb),0.35);
+}
+.hero-title {
+  max-width: 16ch;
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(38px, 5.4vw, 66px); line-height: 1; letter-spacing: -0.04em;
+  margin: 22px 0 22px;
+  background: linear-gradient(100deg, #ffffff 0%, var(--cream) 55%, var(--gold) 120%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-offer {
+  max-width: 620px;
+  font: 600 clamp(18px, 2vw, 22px)/1.45 var(--display); letter-spacing: -0.02em;
+  color: var(--text-mid);
+}
+.hero-offer .hl {
+  padding: 0 .2em; border-radius: 6px;
+  background: var(--gold); color: var(--bg);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  box-shadow: 0 0 24px rgba(var(--gold-rgb),0.25);
+}
+
+/* ---------- group chips ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.chips a {
+  display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px;
+  border-radius: 999px; border: 1px solid var(--glass-border-bright); background: var(--glass);
+  font: 600 13px var(--sans); color: var(--text);
+  transition: border-color .2s, color .2s;
+}
+.chips a span { font: 500 11px var(--mono); color: var(--text-dim); }
+.chips a:hover { border-color: rgba(var(--gold-rgb),0.6); }
+.chips a:hover span { color: var(--gold); }
+
+/* ---------- groups ---------- */
+.group { padding-top: 32px; margin-top: 32px; border-top: 1px solid var(--glass-border); scroll-margin-top: 16px; }
+.group:first-child { border-top: 0; }
+.group-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.group-title { font: 700 clamp(22px, 2.4vw, 28px)/1.15 var(--display); letter-spacing: -0.02em; }
+.group-count {
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  font: 500 11px var(--mono); color: var(--text-dim);
+  background: var(--shot-bg); border: 1px solid var(--glass-border-bright);
+}
+
+/* ---------- cards ---------- */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.grid > li { display: flex; }
+.card {
+  display: flex; flex-direction: column; width: 100%;
+  padding: 12px 12px 20px; color: inherit;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-2px); border-color: rgba(var(--gold-rgb),0.35); box-shadow: var(--soft-out), var(--soft-in), 0 0 40px rgba(var(--gold-rgb),0.12); }
+.card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+.shot {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+  border-radius: 12px; border: 1px solid var(--glass-border); background: var(--shot-bg);
+}
+.shot .preview { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.card:hover .shot .preview { transform: scale(1.03); }
+
+/* телефон: превью в рамке поверх размытого фона из того же снимка */
+.shot--phone { background: #0f1014; }
+.phone-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(22px) saturate(1.2) brightness(.6); transform: scale(1.25); }
+.phone {
+  position: absolute; top: 8%; left: 50%; width: 38%; padding: 1.4%;
+  border-radius: 15% / 6.8%; background: #050506;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07), 0 0 0 2px #8b9099, 0 0 0 3px #2a2b2f, 0 28px 56px -12px rgba(0,0,0,0.7);
+  transform: translateX(-50%); transition: transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.phone::before, .phone::after { content: ""; position: absolute; width: 2px; background: #8b9099; }
+.phone::before { top: 24%; right: -5px; height: 11%; border-radius: 0 2px 2px 0; }
+.phone::after { top: 19%; left: -5px; height: 17%; border-radius: 2px 0 0 2px; background: linear-gradient(#8b9099 0 44%, transparent 44% 56%, #8b9099 56% 100%); }
+.phone-screen { position: relative; aspect-ratio: 600 / 1298; overflow: hidden; border-radius: 12.5% / 5.8%; background: #000; }
+.phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.phone-island { position: absolute; top: 1.35%; left: 50%; width: 31%; height: 4.3%; border-radius: 999px; background: #000; transform: translateX(-50%); }
+.card:hover .phone { transform: translate(-50%, -4%); }
+
+.card-body { display: flex; flex: 1; flex-direction: column; padding: 16px 8px 0; }
+.card-name { font: 700 18px/1.3 var(--display); letter-spacing: -0.02em; }
+.card-desc { margin-top: 8px; font-size: 14px; line-height: 1.55; color: var(--text-mid); }
+.card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: auto; padding-top: 16px; }
+.card-url { min-width: 0; overflow-wrap: anywhere; font: 500 11.5px var(--mono); color: var(--text-dim); transition: color .2s; }
+.card:hover .card-url { color: var(--gold); }
+.card-by {
+  display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px;
+  font: 500 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
+  color: var(--gold); border: 1px solid rgba(var(--gold-rgb),0.35); background: rgba(var(--gold-rgb),0.06);
+}
+
+/* ---------- final block: how to get the agent ---------- */
+.cta { margin-top: 48px; padding: 40px 44px; border-radius: 28px; overflow: hidden; }
+.cta::after {
+  content: ""; position: absolute; left: -140px; bottom: -180px; width: 440px; height: 440px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--gold-rgb),0.10), transparent 65%);
+  pointer-events: none;
+}
+.cta > * { position: relative; z-index: 1; }
+.cta-title { margin-top: 16px; max-width: 22ch; font: 700 clamp(28px, 3.6vw, 40px)/1.1 var(--display); letter-spacing: -0.03em; }
+.cta-lead { margin-top: 16px; max-width: 640px; font-size: 15px; line-height: 1.6; color: var(--text-mid); }
+.cta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.cta-card {
+  display: flex; flex-direction: column; padding: 24px; border-radius: 18px;
+  background: rgba(0,0,0,0.22); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.cta-card.is-main { border-color: rgba(var(--gold-rgb),0.35); }
+.cta-num {
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  font: 500 12px var(--mono); color: var(--text-dim); background: var(--shot-bg); border: 1px solid var(--glass-border-bright);
+}
+.cta-card.is-main .cta-num { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 600; box-shadow: 0 0 0 5px rgba(var(--gold-rgb),0.14); }
+.cta-name { margin-top: 16px; font: 700 19px/1.25 var(--display); letter-spacing: -0.02em; }
+.cta-text { margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--text-mid); flex: 1; }
+.cta-text b { color: var(--text); font-weight: 600; }
+.cta-word { padding: 1px 7px; border-radius: 6px; font: 600 12px var(--mono); letter-spacing: .08em; background: var(--gold); color: #15100c; }
+.cta-list { margin-top: 12px; display: grid; gap: 8px; }
+.cta-list li { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--text-mid); }
+.cta-list li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.btn {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; height: 44px; padding: 0 20px;
+  border-radius: 999px; font: 600 14px var(--sans); transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.btn-gold { background: var(--gold); color: #15100c; box-shadow: 0 0 24px rgba(var(--gold-rgb),0.25); }
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 0 34px rgba(var(--gold-rgb),0.4); }
+.btn-ghost { border: 1px solid var(--glass-border-bright); color: var(--text); }
+.btn-ghost:hover { border-color: rgba(var(--gold-rgb),0.6); }
+
+/* ---------- sticky button to the final block ---------- */
+.sticky-cta {
+  position: fixed; right: 24px; bottom: 24px; z-index: 20;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 50px; padding: 0 24px;
+  border-radius: 999px; background: var(--gold); color: #15100c; font: 600 15px var(--sans);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 26px rgba(var(--gold-rgb),0.3);
+  transition: opacity .25s, transform .25s, box-shadow .2s;
+}
+.sticky-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 36px rgba(var(--gold-rgb),0.45); }
+.sticky-cta.is-hidden { opacity: 0; transform: translateY(14px); pointer-events: none; }
+html[data-theme="light"] .sticky-cta { box-shadow: 0 10px 26px rgba(21,16,12,0.16); }
+
+.foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--glass-border); font: 500 10.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ---------- top bar: theme switch ---------- */
+.top-bar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-bottom: 16px; }
+.theme-switch { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-border-bright); }
+.theme-switch button { display: grid; place-items: center; width: 32px; height: 28px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--text-dim); cursor: pointer; transition: background .2s, color .2s; }
+.theme-switch button:hover { color: var(--text); }
+.theme-switch svg { width: 15px; height: 15px; }
+.theme-switch button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.theme-switch button[data-lang] { width: auto; padding: 0 12px; font: 600 11px var(--mono); letter-spacing: .08em; }
+html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
+
+/* ---------- light theme, as on the platform main page ---------- */
+html[data-theme="light"] {
+  --bg: #eef1f4;
+  --glass: rgba(255,255,255,0.7);
+  --glass-strong: rgba(255,255,255,0.85);
+  --glass-border: rgba(21,16,12,0.09);
+  --glass-border-bright: rgba(21,16,12,0.16);
+  --soft-out: 0 10px 30px rgba(21,16,12,0.06);
+  --soft-in: inset 0 1px 0 rgba(255,255,255,0.8);
+  --text: #15100c;
+  --text-mid: rgba(21,16,12,0.68);
+  --text-dim: rgba(21,16,12,0.46);
+  --text-faint: rgba(21,16,12,0.26);
+  --shot-bg: #e3e7eb;
+}
+html[data-theme="light"] body::before {
+  background:
+    radial-gradient(760px 520px at 82% -6%, rgba(var(--gold-rgb),0.16), transparent 70%),
+    radial-gradient(820px 620px at 100% 100%, rgba(var(--cool-rgb),0.55), transparent 70%),
+    radial-gradient(640px 520px at 18% 70%, rgba(255,255,255,0.7), transparent 70%);
+}
+html[data-theme="light"] .glass { background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+html[data-theme="light"] .hero-title { background: none; color: var(--text); }
+html[data-theme="light"] .hero-offer .hl { color: #15100c; box-shadow: none; }
+html[data-theme="light"] .eyebrow { display: flex; align-items: center; gap: 8px; color: var(--text-dim); text-shadow: none; }
+html[data-theme="light"] .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 3px rgba(var(--gold-rgb),0.25); }
+html[data-theme="light"] .group-count { background: #fbfaf7; }
+html[data-theme="light"] .card:hover { border-color: #e6be00; }
+html[data-theme="light"] .card:hover .card-url { color: #8a7000; }
+html[data-theme="light"] .chips a:hover { border-color: #e6be00; }
+html[data-theme="light"] .chips a:hover span { color: #8a7000; }
+html[data-theme="light"] .cta-card { background: rgba(255,255,255,0.55); box-shadow: inset 0 1px 2px rgba(21,16,12,0.05); }
+html[data-theme="light"] .cta-card.is-main { border-color: #e6be00; }
+html[data-theme="light"] .cta-num { background: #fbfaf7; }
+html[data-theme="light"] .cta-card.is-main .cta-num { color: #15100c; background: var(--gold); }
+html[data-theme="light"] .btn-gold { box-shadow: none; }
+html[data-theme="light"] .btn-ghost:hover { border-color: #e6be00; }
+html[data-theme="light"] .card-by { color: #15100c; background: var(--gold); border-color: var(--gold); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .main { padding: 32px 16px 48px; }
+}
+@media (max-width: 600px) {
+  .hero { min-height: 0; padding: 28px 22px 0; border-radius: 22px; flex-direction: column; align-items: stretch; }
+  .hero-text { max-width: none; }
+  .hero .hero-wall { position: relative; top: auto; right: auto; bottom: auto; width: auto; height: 280px; margin: 28px -22px 0; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%); mask-image: linear-gradient(180deg, transparent 0%, #000 22%); }
+  .hw-in { top: -30%; bottom: -60%; left: -6%; right: -6%; gap: 10px; }
+  .hw-track { gap: 10px; }
+  .grid { grid-template-columns: 1fr; gap: 16px; }
+  .cta { padding: 28px 22px; border-radius: 22px; }
+  .cta-grid { grid-template-columns: 1fr; }
+  .cta-card { padding: 20px; }
+  .sticky-cta { left: 16px; right: 16px; bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+<main class="main">
+<div class="wrap">
+
+  <div class="top-bar">
+    <div class="theme-switch" role="group" aria-label="Язык"><button type="button" data-lang="ru">RU</button><button type="button" data-lang="uk">UA</button></div>
+    <div class="theme-switch" role="group" aria-label="Тема"><button type="button" data-theme="dark" aria-label="Темная тема" title="Темная тема"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button><button type="button" data-theme="light" aria-label="Светлая тема" title="Светлая тема"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div>
+  </div>
+
+  <section class="glass hero">
+    <div class="hero-text">
+      <div class="eyebrow"><span class="ru">AI-сайты · Портфолио</span><span class="uk">AI-сайти · Портфоліо</span></div>
+      <h1 class="hero-title"><span class="ru">Сайты, которые создает AI&#8209;агент</span><span class="uk">Сайти, які створює AI&#8209;агент</span></h1>
+      <p class="hero-offer" id="lead"></p>
+      <nav class="chips" id="chips" aria-label="Подборки"></nav>
+    </div>
+    <div class="hero-wall" aria-hidden="true"><div class="hw-in" id="wall"></div></div>
+  </section>
+
+  <div id="groups"></div>
+
+  <section class="glass cta" id="kak-poluchit" aria-labelledby="cta-title">
+    <div class="eyebrow"><span class="ru">Как сделать так же</span><span class="uk">Як зробити так само</span></div>
+    <h2 class="cta-title" id="cta-title"><span class="ru">Вы можете так же</span><span class="uk">Ви можете так само</span></h2>
+    <p class="cta-lead ru">Не нужно писать код, искать дизайнера и разбираться в настройках. Вы описываете бизнес своими словами, а агент «AI&#8209;сайты» собирает сайт с формой заявки, квизом и аналитикой. Агент работает в Claude и входит в систему 7&nbsp;AI&#8209;агентов Влада Ясько.</p>
+    <p class="cta-lead uk">Не потрібно писати код, шукати дизайнера і розбиратися в налаштуваннях. Ви описуєте бізнес своїми словами, а агент «AI&#8209;сайти» збирає сайт із формою заявки, квізом і аналітикою. Агент працює в Claude і входить у систему 7&nbsp;AI&#8209;агентів Влада Ясько.</p>
+    <div class="cta-grid">
+      <div class="cta-card is-main">
+        <span class="cta-num">01</span>
+        <h3 class="cta-name"><span class="ru">Соберите свой первый сайт</span><span class="uk">Зберіть свій перший сайт</span></h3>
+        <p class="cta-text ru">Откройте бот в Telegram: там тарифы и оплата. Тариф выбираете под задачу: сайт для своего бизнеса или сайты на заказ для клиентов.</p>
+        <p class="cta-text uk">Відкрийте бот у Telegram: там тарифи й оплата. Тариф обираєте під задачу: сайт для свого бізнесу або сайти на замовлення для клієнтів.</p>
+        <a class="btn btn-gold" href="https://t.me/aiagents_pay_bot" target="_blank" rel="noopener noreferrer"><span class="ru">Выбрать тариф ↗</span><span class="uk">Обрати тариф ↗</span></a>
+      </div>
+      <div class="cta-card">
+        <span class="cta-num">02</span>
+        <h3 class="cta-name"><span class="ru">Что еще входит в систему</span><span class="uk">Що ще входить у систему</span></h3>
+        <ul class="cta-list ru">
+          <li>Продающие видео без камеры и съемок</li>
+          <li>Монтаж роликов с субтитрами</li>
+          <li>Реклама в Instagram и Facebook</li>
+          <li>SEO: бизнес находят в поиске и в ответах нейросетей</li>
+          <li>Консультант на сайте и продавец в мессенджерах</li>
+        </ul>
+        <ul class="cta-list uk">
+          <li>Продаючі відео без камери і зйомок</li>
+          <li>Монтаж роликів із субтитрами</li>
+          <li>Реклама в Instagram і Facebook</li>
+          <li>SEO: бізнес знаходять у пошуку і у відповідях нейромереж</li>
+          <li>Консультант на сайті і продавець у месенджерах</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://t.me/aiagents_pay_bot" target="_blank" rel="noopener noreferrer"><span class="ru">Узнать подробности ↗</span><span class="uk">Дізнатися подробиці ↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot"><span class="ru">© 2026 · Система AI-агентов</span><span class="uk">© 2026 · Система AI-агентів</span></footer>
+
+  <a class="sticky-cta" id="sticky-cta" href="#kak-poluchit"><span class="ru">Хочу так же</span><span class="uk">Хочу так само</span> ↓</a>
+
+</div>
+</main>
+</div>
+
+<script>
+/* Подборки сайтов. Текст в виде ['ru', 'uk'], строка – одинаково на обоих языках.
+   phone: true – превью снято с телефона и показывается в рамке телефона, by – плашка под карточкой. */
+const GROUPS = [
+  { id: 'shablony', title: ['Демо-шаблоны', 'Демо-шаблони'], chip: ['Демо-шаблоны', 'Демо-шаблони'], sites: [
+    { slug: 'villa', name: ['Вилла Sawah', 'Вілла Sawah'], desc: ['Аренда виллы на Бали, комнаты показаны на видео', 'Оренда вілли на Балі, кімнати показані на відео'], url: 'https://svettutest.github.io/shablony-demo/villa/' },
+    { slug: 'detailing', name: ['Детейлинг GRAFIT', 'Детейлінг GRAFIT'], desc: ['Студия детейлинга, видео на первом экране', 'Студія детейлінгу, відео на першому екрані'], url: 'https://svettutest.github.io/shablony-demo/detailing/' },
+    { slug: 'stomatologia', name: ['Стоматология Comfort', 'Стоматологія Comfort'], desc: ['Клиника на Троещине, Киев', 'Клініка на Троєщині, Київ'], url: 'https://svettutest.github.io/shablony-demo/stomatologia/' },
+  ]},
+  { id: 'klienty', title: ['Сайты клиентов', 'Сайти клієнтів'], chip: ['Клиенты', 'Клієнти'], sites: [
+    { slug: 'lono', name: 'LONO', desc: ['Сервис долголетия для отелей и резиденций, на английском', 'Сервіс довголіття для готелів і резиденцій, англійською'], url: 'https://lono-next.vercel.app/' },
+    { slug: 'moy-multik', name: 'Мой Мультик', desc: ['Персональные мультфильмы, где герой ваш ребенок', 'Персональні мультфільми, де герой – ваша дитина'], url: 'https://svettutest.github.io/moy-multik/', phone: true },
+    { slug: 'elina', name: ['Элина, курс массажа лица', 'Еліна, курс масажу обличчя'], desc: ['Сайт онлайн-курса, оплата и бот с уроками', 'Сайт онлайн-курсу, оплата і бот з уроками'], url: 'https://elina-deploy.vercel.app/', phone: true },
+    { slug: 'longevityhub', name: 'LongevityHub', desc: ['Брифинг для Dubai Longevity Authority, на английском', 'Брифінг для Dubai Longevity Authority, англійською'], url: 'https://longevityhub.vercel.app/dla/' },
+    { slug: 'english-quest', name: 'English Quest', desc: ['Английский для детей через Roblox и Minecraft', 'Англійська для дітей через Roblox і Minecraft'], url: 'https://english-quest-site.vercel.app/' },
+    { slug: 'yofinders', name: 'YoFinders', desc: ['Сервис поиска потерянных вещей, сайт для ученика из Дубая', 'Сервіс пошуку загублених речей, сайт для учня з Дубая'], url: 'https://yofinders-hero.vercel.app/' },
+  ]},
+  { id: 'akademia', title: ['Академия AI-заработка', 'Академія AI-заробітку'], chip: ['Академия', 'Академія'], sites: [
+    { slug: 'podpisnaya', name: ['Подписная Академии', 'Підписна Академії'], desc: ['Мастер-класс «Как превратить 50 $ в первые 1,000 $ за 30 дней»', 'Майстер-клас «Як перетворити 50 $ на перші 1,000 $ за 30 днів»'], url: 'https://vlad-live.vercel.app/', phone: true },
+    { slug: 'podpisnaya-2', name: ['Подписная Академии, версия 2', 'Підписна Академії, версія 2'], desc: ['Тот же мастер-класс, другая подача и дизайн', 'Той самий майстер-клас, інша подача і дизайн'], url: 'https://vlad-web2.vercel.app/', phone: true },
+  ]},
+  { id: 'marketolog', title: 'AI-Маркетолог', chip: 'AI-Маркетолог', sites: [
+    { slug: 'aimarketolog', name: ['Сайт AI-Маркетолога', 'Сайт AI-Маркетолога'], desc: ['Курс Влада: AI-система для своего проекта за 8 недель', 'Курс Влада: AI-система для свого проєкту за 8 тижнів'], url: 'https://aimarketolog.site/' },
+    { slug: 'loty', name: ['Лоты AI-Маркетолога', 'Лоти AI-Маркетолога'], desc: ['Лоты третьего потока на один день, живой счетчик мест', 'Лоти третього потоку на один день, живий лічильник місць'], url: 'https://loty-landing.vercel.app/', phone: true },
+    { slug: 'kopiika', name: ['Дарья Копейка', 'Дар\'я Копійка'], desc: ['Цифровые сотрудники для эксперта, сайт ученицы третьего потока', 'Цифрові співробітники для експерта, сайт учениці третього потоку'], url: 'https://shtat-kopiika.vercel.app/', by: ['ученица 3 потока', 'учениця 3 потоку'] },
+  ]},
+  { id: 'produkty', title: ['Наши продукты', 'Наші продукти'], chip: ['Продукты', 'Продукти'], sites: [
+    { slug: 'valyusha', name: 'AI Валюша', desc: ['Отвечает на звонки ваших клиентов 24/7', 'Відповідає на дзвінки ваших клієнтів 24/7'], url: 'https://valyusha-landing.vercel.app/' },
+  ]},
+  { id: 'rebyata', title: ['Сайты, которые собрали участники', 'Сайти, які зібрали учасники'], chip: ['Сайты участников', 'Сайти учасників'], sites: [
+    { slug: 'drborodina', name: ['Наталия Бородина', 'Наталія Бородіна'], desc: ['Врач китайской медицины, акупунктура в Киеве, сайт для клиента', 'Лікарка китайської медицини, акупунктура в Києві, сайт для клієнтки'], url: 'https://drborodina.vercel.app/', by: ['от Андрея', 'від Андрія'] },
+    { slug: 'toskana', name: 'Твоя Тоскана', desc: ['Ментальное путешествие в Тоскану, оплата и бот в SendPulse', 'Ментальна подорож у Тоскану, оплата і бот у SendPulse'], url: 'https://tvoya-toskana.vercel.app/', by: ['от Андрея', 'від Андрія'] },
+    { slug: 'toskana-immersive', name: ['Твоя Тоскана, иммерсивная версия', 'Твоя Тоскана, іммерсивна версія'], desc: ['Тот же продукт, другая подача и дизайн', 'Той самий продукт, інша подача і дизайн'], url: 'https://tvoya-toskana-immersive.vercel.app/', by: ['от Андрея', 'від Андрія'] },
+    { slug: 'nikrasova', name: 'Nikrasova', desc: ['Клиника косметологии и дерматологии в Киеве', 'Клініка косметології та дерматології в Києві'], url: 'https://nikrasova-mvp.vercel.app/', by: ['от Константина', 'від Костянтина'] },
+    { slug: 'tvdom', name: ['ТВ Дом-Лидер', 'ТВ Дом-Лідер'], desc: ['Агентство недвижимости в Одессе', 'Агентство нерухомості в Одесі'], url: 'https://tvdom-lider.vercel.app/', by: ['от Яны', 'від Яни'] },
+    { slug: 'rdtaxes', name: 'RD Taxes Group', desc: ['Налоговый консультант во Флориде, на английском', 'Податковий консультант у Флориді, англійською'], url: 'https://rdtaxesgroup.vercel.app/', by: ['от Ket', 'від Ket'] },
+    { slug: 'reifenservice', name: 'Julian G Reifenservice', desc: ['Мобильный шиномонтаж в Германии, сайт для соседа, на немецком', 'Мобільний шиномонтаж у Німеччині, сайт для сусіда, німецькою'], url: 'https://julian-g-reifenservice.vercel.app/', by: ['от Николая', 'від Миколи'] },
+    { slug: 'tpark-vizytka', name: 'TPark', desc: ['Супермаркет Tesla в Киеве', 'Супермаркет Tesla в Києві'], url: 'https://tpark-vizytka.vercel.app/', by: ['от Каролины', 'від Кароліни'] },
+    { slug: 'grili', name: 'GRILI.UA', desc: ['Магазин грилей в Киеве с тест-драйвом, черновик нового сайта', 'Магазин грилів у Києві з тест-драйвом, чернетка нового сайту'], url: 'https://grili-chernetka-flebl8.pages.dev/', by: ['от Александра', 'від Олександра'] },
+    { slug: 'infrasfera', name: ['Инфрасфера', 'Інфрасфера'], desc: ['Предизолированные трубы для теплосетей, для заводов и подрядчиков', 'Попередньо ізольовані труби для тепломереж, для заводів і підрядників'], url: 'https://infrasfera.vercel.app/', by: ['от Федора', 'від Федора'] },
+    { slug: 'elenis', name: 'Elenis Studio', desc: ['Студия эпиляции и косметологии в Киеве', 'Студія епіляції та косметології в Києві'], url: 'https://elenis.studio/', by: ['от Елены', 'від Олени'] },
+    { slug: 'elenis-cosmetics', name: 'ELENIS', desc: ['Профессиональная косметика для депиляции, свое производство', 'Професійна косметика для депіляції, власне виробництво'], url: 'https://elenis-cosmetics-site.vercel.app/', by: ['от Елены', 'від Олени'] },
+    { slug: 'expert-cosmetic-v3', name: 'Expert Cosmetic', desc: ['Косметика под своей маркой от 100 штук, контрактное производство', 'Косметика під власною маркою від 100 штук, контрактне виробництво'], url: 'https://expert-cosmetic-v3.vercel.app/', by: ['от Елены', 'від Олени'] },
+    { slug: 'optika', name: ['Оптика на Южной', 'Оптика на Південній'], desc: ['Проверка зрения и очки в Николаеве', 'Перевірка зору та окуляри в Миколаєві'], url: 'https://optika-na-yuzhnoy.vercel.app/', by: ['от Александра', 'від Олександра'] },
+    { slug: 'tevoma', name: 'TEVOMA', desc: ['LED-маска для лица, предзаказ первой партии', 'LED-маска для обличчя, передзамовлення першої партії'], url: 'https://tevoma-iota.vercel.app/', by: ['от Романа', 'від Романа'] },
+    { slug: 'jitlife', name: 'JITLIFE', desc: ['Электрический чемодан-самокат, продажи по Украине', 'Електрична валіза-самокат, продаж по Україні'], url: 'https://jitlife-ukraina.vercel.app/', by: ['от Григория', 'від Григорія'] },
+    { slug: 'fairyflowers', name: 'Fairy Flowers Bali', desc: ['Цветочный магазин на Бали, сайт для клиента, на английском', 'Квітковий магазин на Балі, сайт для клієнта, англійською'], url: 'https://fairyflowersbali.vercel.app/', by: ['от Глеба', 'від Гліба'] },
+    { slug: 'gleb-ai-neo', name: 'NEO', desc: ['Бесплатный разбор бизнеса и демо-сайт до оплаты', 'Безкоштовний розбір бізнесу і демо-сайт до оплати'], url: 'https://gleb-ai-neo.vercel.app/', by: ['от Глеба', 'від Гліба'] },
+    { slug: 'flowerpower', name: 'Flower Power', desc: ['Цветы с доставкой в Ровно, демо для знакомого', 'Квіти з доставкою в Рівному, демо для знайомого'], url: 'https://flowerpower-demo.vercel.app/2/', by: ['от Дмитрия', 'від Дмитра'] },
+    { slug: 'nabutok', name: 'Nabutok Sushi', desc: ['Доставка суши в Варшаве, на польском', 'Доставка суші у Варшаві, польською'], url: 'https://nabutok-sushi-ursus.vercel.app/', by: ['от Валерии', 'від Валерії'] },
+    { slug: 'roadtex', name: 'Roadtex', desc: ['Набор водителей на рефрижератор в Нью-Джерси', 'Набір водіїв на рефрижератор у Нью-Джерсі'], url: 'https://roadtex-drivers.vercel.app/', by: ['от Дмитрия', 'від Дмитра'] },
+    { slug: 'ekotermo', name: 'Ekotermo', desc: ['Отопление без света: печи, котлы, булерьяны, Харьков', 'Опалення без світла: печі, котли, булер\'яни, Харків'], url: 'https://ekotermo-teplo.vercel.app/', by: ['от Вадика', 'від Вадіка'] },
+    { slug: 'knyzhkovyi-gps', name: 'Книжковий GPS', desc: ['Мини-курс: экспертная книга от идеи до продаж', 'Мінікурс: експертна книга від ідеї до продажів'], url: 'https://knyzhkovyi-gps.vercel.app/', by: ['от Константина', 'від Костянтина'] },
+    { slug: 'knyzhkovyi-wayfinder', name: ['Книжковий GPS, версия 2', 'Книжковий GPS, версія 2'], desc: ['Тот же мини-курс, другая подача и дизайн', 'Той самий мінікурс, інша подача і дизайн'], url: 'https://knyzhkovyi-gps-wayfinder.vercel.app/', by: ['от Константина', 'від Костянтина'] },
+    { slug: 'biblia', name: 'Біблія підприємця', desc: ['Сайт книги для предпринимателей', 'Сайт книги для підприємців'], url: 'https://biblia-pidpryiemtsia.vercel.app/', by: ['от Константина', 'від Костянтина'] },
+    { slug: 'tpark-demo', name: 'TPark', desc: ['Tesla в наличии в Киеве, первый сайт автора', 'Tesla в наявності в Києві, перший сайт авторки'], url: 'https://tpark-demo.vercel.app/', by: ['от Ксюши', 'від Ксюші'] },
+    { slug: 'sal-cecina', name: 'SAL cecina', desc: ['Вяленая говядина', 'В\'ялена яловичина'], url: 'https://cecina-site.vercel.app/', by: ['от Влада', 'від Влада'] },
+    { slug: 'yandrusi', name: ['Готель «Яндрусі»', 'Готель «Яндрусі»'], desc: ['Мини-отель в Каменце-Подольском, прототип', 'Міні-готель у Кам\'янці-Подільському, прототип'], url: 'https://ananinalist-maker.github.io/proto-yandrusi/', by: ['от Анны', 'від Анни'] },
+    { slug: 'konversia-vikon', name: 'Конверсія Вікон', desc: ['Балкон под ключ в Киеве', 'Балкон під ключ у Києві'], url: 'https://liniavikon-world.vercel.app/', by: ['от Василия', 'від Василя'] },
+    { slug: 'fainopet', name: 'Файно!Pet', desc: ['Груминг-салон в Харькове', 'Грумінг-салон у Харкові'], url: 'https://fainopet.vercel.app/', by: ['от Василия', 'від Василя'] },
+    { slug: 'zoo-duken', name: 'ZOO ДҮКЕН', desc: ['Зоомагазин в Атырау', 'Зоомагазин в Атирау'], url: 'https://rzanbatyr.github.io/zoo-demo/', by: ['от Рахат', 'від Рахат'] },
+    { slug: 'olga-zorina', name: ['Ольга Зорина', 'Ольга Зоріна'], desc: ['Эксперт по биохакингу', 'Експертка з біохакінгу'], url: 'https://www.olgazorina.com/', by: ['от Тетяны', 'від Тетяни'] },
+    { slug: 'aq-dent', name: 'AQ DENT', desc: ['Стоматология в Астане', 'Стоматологія в Астані'], url: 'https://rzanbatyr.github.io/stoma-demo/', by: ['от Рахат', 'від Рахат'] },
+    { slug: 'arlan-vet', name: 'ARLAN VET', desc: ['Круглосуточная ветклиника в Астане', 'Цілодобова ветклініка в Астані'], url: 'https://rzanbatyr.github.io/vet-demo/', by: ['от Рахат', 'від Рахат'] },
+    { slug: 'unimeks', name: 'УніМеКС', desc: ['Бесплатный мастер-класс по крою без формул, Киев', 'Безкоштовний майстер-клас із крою без формул, Київ'], url: 'https://unimeks-kyiv1.vercel.app/', by: ['от Anna Kat', 'від Anna Kat'] },
+  ]},
+];
+
+const root = document.documentElement;
+function lang() { return root.getAttribute('lang') === 'uk' ? 'uk' : 'ru'; }
+function tr(v) { return Array.isArray(v) ? v[lang() === 'uk' ? 1 : 0] : v; }
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function sitesWord(n) {
+  const a = n % 10, b = n % 100, few = a >= 2 && a <= 4 && (b < 12 || b > 14), one = a === 1 && b !== 11;
+  return lang() === 'uk' ? (one ? 'сайт' : few ? 'сайти' : 'сайтів') : (one ? 'сайт' : few ? 'сайта' : 'сайтов');
+}
+function shortUrl(u) { const x = new URL(u); return (x.host.replace(/^www\./, '') + x.pathname).replace(/\/$/, ''); }
+
+function render() {
+  const uk = lang() === 'uk';
+  document.title = uk ? 'Сайти для показу' : 'Сайты для показа';
+  const total = GROUPS.reduce(function (s, g) { return s + g.sites.length; }, 0);
+  document.getElementById('lead').innerHTML = '<span class="hl">' + total + '&nbsp;' + sitesWord(total) + '</span> ' +
+    (uk ? 'у ' + GROUPS.length + '&nbsp;добірках. Натисніть на картку, сайт відкриється в новій вкладці.'
+        : 'в ' + GROUPS.length + '&nbsp;подборках. Нажмите на карточку, сайт откроется в новой вкладке.');
+
+  const chips = document.getElementById('chips');
+  const groups = document.getElementById('groups');
+  chips.setAttribute('aria-label', uk ? 'Добірки' : 'Подборки');
+  chips.innerHTML = '';
+  groups.innerHTML = '';
+
+  GROUPS.forEach(function (g, gi) {
+    chips.insertAdjacentHTML('beforeend', '<a href="#' + g.id + '">' + esc(tr(g.chip)) + '<span>' + g.sites.length + '</span></a>');
+
+    const cards = g.sites.map(function (s, si) {
+      const src = 'img/' + s.slug + '.webp';
+      const load = gi === 0 && si < 3 ? 'eager' : 'lazy';
+      const shot = s.phone
+        ? '<div class="shot shot--phone"><img class="phone-bg" src="' + src + '" alt="" aria-hidden="true" loading="' + load + '" decoding="async">' +
+          '<div class="phone"><div class="phone-screen"><img src="' + src + '" alt="" width="600" height="1298" loading="' + load + '" decoding="async"><span class="phone-island"></span></div></div></div>'
+        : '<div class="shot"><img class="preview" src="' + src + '" alt="" width="960" height="600" loading="' + load + '" decoding="async"></div>';
+      return '<li><a class="glass card" href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">' + shot +
+        '<div class="card-body"><h3 class="card-name">' + esc(tr(s.name)) + '</h3><p class="card-desc">' + esc(tr(s.desc)) + '</p>' +
+        '<div class="card-meta"><span class="card-url">' + esc(shortUrl(s.url)) + '</span>' +
+        (s.by ? '<span class="card-by">' + esc(tr(s.by)) + '</span>' : '') + '</div></div></a></li>';
+    }).join('');
+
+    groups.insertAdjacentHTML('beforeend',
+      '<section class="group" id="' + g.id + '" aria-labelledby="' + g.id + '-title">' +
+      '<div class="group-head"><h2 class="group-title" id="' + g.id + '-title">' + esc(tr(g.title)) + '</h2><span class="group-count">' + g.sites.length + '</span></div>' +
+      '<ul class="grid">' + cards + '</ul></section>');
+  });
+}
+
+/* стена из превью сайтов на первом экране: скорость прокрутки не зависит от числа сайтов */
+(function () {
+  const all = [];
+  GROUPS.forEach(function (g) { g.sites.forEach(function (s) { all.push(s); }); });
+  const cols = [[], [], []];
+  all.forEach(function (s, i) { cols[i % 3].push(s); });
+  const wall = document.getElementById('wall');
+  wall.innerHTML = cols.map(function (c) {
+    const t = c.map(function (s) { return '<div class="hw-t' + (s.phone ? ' is-phone' : '') + '"><img src="img/' + s.slug + '.webp" alt="" loading="lazy" decoding="async"></div>'; }).join('');
+    return '<div class="hw-col"><div class="hw-track">' + t + t + '</div></div>';
+  }).join('');
+  const k = Math.max(1, Math.max.apply(null, cols.map(function (c) { return c.length; })) / 11);
+  [70, 85, 78].forEach(function (sec, i) { wall.children[i].firstChild.style.animationDuration = Math.round(sec * k) + 's'; });
+})();
+
+/* переключатель языка: RU по умолчанию, UA по кнопке или ?lang=uk */
+(function () {
+  const btns = document.querySelectorAll('[data-lang]');
+  function setLang(l) {
+    root.setAttribute('lang', l);
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+    try { localStorage.setItem('lang', l); } catch (e) {}
+    try { const u = new URL(location.href); if (l === 'uk') u.searchParams.set('lang', 'uk'); else u.searchParams.delete('lang'); history.replaceState(null, '', u); } catch (e) {}
+    render();
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+  setLang(lang());
+})();
+
+/* кнопка «Хочу так же»: прячется, когда нижний блок уже на экране или пролистан */
+(function () {
+  const btn = document.getElementById('sticky-cta');
+  const cta = document.getElementById('kak-poluchit');
+  function sync() { btn.classList.toggle('is-hidden', cta.getBoundingClientRect().top < window.innerHeight - 80); }
+  window.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
+})();
+
+/* переключатель темы */
+(function () {
+  const btns = document.querySelectorAll('.theme-switch button[data-theme]');
+  function sync() {
+    const light = root.getAttribute('data-theme') === 'light';
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String((b.dataset.theme === 'light') === light)); });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.dataset.theme === 'light') root.setAttribute('data-theme', 'light');
+      else root.removeAttribute('data-theme');
+      try { localStorage.setItem('theme', b.dataset.theme); } catch (e) {}
+      sync();
+    });
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
