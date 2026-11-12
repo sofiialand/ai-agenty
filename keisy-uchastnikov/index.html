@@ -47,8 +47,9 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .sec { position: relative; height: 100vh; height: 100dvh; overflow: hidden; scroll-snap-align: start; }
 .slide {
   position: absolute; left: 50%; top: 50%;
-  width: 1920px; height: 1080px; overflow: hidden;
-  padding: 88px 112px;
+  width: var(--W, 1920px); height: var(--H, 1080px); overflow: hidden;
+  padding: 88px calc(112px + var(--ex, 0px));
+  display: flex; flex-direction: column; justify-content: center;
   transform: translate(-50%, -50%) scale(var(--k, .5));
   background: var(--bg);
 }
@@ -60,6 +61,8 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
     radial-gradient(760px 600px at 12% 70%, rgba(var(--navy-rgb),0.24), transparent 70%);
 }
 .slide > * { position: relative; z-index: 1; }
+/* края свечения гаснут, слайды переходят друг в друга без шва */
+.slide::before { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); }
 
 /* ---------- шапка слайда ---------- */
 .eyebrow {
@@ -133,11 +136,11 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .yt { padding: 20px 22px; border-radius: 18px; background: var(--gold); color: #15100c; box-shadow: 0 24px 60px -28px rgba(var(--gold-rgb),0.5); }
 .yt strong { display: block; font: 800 60px/1 var(--display); letter-spacing: -0.04em; }
 .yt p { margin-top: 10px; font: 600 16px/1.3 var(--display); }
-.gal2 { position: relative; margin: 22px -112px 0; }
+.gal2 { position: relative; margin: 22px calc(-112px - var(--ex, 0px)) 0; }
 .gal2-view { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; outline: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 112px, #000 calc(100% - 112px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 112px, #000 calc(100% - 112px), transparent 100%); }
 .gal2-view::-webkit-scrollbar { display: none; }
 .gal2-view.is-drag { cursor: grabbing; }
-.gal2-track { display: flex; gap: 22px; width: max-content; padding: 10px 112px 18px; }
+.gal2-track { display: flex; gap: 22px; width: max-content; padding: 10px calc(112px + var(--ex, 0px)) 18px; }
 .gc { flex: none; width: 456px; display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); border: 1px solid var(--glass-border-bright); box-shadow: 0 24px 50px -26px rgba(0,0,0,0.85); transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .35s; user-select: none; -webkit-user-select: none; }
 .gc:hover { transform: translateY(-8px); border-color: rgba(var(--gold-rgb),0.6); box-shadow: 0 34px 60px -26px rgba(0,0,0,0.9), 0 0 40px rgba(var(--gold-rgb),0.14); }
 .gc-pic { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--shot-bg); }
@@ -220,7 +223,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .rp-site { display: flex; flex-direction: column; cursor: pointer; }
 .rp-site:hover .bar span { color: var(--gold); }
 .rp-site .bar { flex: none; }
-.rp-site img { flex: 1; min-height: 0; width: 100%; object-fit: cover; object-position: top center; }
+.rp-site .pic { position: relative; flex: 1; min-height: 0; overflow: hidden; --ph: 390px; }
 .rp-vid { position: relative; display: grid; place-items: center; background: #000; }
 .rp-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(26px) brightness(.55) saturate(1.3); transform: scale(1.2); }
 .rp-vid video { position: relative; height: 92%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8); }
@@ -316,7 +319,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .mini:hover b { color: var(--gold); }
 
 /* ---------- как сделать так же ---------- */
-.slide-cta { display: flex; flex-direction: column; justify-content: center; padding: 48px 112px 112px; }
+.slide-cta { display: flex; flex-direction: column; justify-content: center; padding: 48px calc(112px + var(--ex, 0px)) 112px; }
 .cta { position: relative; padding: 48px 64px; border-radius: 36px; overflow: hidden; }
 .cta::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(900px 520px at 0% 100%, rgba(var(--gold-rgb),0.08), transparent 70%); }
 .cta > * { position: relative; z-index: 1; }
@@ -341,7 +344,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .cbtn-gold { background: var(--gold); color: #15100c; box-shadow: 0 0 0 6px rgba(var(--gold-rgb),0.12), 0 18px 44px -16px rgba(var(--gold-rgb),0.6); }
 .cbtn-ghost { border: 1px solid var(--glass-border-bright); color: var(--text); }
 .cbtn-ghost:hover { border-color: rgba(var(--gold-rgb),0.55); }
-.foot { position: absolute; left: 112px; right: 112px; bottom: 36px; padding-top: 20px; border-top: 1px solid var(--glass-border); font: 500 15px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+.foot { position: absolute; left: calc(112px + var(--ex, 0px)); right: calc(112px + var(--ex, 0px)); bottom: 36px; padding-top: 20px; border-top: 1px solid var(--glass-border); font: 500 15px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
 
 /* ---------- панель управления ---------- */
 .ctrl { position: fixed; z-index: 10; right: 20px; top: 20px; display: flex; gap: 10px; align-items: center; }
@@ -535,22 +538,29 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .duo-ph { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 #case4 .body { margin-top: 44px; }
 #case4 .vs { grid-template-columns: 1fr 1fr; gap: 48px; }
-#case4 .vs .shot { height: 300px; }
+#case4 .vs .shot { height: 480px; }
 .pic img.long { position: absolute; left: 0; top: 0; width: 100%; height: auto; object-fit: initial; animation: pageScroll 46s ease-in-out infinite alternate; }
 .shot:hover img.long { animation-play-state: paused; }
 @keyframes pageScroll { 0%, 4% { transform: translateY(0); } 96%, 100% { transform: translateY(calc(-100% + var(--ph, 260px))); } }
-#case4 .vs .pic { --ph: 260px; }
+#case4 .vs .pic { --ph: 440px; }
 /* кейс 4: площадка Tesla */
 #case14 .lead { max-width: none; font-size: 24px; }
 #case14 .body { margin-top: 44px; }
-.sec-tall { height: calc(1540px * var(--k, .5)); }
-.sec-tall .slide { height: 1540px; }
+.sec-tall { --h0: 1540px; height: calc(max(var(--h0), var(--H, 1080px)) * var(--k, .5)); }
+.sec-tall .slide { height: max(var(--h0), var(--H, 1080px)); }
+#case4.sec-tall { --h0: 1320px; }
+#case2.sec-tall { --h0: 1360px; }
+#case3.sec-tall { --h0: 1280px; }
+#case6.sec-tall { --h0: 1260px; }
+#more.sec-tall { --h0: 1600px; }
+#case10.sec-tall { --h0: 1180px; }
 .tp-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 400px; gap: 40px; align-items: start; }
 .tp-row .shot { height: auto; }
 .tp-row .pic { flex: none; height: 440px; --ph: 440px; }
 .tp-row .cap { margin-top: 18px; }
 .tp-q { display: flex; flex-direction: column; gap: 40px; padding-top: 24px; }
-.tp-low { display: grid; grid-template-columns: 270px minmax(0,560px); gap: 48px; align-items: center; margin-top: 72px; }
+.tp-low { display: grid; grid-template-columns: 270px minmax(0,560px) minmax(0,1fr); gap: 48px; align-items: center; margin-top: 72px; }
+.tp-low .lq { justify-self: end; max-width: 520px; }
 .tp-low .phone { width: 270px; }
 .tp-low .ph-cap { margin-top: 0; font-size: 32px; letter-spacing: -0.02em; }
 .tp-low .ph-cap small { margin-top: 12px; font-size: 21px; line-height: 1.55; }
@@ -634,6 +644,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   .tp-low { grid-template-columns: minmax(0,1fr); gap: 16px; margin-top: 32px; }
   .tp-low .phone { width: 210px; margin: 0 auto; }
   .tp-low .ph-cap { font-size: 18px; }
+  .tp-low .lq { justify-self: stretch; max-width: none; }
   .tp-low .ph-cap small { font-size: 14px; }
   .lq q { font-size: 16px; }
   .lq > span { font-size: 10.5px; }
@@ -682,6 +693,22 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   #nishi .gal2 { margin-top: 28px; }
   #nishi .gc b { font-size: 17px; }
   #nishi .idx-q2 { margin-top: 24px; }
+}
+/* окно сайта: везде одна высота, страница сайта сама прокручивается */
+.shot.std { height: auto !important; }
+.shot.std .pic { flex: none !important; height: 440px !important; aspect-ratio: auto !important; --ph: 440px; }
+#more .gal { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 40px 36px; }
+.twin-a .shot.std .pic, .twin-b .shot.std .pic { height: 440px !important; }
+@media (max-width: 640px) {
+  .shot.std .pic { height: 230px !important; --ph: 230px; }
+  .rp-site .pic { --ph: 160px; }
+}
+/* свободная высота экрана уходит в картинки (только компьютер) */
+@media (min-width: 641px) {
+  #case1 .stage { height: calc(600px + var(--xh, 0px) * .55); }
+  #case15 .ph-big .phone { width: calc(350px + var(--xh, 0px) * .3); }
+  .all .mini .pic { height: calc(170px + var(--xh, 0px) * .15); }
+  #nishi .gc { width: calc(456px + var(--xh, 0px) * .5); }
 }
 </style>
 </head>
@@ -775,12 +802,12 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   <p class="lead"><span class="ru">Бизнес: праздники на Бали, 15 лет в ивентах, в ChatGPT – первое место по детским праздникам на острове. За две недели потока – пять результатов.</span><span class="uk">Бізнес: свята на Балі, 15 років в івентах, у ChatGPT – перше місце з дитячих свят на острові. За два тижні потоку – п'ять результатів.</span></p>
   <div class="body story-body">
     <ol class="steps"><li class="st on" data-i="0"><span class="st-n">1</span><div><b><span class="ru">Сайт с результатами агентства</span><span class="uk">Сайт із результатами агенції</span></b><p><span class="ru">Клиенты пишут, что нашли агентство через ChatGPT, бот отвечает в WhatsApp, заявки собирает CRM.</span><span class="uk">Клієнти пишуть, що знайшли агенцію через ChatGPT, бот відповідає у WhatsApp, заявки збирає CRM.</span></p></div></li><li class="st" data-i="1"><span class="st-n">2</span><div><b><span class="ru">Сайт первому клиенту</span><span class="uk">Сайт першому клієнту</span></b><p><span class="ru">У цветочного магазина были только Instagram и каталог в WhatsApp.</span><span class="uk">У квіткового магазину були тільки Instagram і каталог у WhatsApp.</span></p></div></li><li class="st" data-i="2"><span class="st-n">3</span><div><b><span class="ru">Сделку закрыл AI-продавец</span><span class="uk">Угоду закрив AI-продавець</span></b><p><span class="ru">Агент вел клиента от первого сообщения до оплаты без собственника.</span><span class="uk">Агент вів клієнта від першого повідомлення до оплати без власника.</span></p></div></li><li class="st" data-i="3"><span class="st-n">4</span><div><b><span class="ru">Ролик для праздников</span><span class="uk">Ролик для свят</span></b><p><span class="ru">Реклама ивент-агентства: сайт и заявка «перезвоним за 10 минут».</span><span class="uk">Реклама івент-агенції: сайт і заявка «передзвонимо за 10 хвилин».</span></p></div></li><li class="st" data-i="4"><span class="st-n">5</span><div><b><span class="ru">Ролик без съемок</span><span class="uk">Ролик без зйомок</span></b><p><span class="ru">Агент собрал анимацию из иллюстраций и надписей, в конце – переход в Telegram.</span><span class="uk">Агент зібрав анімацію з ілюстрацій і написів, наприкінці – перехід у Telegram.</span></p></div></li></ol>
-    <div class="stage" aria-hidden="true"><div class="ring"><div class="ring-f" data-i="0"><a class="rp rp-site" href="https://gleb-ai-neo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>gleb-ai-neo.vercel.app</span></div><img src="img/gleb-ai-neo.jpg" alt=""></a></div><div class="ring-f" data-i="1"><a class="rp rp-site" href="https://fairyflowersbali.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>fairyflowersbali.vercel.app</span></div><img src="img/fairyflowers.jpg" alt=""></a></div><div class="ring-f" data-i="2"><div class="rp rp-quote"><q><span class="ru">Офигенное ощущение осознавать, что твой агент от начала до конца закрыл сделку, а ты даже счет не выставлял</span><span class="uk">Неймовірне відчуття: твій агент від початку до кінця закрив угоду, а ти навіть рахунок не виставляв</span></q><span><span class="ru">собственник, 9 ноября</span><span class="uk">власник, 9 листопада</span></span></div></div><div class="ring-f" data-i="3"><div class="rp rp-vid"><img class="rp-bg" src="video/montazh-prazdnik.jpg" alt=""><video src="video/montazh-prazdnik.mp4" poster="video/montazh-prazdnik.jpg" muted loop playsinline autoplay preload="metadata"></video><span class="rp-cap"><span class="ru">Ролик · праздники</span><span class="uk">Ролик · свята</span></span></div></div><div class="ring-f" data-i="4"><div class="rp rp-vid"><img class="rp-bg" src="video/montazh-neo.jpg" alt=""><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" muted loop playsinline autoplay preload="metadata"></video><span class="rp-cap"><span class="ru">Ролик · анимация</span><span class="uk">Ролик · анімація</span></span></div></div></div><div class="stage-floor"></div></div>
+    <div class="stage" aria-hidden="true"><div class="ring"><div class="ring-f" data-i="0"><a class="rp rp-site" href="https://gleb-ai-neo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>gleb-ai-neo.vercel.app</span></div><div class="pic"><img class="long" src="img/gleb-ai-neo-full.jpg" alt=""></div></a></div><div class="ring-f" data-i="1"><a class="rp rp-site" href="https://fairyflowersbali.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>fairyflowersbali.vercel.app</span></div><div class="pic"><img class="long" src="img/fairyflowers-full.jpg" alt=""></div></a></div><div class="ring-f" data-i="2"><div class="rp rp-quote"><q><span class="ru">Офигенное ощущение осознавать, что твой агент от начала до конца закрыл сделку, а ты даже счет не выставлял</span><span class="uk">Неймовірне відчуття: твій агент від початку до кінця закрив угоду, а ти навіть рахунок не виставляв</span></q><span><span class="ru">собственник, 9 ноября</span><span class="uk">власник, 9 листопада</span></span></div></div><div class="ring-f" data-i="3"><div class="rp rp-vid"><img class="rp-bg" src="video/montazh-prazdnik.jpg" alt=""><video src="video/montazh-prazdnik.mp4" poster="video/montazh-prazdnik.jpg" muted loop playsinline autoplay preload="metadata"></video><span class="rp-cap"><span class="ru">Ролик · праздники</span><span class="uk">Ролик · свята</span></span></div></div><div class="ring-f" data-i="4"><div class="rp rp-vid"><img class="rp-bg" src="video/montazh-neo.jpg" alt=""><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" muted loop playsinline autoplay preload="metadata"></video><span class="rp-cap"><span class="ru">Ролик · анимация</span><span class="uk">Ролик · анімація</span></span></div></div></div><div class="stage-floor"></div></div>
   </div>
 </div></section>
 
 <!-- 5. Бьюти-компания -->
-<section class="sec" id="case2"><div class="slide">
+<section class="sec sec-tall" id="case2"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 2 · бьюти-компания, несколько стран</span><span class="uk">Кейс 2 · б'юті-компанія, кілька країн</span></div>
   <h2 class="title"><span class="ru">Три сайта за 3&nbsp;часа и два ролика без съемок</span><span class="uk">Три сайти за 3&nbsp;години і два ролики без зйомок</span></h2>
   <div class="body c2">
@@ -788,15 +815,15 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
       <div class="c2-h"><span class="tag"><span class="ru">Агент «AI&#8209;сайты»</span><span class="uk">Агент «AI&#8209;сайти»</span></span><span class="c2-hint"><span class="ru">Три направления компании – три сайта</span><span class="uk">Три напрями компанії – три сайти</span></span></div>
       <div class="c2-s3">
         <div>
-          <a class="shot" href="https://elenis.studio/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>elenis.studio</span></div><div class="pic"><img class="long" src="img/elenis-studio-full.jpg" alt=""></div></a>
+          <a class="shot std" href="https://elenis.studio/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>elenis.studio</span></div><div class="pic"><img class="long" src="img/elenis-studio-full.jpg" alt=""></div></a>
           <div class="cap"><span class="c2-n">01</span><span class="ru">Студия эстетики тела</span><span class="uk">Студія естетики тіла</span><small><span class="ru">Запись в Telegram и подарок на первый визит</span><span class="uk">Запис у Telegram і подарунок на перший візит</span></small></div>
         </div>
         <div>
-          <a class="shot" href="https://elenis-cosmetics-site.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>elenis-cosmetics-site.vercel.app</span></div><div class="pic"><img class="long" src="img/elenis-cosmetics-full.jpg" alt=""></div></a>
+          <a class="shot std" href="https://elenis-cosmetics-site.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>elenis-cosmetics-site.vercel.app</span></div><div class="pic"><img class="long" src="img/elenis-cosmetics-full.jpg" alt=""></div></a>
           <div class="cap"><span class="c2-n">02</span><span class="ru">Магазин для мастеров</span><span class="uk">Магазин для майстрів</span><small><span class="ru">Косметика для депиляции</span><span class="uk">Косметика для депіляції</span></small></div>
         </div>
         <div>
-          <a class="shot" href="https://expert-cosmetic-v3.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>expert-cosmetic-v3.vercel.app</span></div><div class="pic"><img class="long" src="img/expert-cosmetic-full.jpg" alt=""></div></a>
+          <a class="shot std" href="https://expert-cosmetic-v3.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>expert-cosmetic-v3.vercel.app</span></div><div class="pic"><img class="long" src="img/expert-cosmetic-full.jpg" alt=""></div></a>
           <div class="cap"><span class="c2-n">03</span><span class="ru">Своя марка под ключ</span><span class="uk">Власна марка під ключ</span><small><span class="ru">Производство от 100 штук</span><span class="uk">Виробництво від 100 штук</span></small></div>
         </div>
       </div>
@@ -831,7 +858,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
       </ol>
     </div>
     <div class="big">
-      <a class="shot" href="https://tvdom-lider.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tvdom-lider.vercel.app</span></div><div class="pic"><img src="img/tvdom.jpg" alt=""></div></a>
+      <a class="shot std" href="https://tvdom-lider.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tvdom-lider.vercel.app</span></div><div class="pic"><img class="long" src="img/tvdom-full.jpg" alt=""></div></a>
     </div>
   </div>
 </div></section>
@@ -843,30 +870,30 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   <p class="lead"><span class="ru">Бизнес: площадка в Киеве, где в наличии больше 50 Tesla. За неделю – два лендинга, первый ролик и разбор маркетинга.</span><span class="uk">Бізнес: майданчик у Києві, де в наявності понад 50 Tesla. За тиждень – два лендинги, перший ролик і розбір маркетингу.</span></p>
   <div class="body tp">
     <div class="tp-row">
-      <div><a class="shot" href="https://tpark-vizytka.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tpark-vizytka.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-vizytka-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Лендинг на видео с площадки</span><span class="uk">Лендинг на відео з майданчика</span><small><span class="ru">Все видео на сайте сняты на своей площадке, чтобы клиент сразу доверял.</span><span class="uk">Усі відео на сайті зняті на власному майданчику, щоб клієнт одразу довіряв.</span></small></div></div>
-      <div><a class="shot" href="https://tpark-demo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tpark-demo.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-demo-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Первый лендинг новичка</span><span class="uk">Перший лендинг новачка</span><small><span class="ru">Вторая участница знакома с AI на базовом уровне.</span><span class="uk">Друга учасниця знайома з AI на базовому рівні.</span></small></div></div>
-      <div class="tp-q"><div class="lq"><q><span class="ru">Окупил обучение с одного голосового! Полная смена позиционирования в маркетинге</span><span class="uk">Окупив навчання з одного голосового! Повна зміна позиціонування в маркетингу</span></q><span><span class="ru">участник, после разбора сайта</span><span class="uk">учасник, після розбору сайту</span></span></div><div class="lq"><q><span class="ru">Очень круто все выходит, все достаточно просто</span><span class="uk">Дуже круто все виходить, все досить просто</span></q><span><span class="ru">участница, о первом ролике</span><span class="uk">учасниця, про перший ролик</span></span></div></div>
+      <div><a class="shot std" href="https://tpark-vizytka.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tpark-vizytka.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-vizytka-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Лендинг на видео с площадки</span><span class="uk">Лендинг на відео з майданчика</span><small><span class="ru">Все видео на сайте сняты на своей площадке, чтобы клиент сразу доверял.</span><span class="uk">Усі відео на сайті зняті на власному майданчику, щоб клієнт одразу довіряв.</span></small></div></div>
+      <div><a class="shot std" href="https://tpark-demo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tpark-demo.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-demo-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Первый лендинг новичка</span><span class="uk">Перший лендинг новачка</span><small><span class="ru">Вторая участница знакома с AI на базовом уровне.</span><span class="uk">Друга учасниця знайома з AI на базовому рівні.</span></small></div></div>
+      <div class="tp-q"><div class="lq"><q><span class="ru">Окупил обучение с одного голосового! Полная смена позиционирования в маркетинге</span><span class="uk">Окупив навчання з одного голосового! Повна зміна позиціонування в маркетингу</span></q><span><span class="ru">участник, после разбора сайта</span><span class="uk">учасник, після розбору сайту</span></span></div></div>
     </div>
-    <div class="tp-low"><div class="phone"><div class="phone-screen"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="ph-cap"><span class="ru">Первый ролик</span><span class="uk">Перший ролик</span><small><span class="ru">Цены на топливо против 100&nbsp;км на Tesla и приглашение на тест-драйв.</span><span class="uk">Ціни на пальне проти 100&nbsp;км на Tesla і запрошення на тест-драйв.</span></small></div></div>
+    <div class="tp-low"><div class="phone"><div class="phone-screen"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="ph-cap"><span class="ru">Первый ролик</span><span class="uk">Перший ролик</span><small><span class="ru">Цены на топливо против 100&nbsp;км на Tesla и приглашение на тест-драйв.</span><span class="uk">Ціни на пальне проти 100&nbsp;км на Tesla і запрошення на тест-драйв.</span></small></div><div class="lq"><q><span class="ru">Очень круто все выходит, все достаточно просто</span><span class="uk">Дуже круто все виходить, все досить просто</span></q><span><span class="ru">участница, о первом ролике</span><span class="uk">учасниця, про перший ролик</span></span></div></div>
   </div>
 </div></section>
 
 <!-- 6. Кейсы 5–6: один участник, врач-клиент и проект жены -->
-<section class="sec" id="case3"><div class="slide">
+<section class="sec sec-tall" id="case3"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейсы 5–6 · один участник, два бизнеса</span><span class="uk">Кейси 5–6 · один учасник, два бізнеси</span></div>
   <h2 class="title"><span class="ru">Сайт клиенту-врачу и лендинг с оплатой для жены</span><span class="uk">Сайт клієнтці-лікарці й лендинг з оплатою для дружини</span></h2>
   <div class="body twin">
     <div class="twin-a">
       <div class="twin-h"><span class="num">5</span><div><span class="tag"><span class="ru">Кейс 5 · врач китайской медицины, Киев</span><span class="uk">Кейс 5 · лікарка китайської медицини, Київ</span></span><b><span class="ru">Сайт клиенту</span><span class="uk">Сайт клієнтці</span></b></div></div>
       <p class="twin-p"><span class="ru">Заказ клиента: акупунктура в Киеве, запись онлайн и в Direct.</span><span class="uk">Замовлення клієнтки: акупунктура в Києві, запис онлайн і в Direct.</span></p>
-      <a class="shot" href="https://drborodina.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>drborodina.vercel.app</span></div><div class="pic"><img src="img/drborodina.jpg" alt=""></div></a>
+      <a class="shot std" href="https://drborodina.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>drborodina.vercel.app</span></div><div class="pic"><img class="long" src="img/drborodina-full.jpg" alt=""></div></a>
     </div>
     <div class="twin-b">
       <div class="twin-h"><span class="num">6</span><div><span class="tag"><span class="ru">Кейс 6 · программа медитаций, проект жены</span><span class="uk">Кейс 6 · програма медитацій, проєкт дружини</span></span><b><span class="ru">Лендинг, который принимает оплату</span><span class="uk">Лендинг, який приймає оплату</span></b></div></div>
       <p class="twin-p"><span class="ru">Подключены оплата и бот в SendPulse. Иммерсивную версию участник собрал за 2&nbsp;часа, к началу эфира.</span><span class="uk">Підключені оплата і бот у SendPulse. Імерсивну версію учасник зібрав за 2&nbsp;години, до початку ефіру.</span></p>
       <div class="pair">
-        <a class="shot" href="https://tvoya-toskana.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tvoya-toskana.vercel.app</span></div><div class="pic"><img src="img/toskana.jpg" alt=""></div></a>
-        <a class="shot" href="https://tvoya-toskana-immersive.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tvoya-toskana-immersive.vercel.app</span></div><div class="pic"><img src="img/toskana-immersive.jpg" alt=""></div></a>
+        <a class="shot std" href="https://tvoya-toskana.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tvoya-toskana.vercel.app</span></div><div class="pic"><img class="long" src="img/toskana-full.jpg" alt=""></div></a>
+        <a class="shot std" href="https://tvoya-toskana-immersive.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tvoya-toskana-immersive.vercel.app</span></div><div class="pic"><img class="long" src="img/toskana-immersive-full.jpg" alt=""></div></a>
       </div>
       <div class="quote glass"><q><span class="ru">Кто не знал, Claude прекрасно САМ кликает кнопочки в конструкторе ботов и все настраивает</span><span class="uk">Хто не знав, Claude чудово САМ клікає кнопочки в конструкторі ботів і все налаштовує</span></q><span><span class="ru">участник, 6 ноября</span><span class="uk">учасник, 6 листопада</span></span></div>
     </div>
@@ -874,18 +901,18 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 7. До и после -->
-<section class="sec" id="case4"><div class="slide">
+<section class="sec sec-tall" id="case4"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 7 · найм водителей, логистика в США</span><span class="uk">Кейс 7 · найм водіїв, логістика в США</span></div>
   <h2 class="title"><span class="ru">Одна задача: что собирает Claude без агента и что с агентом</span><span class="uk">Одна задача: що збирає Claude без агента і що з агентом</span></h2>
   <div class="body">
     <div class="vs">
       <div class="vs-col">
         <div class="vs-head"><span class="tag"><span class="ru">Без агента</span><span class="uk">Без агента</span></span><span class="ru">Claude по запросу</span><span class="uk">Claude за запитом</span></div>
-        <a class="shot" href="https://roadtex-makety.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>roadtex-makety.vercel.app</span></div><div class="pic"><img class="long" src="img/roadtex-makety-full.jpg" alt=""></div></a>
+        <a class="shot std" href="https://roadtex-makety.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>roadtex-makety.vercel.app</span></div><div class="pic"><img class="long" src="img/roadtex-makety-full.jpg" alt=""></div></a>
       </div>
       <div class="vs-col is-agent">
         <div class="vs-head"><span class="tag"><span class="ru">С агентом</span><span class="uk">З агентом</span></span><span class="ru">AI-сайты</span><span class="uk">AI-сайти</span></div>
-        <a class="shot" href="https://roadtex-drivers.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>roadtex-drivers.vercel.app</span></div><div class="pic"><img class="long" src="img/roadtex-drivers-full.jpg" alt=""></div></a>
+        <a class="shot std" href="https://roadtex-drivers.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>roadtex-drivers.vercel.app</span></div><div class="pic"><img class="long" src="img/roadtex-drivers-full.jpg" alt=""></div></a>
       </div>
     </div>
     <div class="vs-low">
@@ -916,26 +943,26 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
       </div>
     </div>
     <div class="big">
-      <a class="shot" href="https://julian-g-reifenservice.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>julian-g-reifenservice.vercel.app</span></div><div class="pic"><img src="img/reifenservice.jpg" alt=""></div></a>
+      <a class="shot std" href="https://julian-g-reifenservice.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>julian-g-reifenservice.vercel.app</span></div><div class="pic"><img class="long" src="img/reifenservice-full.jpg" alt=""></div></a>
     </div>
   </div>
 </div></section>
 
 <!-- 9. Недигитальные ниши -->
-<section class="sec" id="case6"><div class="slide">
+<section class="sec sec-tall" id="case6"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейсы 9–11 · промышленность и торговля</span><span class="uk">Кейси 9–11 · промисловість і торгівля</span></div>
   <h2 class="title"><span class="ru">Трубы, грили и обогрев: сайты для недигитальных ниш</span><span class="uk">Труби, грилі та обігрів: сайти для нецифрових ніш</span></h2>
   <div class="body trio">
     <div>
-      <a class="shot" href="https://infrasfera.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>infrasfera.vercel.app</span></div><div class="pic"><img src="img/infrasfera.jpg" alt=""></div></a>
+      <a class="shot std" href="https://infrasfera.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>infrasfera.vercel.app</span></div><div class="pic"><img class="long" src="img/infrasfera-full.jpg" alt=""></div></a>
       <div class="cap"><span class="ru">Трубы для теплосетей</span><span class="uk">Труби для тепломереж</span><small><span class="ru">Ниша, где конкуренты – старые заводы со старыми отделами продаж. Сайт участник собрал за одну ночь.</span><span class="uk">Ніша, де конкуренти – старі заводи зі старими відділами продажу. Сайт учасник зібрав за одну ніч.</span></small></div>
     </div>
     <div>
-      <a class="shot" href="https://grili-chernetka-flebl8.pages.dev/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>grili-chernetka-flebl8.pages.dev</span></div><div class="pic"><img src="img/grili.jpg" alt=""></div></a>
+      <a class="shot std" href="https://grili-chernetka-flebl8.pages.dev/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>grili-chernetka-flebl8.pages.dev</span></div><div class="pic"><img class="long" src="img/grili-full.jpg" alt=""></div></a>
       <div class="cap"><span class="ru">Магазин грилей</span><span class="uk">Магазин грилів</span><small><span class="ru">Черновик нового сайта для магазина на 37&nbsp;000+ товаров, собран из наработок компании.</span><span class="uk">Чернетка нового сайту для магазину на 37&nbsp;000+ товарів, зібрана з напрацювань компанії.</span></small></div>
     </div>
     <div>
-      <a class="shot" href="https://ekotermo-teplo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>ekotermo-teplo.vercel.app</span></div><div class="pic"><img src="img/ekotermo.jpg" alt=""></div></a>
+      <a class="shot std" href="https://ekotermo-teplo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>ekotermo-teplo.vercel.app</span></div><div class="pic"><img class="long" src="img/ekotermo-full.jpg" alt=""></div></a>
       <div class="cap"><span class="ru">Обогрев дома без света</span><span class="uk">Обігрів дому без світла</span><small><span class="ru">Первый экран начинается с боли клиента: «Світло вимкнули. А вдома холодно».</span><span class="uk">Перший екран починається з болю клієнта: «Світло вимкнули. А вдома холодно».</span></small></div>
     </div>
   </div>
@@ -946,7 +973,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 11. Как продают сайты -->
-<section class="sec" id="case10"><div class="slide">
+<section class="sec sec-tall" id="case10"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейсы 12–14 · цветочный магазин, книга для предпринимателей, клиника косметологии</span><span class="uk">Кейси 12–14 · квітковий магазин, книга для підприємців, клініка косметології</span></div>
   <h2 class="title"><span class="ru">Готовый сайт до разговора о цене: два способа предложить его клиенту</span><span class="uk">Готовий сайт до розмови про ціну: два способи запропонувати його клієнту</span></h2>
   <div class="body">
@@ -955,9 +982,9 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
       <li><span class="num">2</span><div><b><span class="ru">Пересборка сайта, который уже есть</span><span class="uk">Перезбірка сайту, який уже є</span></b><p><span class="ru">Агент берет действующий сайт и собирает новую версию: так участник обновил сайты книги для предпринимателей и клиники косметологии.</span><span class="uk">Агент бере чинний сайт і збирає нову версію: так учасник оновив сайти книги для підприємців і клініки косметології.</span></p></div></li>
     </ol>
     <div class="trio full">
-      <a class="shot" href="https://flowerpower-demo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>flowerpower-demo.vercel.app</span></div><div class="pic"><img src="img/flowerpower.jpg" alt=""></div></a>
-      <a class="shot" href="https://biblia-pidpryiemtsia.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>biblia-pidpryiemtsia.vercel.app</span></div><div class="pic"><img src="img/biblia.jpg" alt=""></div></a>
-      <a class="shot" href="https://nikrasova-mvp.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>nikrasova-mvp.vercel.app</span></div><div class="pic"><img src="img/nikrasova.jpg" alt=""></div></a>
+      <a class="shot std" href="https://flowerpower-demo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>flowerpower-demo.vercel.app</span></div><div class="pic"><img class="long" src="img/flowerpower-full.jpg" alt=""></div></a>
+      <a class="shot std" href="https://biblia-pidpryiemtsia.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>biblia-pidpryiemtsia.vercel.app</span></div><div class="pic"><img class="long" src="img/biblia-full.jpg" alt=""></div></a>
+      <a class="shot std" href="https://nikrasova-mvp.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>nikrasova-mvp.vercel.app</span></div><div class="pic"><img class="long" src="img/nikrasova-full.jpg" alt=""></div></a>
     </div>
   </div>
 </div></section>
@@ -979,16 +1006,16 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 12. Галерея -->
-<section class="sec" id="more"><div class="slide">
+<section class="sec sec-tall" id="more"><div class="slide">
   <div class="eyebrow"><span class="ru">Еще работы потока</span><span class="uk">Ще роботи потоку</span></div>
   <h2 class="title"><span class="ru">Шесть ниш – шесть сайтов участников</span><span class="uk">Шість ніш – шість сайтів учасників</span></h2>
   <div class="body gal">
-    <div><a class="shot" href="https://nabutok-sushi-ursus.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>nabutok-sushi-ursus.vercel.app</span></div><div class="pic"><img src="img/sushi.jpg" alt=""></div></a><div class="cap"><span class="ru">Доставка суши</span><span class="uk">Доставка суші</span><small><span class="ru">Варшава, сайт с корзиной</span><span class="uk">Варшава, сайт з кошиком</span></small></div></div>
-    <div><a class="shot" href="https://rdtaxesgroup.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>rdtaxesgroup.vercel.app</span></div><div class="pic"><img src="img/rdtaxes.jpg" alt=""></div></a><div class="cap"><span class="ru">Налоговые услуги</span><span class="uk">Податкові послуги</span><small><span class="ru">США, отчетность для бизнеса</span><span class="uk">США, звітність для бізнесу</span></small></div></div>
-    <div><a class="shot" href="https://optika-na-yuzhnoy.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>optika-na-yuzhnoy.vercel.app</span></div><div class="pic"><img src="img/optika.jpg" alt=""></div></a><div class="cap"><span class="ru">Оптика</span><span class="uk">Оптика</span><small><span class="ru">Проверка зрения и очки</span><span class="uk">Перевірка зору та окуляри</span></small></div></div>
-    <div><a class="shot" href="https://tevoma-iota.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tevoma-iota.vercel.app</span></div><div class="pic"><img src="img/tevoma.jpg" alt=""></div></a><div class="cap"><span class="ru">LED-маски для лица</span><span class="uk">LED-маски для обличчя</span><small><span class="ru">Предзаказ первой партии</span><span class="uk">Передзамовлення першої партії</span></small></div></div>
-    <div><a class="shot" href="https://jitlife-ukraina.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>jitlife-ukraina.vercel.app</span></div><div class="pic"><img src="img/jitlife.jpg" alt=""></div></a><div class="cap"><span class="ru">Чемоданы-самокаты</span><span class="uk">Валізи-самокати</span><small><span class="ru">Магазин, доставка по Украине</span><span class="uk">Магазин, доставка по Україні</span></small></div></div>
-    <div><a class="shot" href="https://knyzhkovyi-gps.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>knyzhkovyi-gps.vercel.app</span></div><div class="pic"><img src="img/knyzhkovyi.jpg" alt=""></div></a><div class="cap"><span class="ru">Мини-курс для авторов</span><span class="uk">Мінікурс для авторів</span><small><span class="ru">Экспертная книга от идеи до продаж</span><span class="uk">Експертна книга від ідеї до продажів</span></small></div></div>
+    <div><a class="shot std" href="https://nabutok-sushi-ursus.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>nabutok-sushi-ursus.vercel.app</span></div><div class="pic"><img class="long" src="img/sushi-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Доставка суши</span><span class="uk">Доставка суші</span><small><span class="ru">Варшава, сайт с корзиной</span><span class="uk">Варшава, сайт з кошиком</span></small></div></div>
+    <div><a class="shot std" href="https://rdtaxesgroup.vercel.app" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>rdtaxesgroup.vercel.app</span></div><div class="pic"><img class="long" src="img/rdtaxes-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Налоговые услуги</span><span class="uk">Податкові послуги</span><small><span class="ru">США, отчетность для бизнеса</span><span class="uk">США, звітність для бізнесу</span></small></div></div>
+    <div><a class="shot std" href="https://optika-na-yuzhnoy.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>optika-na-yuzhnoy.vercel.app</span></div><div class="pic"><img class="long" src="img/optika-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Оптика</span><span class="uk">Оптика</span><small><span class="ru">Проверка зрения и очки</span><span class="uk">Перевірка зору та окуляри</span></small></div></div>
+    <div><a class="shot std" href="https://tevoma-iota.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>tevoma-iota.vercel.app</span></div><div class="pic"><img class="long" src="img/tevoma-full.jpg" alt=""></div></a><div class="cap"><span class="ru">LED-маски для лица</span><span class="uk">LED-маски для обличчя</span><small><span class="ru">Предзаказ первой партии</span><span class="uk">Передзамовлення першої партії</span></small></div></div>
+    <div><a class="shot std" href="https://jitlife-ukraina.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>jitlife-ukraina.vercel.app</span></div><div class="pic"><img class="long" src="img/jitlife-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Чемоданы-самокаты</span><span class="uk">Валізи-самокати</span><small><span class="ru">Магазин, доставка по Украине</span><span class="uk">Магазин, доставка по Україні</span></small></div></div>
+    <div><a class="shot std" href="https://knyzhkovyi-gps.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>knyzhkovyi-gps.vercel.app</span></div><div class="pic"><img class="long" src="img/knyzhkovyi-full.jpg" alt=""></div></a><div class="cap"><span class="ru">Мини-курс для авторов</span><span class="uk">Мінікурс для авторів</span><small><span class="ru">Экспертная книга от идеи до продаж</span><span class="uk">Експертна книга від ідеї до продажів</span></small></div></div>
   </div>
 </div></section>
 
@@ -1065,8 +1092,13 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 
   /* масштаб слайда под окно */
   function fit(){
-    var k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    var w = window.innerWidth, h = window.innerHeight;
+    var k = Math.min(w / 1920, h / 1080);
     root.style.setProperty('--k', k);
+    root.style.setProperty('--W', (w / k) + 'px');
+    root.style.setProperty('--H', (h / k) + 'px');
+    root.style.setProperty('--ex', ((w / k - 1920) / 2) + 'px');
+    root.style.setProperty('--xh', (h / k - 1080) + 'px');
   }
   fit(); window.addEventListener('resize', fit);
 
