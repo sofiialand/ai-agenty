@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Партнерская программа · Система AI-агентов</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+/* адрес партнерского бота: от него работают кнопка «Получить ссылку» и QR-код */
+var PARTNER_BOT = 'https://t.me/partner_ai_agents_bot';
+(function(){var l='ru';try{var q=new URLSearchParams(location.search).get('lang');if(q==='uk'||q==='ru'){l=q}else{var s=localStorage.getItem('lang');if(s==='uk')l='uk'}}catch(e){}document.documentElement.setAttribute('lang',l)})();
+</script>
+<style>
+:root {
+  --bg: #0b0c0e;
+  --ink-2: #16181c;
+  --line: rgba(255,255,255,0.08);
+  --line-2: rgba(255,255,255,0.16);
+  --text: #f4efe7;
+  --mid: rgba(244,239,231,0.7);
+  --dim: rgba(244,239,231,0.44);
+  --gold: #fdd506;
+  --gold-rgb: 253,213,6;
+  --cream: #f4efe7;
+  --warm-ink: #15100c;
+  --navy-rgb: 38,56,84;
+  --display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --sans: "Inter", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+  --spring: cubic-bezier(.32,.72,0,1);
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); scroll-snap-type: y mandatory; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img, video { display: block; }
+ul, ol { list-style: none; }
+.nw { white-space: nowrap; }
+html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
+
+/* ---------- слайд 1920×1080, растягивается на весь экран ---------- */
+.sec { position: relative; height: 100vh; height: 100dvh; overflow: hidden; scroll-snap-align: start; }
+.slide {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--W, 1920px); height: var(--H, 1080px); overflow: hidden;
+  padding: 88px calc(112px + var(--ex, 0px));
+  display: flex; flex-direction: column; justify-content: center;
+  transform: translate(-50%, -50%) scale(var(--k, .5));
+  background: var(--bg);
+}
+.slide::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(1100px 720px at 84% -14%, rgba(var(--navy-rgb),0.62), transparent 70%),
+    radial-gradient(900px 640px at 100% 106%, rgba(var(--gold-rgb),0.07), transparent 70%),
+    radial-gradient(760px 600px at 8% 72%, rgba(var(--navy-rgb),0.22), transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+.slide > * { position: relative; z-index: 1; flex-shrink: 0; }
+
+/* ---------- шапка ---------- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 14px; align-self: flex-start;
+  height: 44px; padding: 0 20px 0 16px; border-radius: 999px;
+  background: rgba(12,11,10,0.55); border: 1px solid rgba(244,239,231,0.14);
+  font: 500 18px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+}
+.eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(var(--gold-rgb),0.16), 0 0 14px rgba(var(--gold-rgb),0.8); animation: blink 2.4s var(--ease) infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+.title {
+  margin-top: 26px; max-width: 1560px;
+  font: 700 72px/1.04 var(--display); letter-spacing: -0.035em;
+  background: linear-gradient(100deg, #ffffff 0%, var(--cream) 60%, #f7e7a6 120%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.title em {
+  font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em;
+  font-size: 1.12em; line-height: .9;
+  background: none; color: var(--gold); -webkit-text-fill-color: var(--gold);
+  padding-right: .06em;
+}
+.lead { margin-top: 22px; max-width: 1180px; font: 500 26px/1.45 var(--display); letter-spacing: -0.01em; color: var(--mid); }
+.body { margin-top: 64px; }
+
+/* ---------- двойная рамка: стеклянная пластина в лотке ---------- */
+.bz { padding: 8px; border-radius: 34px; background: rgba(255,255,255,0.035); border: 1px solid var(--line); box-shadow: 0 40px 80px -40px rgba(0,0,0,0.9); }
+.bz > .core { height: 100%; border-radius: 27px; overflow: hidden; background: linear-gradient(160deg, #17191e, #0f1013); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
+
+/* ---------- кнопки: стрелка в своем круге ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 22px; height: 76px; padding: 0 10px 0 34px; border-radius: 999px;
+  background: var(--cream); color: var(--bg); font: 600 23px var(--display); letter-spacing: -0.01em;
+  transition: transform .5s var(--spring), box-shadow .5s var(--spring);
+}
+.btn i { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--bg); color: var(--gold); transition: transform .5s var(--spring); }
+.btn i svg { width: 22px; height: 22px; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 24px 50px -20px rgba(var(--gold-rgb),0.45); }
+.btn:hover i { transform: translate(3px,-2px) scale(1.06); }
+.btn:active { transform: scale(.98); }
+.btn.gold { background: var(--gold); color: var(--warm-ink); box-shadow: 0 0 0 7px rgba(var(--gold-rgb),0.12), 0 22px 50px -18px rgba(var(--gold-rgb),0.6); }
+.btn.ghost { background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--line-2); }
+.btn.ghost i { background: rgba(255,255,255,0.08); color: var(--text); }
+
+.chip { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line-2); background: rgba(12,11,10,0.55); font: 600 19px var(--display); color: var(--text); }
+.chip b { color: var(--gold); font-weight: 700; }
+.chip.g { border-color: rgba(var(--gold-rgb),0.5); color: var(--gold); background: rgba(var(--gold-rgb),0.07); }
+
+/* ---------- появление при входе на слайд ---------- */
+.rv { opacity: 0; transform: translateY(42px); filter: blur(10px); transition: opacity .9s var(--spring), transform 1.1s var(--spring), filter .9s var(--spring); transition-delay: calc(var(--d, 0) * 90ms); }
+.sec.in .rv { opacity: 1; transform: none; filter: none; }
+
+/* ---------- окно сайта, страница сама прокручивается ---------- */
+.win { display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: 20px; background: #121418; border: 1px solid var(--line-2); }
+.win .bar { display: flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px; flex: none; background: #16181d; border-bottom: 1px solid var(--line); }
+.win .bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.16); }
+.win .bar span { margin-left: 8px; font: 500 13px var(--mono); color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win .pic { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.win .pic img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.win .pic img.long { position: absolute; left: 0; top: 0; height: auto; animation: longScroll 26s var(--ease) infinite alternate; }
+@keyframes longScroll { 0%, 8% { transform: translateY(0); } 92%, 100% { transform: translateY(calc(-100% + var(--ph, 300px))); } }
+
+.lab { position: absolute; left: 14px; bottom: 14px; z-index: 2; padding: 7px 12px; border-radius: 10px; background: rgba(11,12,14,0.78); border: 1px solid var(--line-2); font: 600 15px var(--display); color: var(--text); backdrop-filter: none; }
+
+/* ---------- 1. Обложка ---------- */
+.wall { position: absolute !important; z-index: 0 !important; inset: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 36%, #000 60%); mask-image: linear-gradient(90deg, transparent 36%, #000 60%); }
+.wall-in { position: absolute; top: -380px; left: calc(980px + var(--ex, 0px) * 1.4); width: 1700px; height: 1950px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 30px; transform: perspective(2600px) rotateX(16deg) rotateY(-18deg) rotateZ(9deg); transform-origin: 30% 40%; animation: wallIn 1.8s var(--ease) both; }
+@keyframes wallIn { from { opacity: 0; } to { opacity: 1; } }
+.wcol { overflow: hidden; }
+.wtrack { display: flex; flex-direction: column; gap: 30px; animation: wallUp 95s linear infinite; will-change: transform; }
+.wcol:nth-child(2) .wtrack { animation-name: wallDown; animation-duration: 115s; }
+.wcol:nth-child(3) .wtrack { animation-duration: 105s; }
+.wcol:nth-child(4) .wtrack { animation-name: wallDown; animation-duration: 125s; }
+@keyframes wallUp { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 15px)); } }
+@keyframes wallDown { from { transform: translateY(calc(-50% - 15px)); } to { transform: translateY(0); } }
+.wt { flex: none; aspect-ratio: 16 / 10; border-radius: 16px; overflow: hidden; background: #121418; border: 1px solid var(--line-2); box-shadow: 0 30px 60px -24px rgba(0,0,0,0.85); }
+.wt img, .wt video { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.wt.v { aspect-ratio: 9 / 13; border-color: rgba(var(--gold-rgb),0.45); }
+.cover-shade { position: absolute !important; z-index: 0 !important; inset: 0; pointer-events: none; background: radial-gradient(1000px 760px at 20% 52%, rgba(11,12,14,0.94), transparent 70%), linear-gradient(180deg, rgba(11,12,14,0) 72%, rgba(11,12,14,0.9)); }
+.cv { position: relative; z-index: 2; max-width: 1080px; }
+.cv-sys { font: 600 24px/1 var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--gold); text-shadow: 0 0 18px rgba(var(--gold-rgb),0.4); }
+.cv-h { margin-top: 36px; font: 800 136px/.94 var(--display); letter-spacing: -0.055em; color: var(--text); }
+.cv-h em { font-style: normal; color: var(--gold); text-shadow: 0 0 120px rgba(var(--gold-rgb),0.35); }
+.cv .lead { margin-top: 44px; max-width: 800px; font-size: 27px; }
+.cv .lead b { color: var(--gold); font-weight: 700; }
+.scroll-hint { position: absolute !important; left: calc(112px + var(--ex, 0px)); bottom: 48px; display: flex; align-items: center; gap: 12px; font: 500 14px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.scroll-hint span { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--line-2); font-size: 13px; letter-spacing: 0; }
+
+/* ---------- 2. Что рекомендуете ---------- */
+.agents { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; max-width: 1500px; }
+.agents .chip { height: 42px; font-size: 18px; }
+.s2 { display: grid; grid-template-columns: 820px minmax(0,1fr); gap: 56px; align-items: stretch; margin-top: 48px; }
+.yts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.yt { display: flex; flex-direction: column; justify-content: space-between; padding: 26px 30px; border-radius: 28px; background: var(--gold); color: var(--warm-ink); box-shadow: 0 30px 70px -34px rgba(var(--gold-rgb),0.55), inset 0 1px 0 rgba(255,255,255,0.5); transition: transform .6s var(--spring); }
+.yt:hover { transform: translateY(-6px) rotate(-.6deg); }
+.yt strong { display: block; font: 800 72px/0.95 var(--display); letter-spacing: -0.05em; }
+.yt p { margin-top: 22px; font: 600 20px/1.35 var(--display); letter-spacing: -0.01em; }
+.bento { display: grid; grid-template-columns: 1.05fr 1fr 1fr; grid-template-rows: 1fr 1.25fr; gap: 16px; min-height: 0; height: 480px; }
+.bento > div { position: relative; overflow: hidden; border-radius: 22px; background: #121418; border: 1px solid var(--line-2); transition: transform .6s var(--spring), border-color .4s; }
+.bento > div:hover { transform: translateY(-5px); border-color: rgba(var(--gold-rgb),0.55); }
+.bento video, .bento img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.bn-a { grid-row: span 2; }
+.bn-b { grid-column: span 2; }
+.bn-b .win { border: 0; border-radius: 0; }
+.bn-b .pic { --ph: 166px; }
+
+/* ---------- 3. Бонус ---------- */
+.prices { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 20px; }
+.pt { position: relative; display: flex; flex-direction: column; padding: 30px 30px 32px; min-height: 380px; border-radius: 30px; background: var(--gold); color: var(--warm-ink); box-shadow: 0 30px 70px -34px rgba(var(--gold-rgb),0.6), inset 0 1px 0 rgba(255,255,255,0.55); transition: transform .6s var(--spring), box-shadow .6s var(--spring); }
+.pt:hover { transform: translateY(-8px); box-shadow: 0 44px 80px -30px rgba(var(--gold-rgb),0.7), inset 0 1px 0 rgba(255,255,255,0.55); }
+.pt-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 600 15px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.pt-h span:last-child { opacity: .62; }
+.pt-name { margin-top: 18px; font: 700 30px/1.15 var(--display); letter-spacing: -0.02em; }
+.pt-sum { margin-top: auto; font: 800 112px/0.9 var(--display); letter-spacing: -0.055em; }
+.pt-sum.sm { font-size: 82px; }
+.pt-pc { display: flex; align-items: center; gap: 14px; margin-top: 22px; font: 600 18px var(--display); }
+.pt-bar { flex: 1; height: 8px; border-radius: 99px; background: rgba(21,16,12,0.16); overflow: hidden; }
+.pt-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--warm-ink); transition: width 1.4s var(--spring) .5s; }
+.sec.in .pt-bar i { width: var(--w); }
+.pt-tag { position: absolute; top: -16px; right: 24px; padding: 7px 14px; border-radius: 999px; background: var(--bg); color: var(--gold); border: 1px solid rgba(var(--gold-rgb),0.5); font: 600 14px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.ex { display: grid; grid-template-columns: 290px repeat(3, minmax(0,1fr)); gap: 20px; align-items: center; margin-top: 36px; }
+.ex-l { font: 600 15px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+.ex-i { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 84px; padding: 0 28px; border-radius: 22px; background: rgba(255,255,255,0.035); border: 1px solid var(--line); }
+.ex-i > span { font: 500 20px/1.3 var(--display); color: var(--mid); }
+.ex-i b { font: 800 40px var(--display); letter-spacing: -0.04em; color: var(--gold); white-space: nowrap; }
+.note { margin-top: 28px; display: flex; align-items: center; gap: 14px; font: 500 19px/1.5 var(--sans); color: var(--dim); }
+.note::before { content: ""; flex: none; width: 24px; height: 2px; background: var(--gold); }
+
+/* ---------- 4. Три шага одной линией ---------- */
+.road { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 56px; }
+.road-line { position: absolute !important; left: 0; right: 0; top: 31px; height: 2px; background: linear-gradient(90deg, rgba(var(--gold-rgb),0.7), rgba(255,255,255,0.12)); overflow: hidden; }
+.road-line::after { content: ""; position: absolute; top: -3px; left: -20%; width: 20%; height: 8px; border-radius: 99px; background: radial-gradient(closest-side, #fff, rgba(var(--gold-rgb),0.9), transparent); filter: blur(1px); animation: travel 4.2s var(--ease) infinite; }
+@keyframes travel { from { left: -20%; } to { left: 100%; } }
+.rs-n { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--gold); color: var(--warm-ink); font: 700 24px var(--mono); box-shadow: 0 0 0 8px var(--bg), 0 0 0 9px rgba(var(--gold-rgb),0.35), 0 0 40px rgba(var(--gold-rgb),0.45); }
+.rs-vis { height: 300px; margin-top: 30px; }
+.rs-vis .core { position: relative; display: flex; align-items: center; justify-content: center; padding: 26px; }
+.rs-name { margin-top: 30px; font: 700 38px/1.1 var(--display); letter-spacing: -0.03em; }
+.rs-text { margin-top: 12px; font-size: 21px; line-height: 1.5; color: var(--mid); }
+.rs-res { margin-top: 20px; }
+.rs-res .chip { height: auto; min-height: 44px; padding: 9px 18px; font-size: 18px; line-height: 1.3; }
+.tg { width: 100%; max-width: 440px; padding: 18px 20px; border-radius: 18px 18px 18px 6px; background: #1d2733; box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8); font: 500 17px/1.45 var(--sans); color: #eef3f8; }
+.tg b { font-weight: 700; }
+.tg small { display: block; margin-top: 6px; font-size: 15px; color: rgba(238,243,248,0.66); }
+.tg-l { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: rgba(0,0,0,0.22); }
+.tg-l span { font-size: 14px; color: rgba(238,243,248,0.66); }
+.tg-l code { font: 500 14px var(--mono); color: #7fc4ff; }
+.rs-story { display: flex; gap: 16px; align-items: center; height: 100%; }
+.rs-story img { height: 100%; width: auto; border-radius: 14px; border: 1px solid var(--line-2); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.9); }
+.rs-story img + img { height: 78%; }
+.rs-story .bnr { height: auto; width: 250px; transform: rotate(-3deg); }
+
+/* ---------- 5. Ссылки под разговор ---------- */
+.links { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 22px; }
+.lk { display: flex; flex-direction: column; transition: transform .6s var(--spring); }
+.lk:hover { transform: translateY(-8px); }
+.lk .core { display: flex; flex-direction: column; }
+.lk-pic { position: relative; height: 300px; overflow: hidden; border-bottom: 1px solid var(--line); }
+.lk-pic > img { width: 100%; height: 100%; object-fit: cover; object-position: 68% 20%; transition: transform 1s var(--spring); }
+.lk:hover .lk-pic > img { transform: scale(1.05); }
+.lk-play { position: absolute; left: 20px; bottom: 20px; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: var(--gold); color: var(--warm-ink); box-shadow: 0 0 0 8px rgba(var(--gold-rgb),0.18); }
+.lk-play svg { width: 20px; height: 20px; margin-left: 3px; }
+.lk-body { display: flex; flex-direction: column; flex: 1; padding: 26px 26px 26px; }
+.lk-sit { font: 600 15px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.lk-name { margin-top: 12px; font: 700 29px/1.15 var(--display); letter-spacing: -0.02em; }
+.lk-text { margin-top: 12px; font-size: 18.5px; line-height: 1.5; color: var(--mid); flex: 1; }
+.lk-code { margin-top: 20px; align-self: flex-start; padding: 8px 12px; border-radius: 10px; background: rgba(0,0,0,0.35); border: 1px solid var(--line); font: 500 15px var(--mono); color: #7fc4ff; }
+.lk-col { position: absolute; inset: 0; }
+.lk-col .w1, .lk-col .w2 { position: absolute; width: 74%; aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; border: 1px solid var(--line-2); box-shadow: 0 24px 40px -20px rgba(0,0,0,0.9); }
+.lk-col img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.lk-col .w1 { left: 18px; top: 26px; transform: rotate(-4deg); }
+.lk-col .w2 { left: 46px; top: 120px; transform: rotate(3deg); }
+.lk-col .ph { position: absolute; right: 18px; top: 22px; width: 118px; aspect-ratio: 9/16; border-radius: 18px; overflow: hidden; border: 3px solid #222; box-shadow: 0 24px 40px -16px rgba(0,0,0,0.95); }
+.lk-col .ph video { width: 100%; height: 100%; object-fit: cover; }
+.lk-pic .win { border: 0; border-radius: 0; }
+.lk-pic .win .pic { --ph: 266px; }
+.tar { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 24px; background: radial-gradient(400px 260px at 80% 0%, rgba(var(--gold-rgb),0.12), transparent 70%); }
+.tar div { display: flex; justify-content: space-between; align-items: center; height: 52px; padding: 0 18px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--line); font: 600 19px var(--display); }
+.tar div b { font-weight: 700; color: var(--gold); }
+.tar div.on { background: var(--gold); color: var(--warm-ink); border-color: var(--gold); }
+.tar div.on b { color: var(--warm-ink); }
+
+/* ---------- 6. Промо-материалы ---------- */
+.s6 { display: grid; grid-template-columns: 840px minmax(0,1fr); gap: 64px; align-items: center; }
+.kit { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 48px; }
+.kit li { display: flex; align-items: center; gap: 16px; height: 76px; padding: 0 22px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid var(--line); font: 600 20px/1.25 var(--display); transition: border-color .4s, transform .5s var(--spring); }
+.kit li:hover { border-color: rgba(var(--gold-rgb),0.5); transform: translateX(4px); }
+.kit li i { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: rgba(var(--gold-rgb),0.12); color: var(--gold); }
+.kit li i svg { width: 20px; height: 20px; }
+.s6 .note { margin-top: 30px; max-width: 700px; align-items: flex-start; }
+.s6 .note::before { margin-top: 14px; }
+.s6 .btn { margin-top: 36px; }
+.stack { position: relative; height: 780px; }
+.stack > * { position: absolute; border-radius: 18px; overflow: hidden; border: 1px solid var(--line-2); box-shadow: 0 50px 90px -40px rgba(0,0,0,0.95); transition: transform .9s var(--spring); }
+.stack img { width: 100%; height: 100%; object-fit: cover; }
+.st-1 { left: 0; top: 40px; width: 640px; aspect-ratio: 16/9; transform: rotate(-4deg); animation: float1 9s var(--ease) infinite alternate; }
+.st-2 { left: 120px; top: 300px; width: 640px; aspect-ratio: 16/9; transform: rotate(2deg); animation: float2 10s var(--ease) infinite alternate; }
+.st-3 { left: 40px; top: 540px; width: 560px; aspect-ratio: 16/9; transform: rotate(-1.5deg); animation: float1 11s var(--ease) infinite alternate-reverse; }
+.st-4 { right: 0; top: 0; width: 300px; aspect-ratio: 9/16; transform: rotate(4deg); border-radius: 26px; animation: float2 8s var(--ease) infinite alternate; }
+.st-5 { right: -10px; top: 380px; width: 220px; aspect-ratio: 9/16; transform: rotate(-3deg); border-radius: 26px; animation: float1 9.5s var(--ease) infinite alternate; }
+@keyframes float1 { to { translate: 0 -14px; } }
+@keyframes float2 { to { translate: 0 12px; } }
+.stack > *:hover { z-index: 5; transform: rotate(0) scale(1.04); }
+
+/* ---------- 7. Выплаты ---------- */
+.s7 { display: grid; grid-template-columns: minmax(0,1fr) 420px; gap: 96px; align-items: center; height: 100%; }
+.tl { position: relative; display: flex; flex-direction: column; gap: 6px; margin-top: 52px; }
+.tl::before { content: ""; position: absolute; left: 25px; top: 30px; bottom: 30px; width: 2px; background: linear-gradient(180deg, rgba(var(--gold-rgb),0.6), rgba(255,255,255,0.1)); }
+.tl li { position: relative; display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 24px; padding: 14px 24px 14px 0; border-radius: 20px; cursor: default; transition: background .5s var(--spring); }
+.tl-n { position: relative; z-index: 1; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line-2); font: 600 18px var(--mono); color: var(--dim); transition: all .5s var(--spring); }
+.tl b { display: block; font: 700 27px/1.25 var(--display); letter-spacing: -0.02em; color: var(--dim); transition: color .5s; }
+.tl p { margin-top: 4px; font-size: 19px; line-height: 1.5; color: var(--dim); transition: color .5s; }
+.tl li.on .tl-n, .tl li.done .tl-n { background: var(--gold); border-color: var(--gold); color: var(--warm-ink); }
+.tl li.on .tl-n { box-shadow: 0 0 0 7px rgba(var(--gold-rgb),0.18), 0 0 30px rgba(var(--gold-rgb),0.5); }
+.tl li.on b, .tl li.done b { color: var(--text); }
+.tl li.on p { color: var(--mid); }
+.tl li.on { background: rgba(255,255,255,0.03); }
+.phone { position: relative; width: 420px; aspect-ratio: 9 / 19; padding: 12px; border-radius: 58px; background: linear-gradient(160deg, #2a2c31, #111215); box-shadow: 0 60px 100px -40px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.1); }
+.phone::after { content: ""; position: absolute; left: 50%; top: 26px; width: 110px; height: 30px; transform: translateX(-50%); border-radius: 99px; background: #000; z-index: 3; }
+.scr { position: relative; height: 100%; border-radius: 47px; overflow: hidden; background: #0e1621; display: flex; flex-direction: column; }
+.scr-h { display: flex; align-items: center; gap: 12px; padding: 70px 20px 14px; background: #17212b; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.scr-h i { display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--warm-ink); font: 800 15px var(--display); font-style: normal; }
+.scr-h b { display: block; font: 600 16px/1.2 var(--sans); color: #fff; }
+.scr-h small { font-size: 13px; color: #6d8aa6; }
+.chat { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 16px 14px 22px; overflow: hidden; }
+.msg { max-width: 92%; padding: 12px 14px; border-radius: 16px 16px 16px 5px; background: #182533; font: 400 15.5px/1.45 var(--sans); color: #eef3f8; transform-origin: 0 100%; transition: opacity .5s var(--spring), transform .6s var(--spring), max-height .6s var(--spring), margin .6s var(--spring), padding .6s var(--spring); }
+.msg b { font-weight: 700; }
+.msg small { display: block; margin-top: 4px; color: rgba(238,243,248,0.62); font-size: 14px; }
+.msg.off { opacity: 0; transform: translateY(20px) scale(.94); max-height: 0; padding-top: 0; padding-bottom: 0; margin-top: -10px; overflow: hidden; }
+.msg.hot { box-shadow: 0 0 0 1px rgba(var(--gold-rgb),0.55), 0 10px 30px -10px rgba(var(--gold-rgb),0.35); }
+.msg .row { display: flex; justify-content: space-between; gap: 10px; }
+.msg .row + .row { margin-top: 2px; }
+.ph-cap { margin-top: 20px; text-align: center; white-space: nowrap; font: 500 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+
+/* ---------- 8. Правила ---------- */
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.rule .core { padding: 44px 48px 48px; }
+.rule h3 { display: flex; align-items: center; gap: 16px; font: 700 34px/1.2 var(--display); letter-spacing: -0.02em; }
+.rule h3 i { display: grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 16px; background: rgba(var(--gold-rgb),0.12); color: var(--gold); }
+.rule h3 i svg { width: 24px; height: 24px; }
+.rule ol { display: flex; flex-direction: column; gap: 14px; margin-top: 36px; counter-reset: r; }
+.rule li { position: relative; display: flex; align-items: center; gap: 22px; min-height: 92px; padding: 18px 26px; border-radius: 22px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); font: 500 22px/1.4 var(--display); color: var(--text); counter-increment: r; transition: border-color .4s, transform .5s var(--spring); }
+.rule li:hover { border-color: rgba(var(--gold-rgb),0.45); transform: translateX(6px); }
+.rule li::before { content: "0" counter(r); flex: none; font: 600 18px var(--mono); color: var(--gold); }
+
+/* ---------- 9. Вопросы ---------- */
+.faq { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
+.fq { display: flex; flex-direction: column; padding: 34px 34px 36px; border-radius: 28px; background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.012)); border: 1px solid var(--line); transition: border-color .4s, transform .6s var(--spring); }
+.fq:hover { border-color: rgba(var(--gold-rgb),0.45); transform: translateY(-6px); }
+.fq q { display: block; font: italic 400 36px/1.15 var(--serif); color: var(--cream); quotes: "«" "»"; }
+.fq p { margin-top: 18px; font-size: 20px; line-height: 1.55; color: var(--mid); }
+.fq p b { color: var(--gold); font-weight: 600; }
+
+/* ---------- 10. Финал ---------- */
+.fin { display: grid; grid-template-columns: minmax(0,1fr) 400px; gap: 96px; align-items: center; }
+.fin .title { font-size: 120px; line-height: .98; letter-spacing: -0.045em; }
+.fin .lead { max-width: 900px; }
+.fin-btns { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 48px; }
+.qr .core { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 34px; }
+.qr-box { display: grid; place-items: center; width: 300px; height: 300px; padding: 18px; border-radius: 22px; background: #fff; }
+.qr-box img, .qr-box canvas { width: 264px !important; height: 264px !important; }
+.qr p { font: 500 17px/1.45 var(--display); color: var(--mid); text-align: center; }
+.qr.wait .qr-box { background: rgba(255,255,255,0.04); border: 1px dashed var(--line-2); }
+.qr.wait .qr-box span { font: 500 15px/1.5 var(--mono); color: var(--dim); text-align: center; letter-spacing: .06em; text-transform: uppercase; }
+.mq { position: absolute !important; left: 0; right: 0; bottom: 96px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); opacity: .55; }
+.mq-t { display: flex; gap: 22px; width: max-content; animation: mq 70s linear infinite; }
+.mq-t img { width: 300px; aspect-ratio: 16/10; object-fit: cover; object-position: top; border-radius: 14px; border: 1px solid var(--line-2); }
+@keyframes mq { to { transform: translateX(calc(-50% - 11px)); } }
+.foot { position: absolute !important; left: calc(112px + var(--ex, 0px)); right: calc(112px + var(--ex, 0px)); bottom: 36px; display: flex; justify-content: space-between; padding-top: 18px; border-top: 1px solid var(--line); font: 500 14px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+.s-fin .slide { justify-content: flex-start; padding-top: 150px; }
+
+/* ---------- управление ---------- */
+.ctrl { position: fixed; z-index: 10; right: 20px; top: 20px; display: flex; gap: 10px; align-items: center; }
+.seg { display: inline-flex; padding: 3px; border-radius: 999px; background: rgba(18,20,24,0.85); border: 1px solid var(--line-2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.seg button { height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: none; color: var(--dim); font: 600 12px var(--mono); letter-spacing: .08em; cursor: pointer; transition: background .3s var(--spring), color .3s; }
+.seg button:hover { color: var(--text); }
+.seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.counter { position: fixed; z-index: 10; right: 20px; bottom: 20px; padding: 6px 12px; border-radius: 999px; background: rgba(18,20,24,0.85); border: 1px solid var(--line-2); font: 500 12px var(--mono); letter-spacing: .08em; color: var(--dim); }
+.prog { position: fixed; z-index: 10; left: 0; top: 0; height: 2px; width: 100%; background: transparent; }
+.prog i { display: block; height: 100%; width: 0; background: var(--gold); box-shadow: 0 0 12px rgba(var(--gold-rgb),0.7); transition: width .6s var(--spring); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wtrack, .mq-t, .road-line::after, .win .pic img.long, .stack > *, .eyebrow::before { animation: none !important; }
+  .rv { transition: none; opacity: 1; transform: none; filter: none; }
+}
+
+/* ---------- свободная высота экрана уходит в картинки ---------- */
+@media (min-width: 641px) {
+  .bento { height: calc(480px + var(--xh, 0px) * .6); }
+  .lk-pic { height: calc(300px + var(--xh, 0px) * .4); }
+  .lk-pic .win .pic { --ph: calc(266px + var(--xh, 0px) * .4); }
+  .rs-vis { height: calc(300px + var(--xh, 0px) * .4); }
+}
+
+/* ---------- телефон: слайды складываются в ленту ---------- */
+@media (max-width: 640px) {
+  html { scroll-snap-type: none; }
+  .sec { height: auto; overflow: visible; border-bottom: 1px solid var(--line); }
+  .slide { position: relative; left: auto; top: auto; width: auto; height: auto; transform: none; padding: 60px 16px 52px; }
+  .eyebrow { height: 32px; gap: 10px; padding: 0 14px 0 12px; font-size: 11px; }
+  .eyebrow::before { width: 6px; height: 6px; }
+  .title { margin-top: 16px; font-size: 32px; line-height: 1.08; }
+  .lead { margin-top: 14px; font-size: 16px; }
+  .body { margin-top: 32px; }
+  .btn { height: 56px; gap: 14px; padding: 0 6px 0 22px; font-size: 16px; }
+  .btn i { width: 44px; height: 44px; }
+  .btn i svg { width: 18px; height: 18px; }
+  .chip { height: 34px; padding: 0 12px; font-size: 14px; }
+  .note { font-size: 14px; align-items: flex-start; }
+  .note::before { margin-top: 10px; width: 16px; }
+  .rv { transform: translateY(24px); }
+
+  .sec-cover .slide { display: flex; flex-direction: column; }
+  .cover-shade, .scroll-hint { display: none; }
+  .wall { position: relative !important; inset: auto; order: 2; height: 360px; margin: 32px -16px 0; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+  .wall-in { top: -120px; left: -60px; width: 760px; height: 900px; gap: 14px; transform: perspective(1400px) rotateX(14deg) rotateY(-14deg) rotateZ(8deg); }
+  .wtrack { gap: 14px; }
+  .wt { border-radius: 10px; }
+  .cv-sys { font-size: 13px; letter-spacing: .2em; }
+  .cv-h { margin-top: 18px; font-size: 54px; }
+  .cv .lead { margin-top: 18px; font-size: 16px; }
+
+  .agents { gap: 6px; margin-top: 18px; }
+  .agents .chip { height: 30px; font-size: 13px; }
+  .s2 { grid-template-columns: minmax(0,1fr); gap: 16px; margin-top: 28px; }
+  .yts { gap: 10px; }
+  .yt { padding: 18px; border-radius: 18px; }
+  .yt strong { font-size: 38px; }
+  .yt p { margin-top: 10px; font-size: 13.5px; }
+  .bento { height: 420px; gap: 10px; }
+  .bento > div { border-radius: 14px; }
+  .bn-b .pic { --ph: 140px; }
+  .lab { left: 8px; bottom: 8px; padding: 5px 8px; font-size: 11px; border-radius: 8px; }
+
+  .prices { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pt { min-height: 230px; padding: 18px 16px 20px; border-radius: 20px; }
+  .pt-h { font-size: 10.5px; letter-spacing: .06em; flex-direction: column; gap: 2px; }
+  .pt-name { margin-top: 10px; font-size: 17px; }
+  .pt-sum { font-size: 52px; }
+  .pt-sum.sm { font-size: 36px; }
+  .pt-pc { margin-top: 12px; gap: 8px; font-size: 12.5px; flex-direction: column; align-items: stretch; }
+  .pt-tag { top: -12px; right: 12px; padding: 4px 8px; font-size: 10px; }
+  .ex { grid-template-columns: 1fr; gap: 8px; margin-top: 24px; }
+  .ex-i { height: 60px; padding: 0 18px; border-radius: 16px; }
+  .ex-i span { font-size: 14px; }
+  .ex-i b { font-size: 24px; }
+  .ex-l { font-size: 11px; }
+
+  .road { grid-template-columns: minmax(0,1fr); gap: 40px; }
+  .road-line { display: none; }
+  .rs-n { width: 48px; height: 48px; font-size: 18px; box-shadow: 0 0 0 6px rgba(var(--gold-rgb),0.16); }
+  .rs-vis { height: 230px; margin-top: 18px; }
+  .rs-vis .core { padding: 16px; }
+  .rs-name { margin-top: 18px; font-size: 24px; }
+  .rs-text { font-size: 15px; }
+  .rs-res .chip { font-size: 14px; min-height: 34px; padding: 7px 12px; }
+  .tg { font-size: 14px; padding: 14px; }
+  .tg small, .tg-l span { font-size: 12.5px; }
+  .tg-l code { font-size: 11.5px; }
+  .rs-story .bnr { width: 160px; }
+
+  .links { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .lk-pic { height: 220px; }
+  .lk-pic .win .pic { --ph: 186px; }
+  .lk-body { padding: 18px 18px 20px; }
+  .lk-sit { font-size: 11.5px; }
+  .lk-name { font-size: 21px; margin-top: 8px; }
+  .lk-text { font-size: 14.5px; }
+  .lk-code { font-size: 12px; margin-top: 14px; }
+  .tar div { height: 40px; font-size: 14px; }
+
+  .s6 { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  .kit { grid-template-columns: 1fr; gap: 8px; margin-top: 24px; }
+  .kit li { height: 54px; padding: 0 14px; font-size: 15px; border-radius: 14px; }
+  .kit li i { width: 32px; height: 32px; border-radius: 10px; }
+  .s6 .note { margin-top: 18px; }
+  .s6 .btn { margin-top: 22px; }
+  .stack { height: 420px; }
+  .st-1 { width: 78%; top: 10px; }
+  .st-2 { width: 78%; left: 14%; top: 130px; }
+  .st-3 { width: 70%; left: 4%; top: 250px; }
+  .st-4 { width: 34%; border-radius: 14px; }
+  .st-5 { width: 30%; right: 8%; top: 200px; border-radius: 14px; }
+
+  .s7 { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  .tl { margin-top: 28px; }
+  .tl::before { left: 19px; }
+  .tl li { grid-template-columns: 40px minmax(0,1fr); gap: 14px; padding: 10px 10px 10px 0; }
+  .tl-n { width: 40px; height: 40px; font-size: 14px; }
+  .tl b { font-size: 17px; }
+  .tl p { font-size: 14px; }
+  .phone { width: 300px; margin: 0 auto; padding: 9px; border-radius: 44px; }
+  .phone::after { top: 19px; width: 80px; height: 22px; }
+  .scr { border-radius: 36px; }
+  .scr-h { padding-top: 52px; }
+  .msg { font-size: 13px; }
+  .msg small { font-size: 12px; }
+  .ph-cap { font-size: 11px; white-space: normal; }
+
+  .rules { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .rule .core { padding: 24px 20px 24px; }
+  .rule h3 { font-size: 21px; gap: 12px; }
+  .rule h3 i { width: 40px; height: 40px; border-radius: 12px; }
+  .rule ol { margin-top: 20px; gap: 10px; }
+  .rule li { min-height: 0; padding: 14px 16px; gap: 14px; font-size: 15px; border-radius: 16px; }
+  .rule li::before { font-size: 13px; }
+
+  .faq { grid-template-columns: minmax(0,1fr); gap: 12px; }
+  .fq { padding: 22px 20px; border-radius: 20px; }
+  .fq q { font-size: 26px; }
+  .fq p { margin-top: 10px; font-size: 15px; }
+
+  .s-fin .slide { padding-top: 60px; }
+  .fin { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  .fin .title { font-size: 48px; }
+  .fin-btns { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 28px; }
+  .qr-box { width: 220px; height: 220px; }
+  .qr-box img, .qr-box canvas { width: 190px !important; height: 190px !important; }
+  .qr .core { padding: 22px; }
+  .qr p { font-size: 14px; }
+  .mq { position: relative !important; bottom: auto; margin: 40px -16px 0; }
+  .mq-t img { width: 180px; }
+  .foot { position: static !important; margin-top: 32px; font-size: 10.5px; flex-direction: column; gap: 6px; }
+  .counter { display: none; }
+  .ctrl { top: 12px; right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
+<div class="ctrl">
+  <div class="seg" role="group" aria-label="Язык">
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="uk">UA</button>
+  </div>
+</div>
+<div class="counter" id="counter">1 / 10</div>
+
+<main id="deck">
+
+<!-- 1. Обложка -->
+<section class="sec sec-cover"><div class="slide">
+  <div class="wall" aria-hidden="true"><div class="wall-in">
+    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/gleb-ai-neo.jpg" alt=""></div><div class="wt"><img src="img/expert-cosmetic.jpg" alt=""></div><div class="wt v"><video src="video/beauty-avatar.mp4" poster="video/beauty-avatar.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/toskana-immersive.jpg" alt=""></div><div class="wt"><img src="img/grili.jpg" alt=""></div><div class="wt"><img src="img/biblia.jpg" alt=""></div></div></div>
+    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/fairyflowers.jpg" alt=""></div><div class="wt v"><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/roadtex-drivers.jpg" alt=""></div><div class="wt"><img src="img/ekotermo.jpg" alt=""></div><div class="wt"><img src="img/nikrasova.jpg" alt=""></div><div class="wt"><img src="img/optika.jpg" alt=""></div></div></div>
+    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/elenis-studio.jpg" alt=""></div><div class="wt"><img src="img/drborodina.jpg" alt=""></div><div class="wt v"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/reifenservice.jpg" alt=""></div><div class="wt"><img src="img/tvdom.jpg" alt=""></div><div class="wt"><img src="img/sushi.jpg" alt=""></div></div></div>
+    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/infrasfera.jpg" alt=""></div><div class="wt"><img src="img/flowerpower.jpg" alt=""></div><div class="wt v"><video src="video/konsultant.mp4" poster="video/konsultant.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/jitlife.jpg" alt=""></div><div class="wt"><img src="img/tevoma.jpg" alt=""></div><div class="wt"><img src="img/rdtaxes.jpg" alt=""></div></div></div>
+  </div></div>
+  <div class="cover-shade" aria-hidden="true"></div>
+  <div class="cv">
+    <div class="cv-sys rv"><span class="ru">7 AI&#8209;агентов</span><span class="uk">7 AI&#8209;агентів</span></div>
+    <h1 class="cv-h rv" style="--d:1"><span class="ru">Партнерская<br><em>программа</em></span><span class="uk">Партнерська<br><em>програма</em></span></h1>
+    <p class="lead rv" style="--d:2"><span class="ru">Рекомендуйте систему друзьям и получайте до&nbsp;<b class="nw">312&nbsp;$</b> с каждой оплаты по вашей ссылке. Продавать не нужно: систему показывает видео-презентация Влада Ясько, на вопросы отвечает менеджер.</span><span class="uk">Рекомендуйте систему друзям і отримуйте до&nbsp;<b class="nw">312&nbsp;$</b> з кожної оплати за вашим посиланням. Продавати не потрібно: систему показує відеопрезентація Влада Ясько, на питання відповідає менеджер.</span></p>
+  </div>
+  <div class="scroll-hint"><span>↓</span><span class="ru" style="all:unset">Листайте стрелками</span><span class="uk" style="all:unset">Гортайте стрілками</span></div>
+</div></section>
+
+<!-- 2. Что вы рекомендуете -->
+<section class="sec"><div class="slide">
+  <div class="eyebrow rv"><span class="ru">Что вы рекомендуете</span><span class="uk">Що ви рекомендуєте</span></div>
+  <h2 class="title rv" style="--d:1"><span class="ru">7 AI&#8209;агентов, которые делают услуги <em>целиком</em></span><span class="uk">7 AI&#8209;агентів, які роблять послуги <em>повністю</em></span></h2>
+  <p class="lead rv" style="--d:2"><span class="ru">Агентов ставят в свой бизнес вместо подрядчиков или продают как услугу. Восьмой агент в подарок ищет клиентов.</span><span class="uk">Агентів ставлять у свій бізнес замість підрядників або продають як послугу. Восьмий агент у подарунок шукає клієнтів.</span></p>
+  <div class="agents rv" style="--d:3">
+    <span class="chip"><span class="ru">Сайты</span><span class="uk">Сайти</span></span>
+    <span class="chip">Монтаж</span>
+    <span class="chip"><span class="ru">Продающие видео</span><span class="uk">Продаючі відео</span></span>
+    <span class="chip">Консультант</span>
+    <span class="chip"><span class="ru">Продавец в мессенджерах</span><span class="uk">Продавець у месенджерах</span></span>
+    <span class="chip">Реклама</span>
+    <span class="chip">SEO</span>
+    <span class="chip g"><span class="ru">+ AI&#8209;Охотник в подарок</span><span class="uk">+ AI&#8209;Мисливець у подарунок</span></span>
+  </div>
+  <div class="s2">
+    <div class="yts">
+      <div class="yt rv" style="--d:4"><strong class="nw">85,509&nbsp;$</strong><p><span class="ru">принесла система в бизнесе Влада Ясько</span><span class="uk">принесла система в бізнесі Влада Ясько</span></p></div>
+      <div class="yt rv" style="--d:5"><strong class="nw"><span class="ru">26&nbsp;сайтов</span><span class="uk">26&nbsp;сайтів</span></strong><p><span class="ru">собрали участники потока за первые 10&nbsp;дней</span><span class="uk">зібрали учасники потоку за перші 10&nbsp;днів</span></p></div>
+      <div class="yt rv" style="--d:6"><strong class="nw"><span class="ru">14&nbsp;дней</span><span class="uk">14&nbsp;днів</span></strong><p><span class="ru">на пробу: если не подойдет, вернем 100% оплаты</span><span class="uk">на пробу: якщо не підійде, повернемо 100% оплати</span></p></div>
+      <div class="yt rv" style="--d:7"><strong class="nw"><span class="ru">2&nbsp;месяца</span><span class="uk">2&nbsp;місяці</span></strong><p><span class="ru">с куратором и разбором задач каждую неделю</span><span class="uk">з куратором і розбором задач щотижня</span></p></div>
+    </div>
+    <div class="bento rv" style="--d:5">
+      <div class="bn-a"><video src="video/konsultant.mp4" poster="video/konsultant.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="lab"><span class="ru">AI&#8209;консультант отвечает клиентам</span><span class="uk">AI&#8209;консультант відповідає клієнтам</span></span></div>
+      <div class="bn-b"><div class="win"><div class="bar"><i></i><i></i><i></i><span>elenis.studio</span></div><div class="pic"><img class="long" src="img/elenis-studio-full.jpg" alt=""></div></div><span class="lab"><span class="ru">Сайт участника, собранный агентом</span><span class="uk">Сайт учасниці, зібраний агентом</span></span></div>
+      <div><video src="video/oplaty-ot-prodavca.mp4" poster="video/oplaty-ot-prodavca.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="lab"><span class="ru">Оплаты от AI&#8209;продавца</span><span class="uk">Оплати від AI&#8209;продавця</span></span></div>
+      <div><video src="video/montazh-posle.mp4" poster="video/montazh-posle.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="lab"><span class="ru">Ролик после AI&#8209;монтажа</span><span class="uk">Ролик після AI&#8209;монтажу</span></span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 3. Бонус -->
+<section class="sec"><div class="slide">
+  <div class="eyebrow rv"><span class="ru">Сколько вы получаете</span><span class="uk">Скільки ви отримуєте</span></div>
+  <h2 class="title rv" style="--d:1"><span class="ru">Бонус с <em>первой оплаты</em> друга</span><span class="uk">Бонус з <em>першої оплати</em> друга</span></h2>
+  <div class="body">
+    <div class="prices">
+      <div class="pt rv" style="--d:2">
+        <div class="pt-h"><span><span class="ru">Тариф</span><span class="uk">Тариф</span></span><span class="nw">300&nbsp;$</span></div>
+        <div class="pt-name">«Старт»</div>
+        <div class="pt-sum nw">30&nbsp;$</div>
+        <div class="pt-pc"><span class="ru">10% от цены</span><span class="uk">10% від ціни</span><span class="pt-bar"><i style="--w:10%"></i></span></div>
+      </div>
+      <div class="pt rv" style="--d:3">
+        <span class="pt-tag"><span class="ru">Самый высокий процент</span><span class="uk">Найвищий відсоток</span></span>
+        <div class="pt-h"><span><span class="ru">Тариф</span><span class="uk">Тариф</span></span><span class="nw">600&nbsp;$</span></div>
+        <div class="pt-name">«Система»</div>
+        <div class="pt-sum nw">90&nbsp;$</div>
+        <div class="pt-pc"><span class="ru">15% от цены</span><span class="uk">15% від ціни</span><span class="pt-bar"><i style="--w:15%"></i></span></div>
+      </div>
+      <div class="pt rv" style="--d:4">
+        <div class="pt-h"><span><span class="ru">Набор</span><span class="uk">Набір</span></span><span class="nw">850-5,200&nbsp;$</span></div>
+        <div class="pt-name"><span class="ru">Свой набор агентов</span><span class="uk">Свій набір агентів</span></div>
+        <div class="pt-sum sm nw">51-312&nbsp;$</div>
+        <div class="pt-pc"><span class="ru">6% от цены</span><span class="uk">6% від ціни</span><span class="pt-bar"><i style="--w:6%"></i></span></div>
+      </div>
+      <div class="pt rv" style="--d:5">
+        <div class="pt-h"><span><span class="ru">Тариф</span><span class="uk">Тариф</span></span><span class="nw">5,200&nbsp;$</span></div>
+        <div class="pt-name"><span class="ru">«Под ключ»</span><span class="uk">«Під ключ»</span></div>
+        <div class="pt-sum nw">312&nbsp;$</div>
+        <div class="pt-pc"><span class="ru">6% от цены</span><span class="uk">6% від ціни</span><span class="pt-bar"><i style="--w:6%"></i></span></div>
+      </div>
+    </div>
+    <div class="ex rv" style="--d:6">
+      <div class="ex-l"><span class="ru">Сколько это в деньгах</span><span class="uk">Скільки це в грошах</span></div>
+      <div class="ex-i"><span><span class="ru">3 друга купили «Систему»</span><span class="uk">3 друзі купили «Систему»</span></span><b><span class="cnt" data-to="270">270</span>&nbsp;$</b></div>
+      <div class="ex-i"><span><span class="ru">5 друзей купили «Старт»</span><span class="uk">5 друзів купили «Старт»</span></span><b><span class="cnt" data-to="150">150</span>&nbsp;$</b></div>
+      <div class="ex-i"><span><span class="ru">1 друг купил «Под ключ»</span><span class="uk">1 друг купив «Під ключ»</span></span><b><span class="cnt" data-to="312">312</span>&nbsp;$</b></div>
+    </div>
+    <p class="note rv" style="--d:7"><span class="ru">Бонус платим один раз, с первой покупки друга. С доплат за внедрение и сопровождение бонуса нет.</span><span class="uk">Бонус платимо один раз, з першої покупки друга. З доплат за впровадження та супровід бонусу немає.</span></p>
+  </div>
+</div></section>
+
+<!-- 4. Три шага -->
+<section class="sec"><div class="slide">
+  <div class="eyebrow rv"><span class="ru">Как это работает</span><span class="uk">Як це працює</span></div>
+  <h2 class="title rv" style="--d:1"><span class="ru">Три шага от ссылки <em>до выплаты</em></span><span class="uk">Три кроки від посилання <em>до виплати</em></span></h2>
+  <div class="body">
+    <div class="road">
+      <div class="road-line rv" style="--d:2" aria-hidden="true"></div>
+      <div class="rs rv" style="--d:2">
+        <div class="rs-n">1</div>
+        <div class="rs-vis bz"><div class="core">
+          <div class="tg"><b><span class="ru">🔗 Мои ссылки</span><span class="uk">🔗 Мої посилання</span></b>
+            <div class="tg-l"><span><span class="ru">Видео-презентация</span><span class="uk">Відеопрезентація</span></span><code>t.me/aiagents_pay_bot?start=p_4ZES0XJN</code></div>
+            <div class="tg-l"><span><span class="ru">Сразу к тарифам</span><span class="uk">Одразу до тарифів</span></span><code>t.me/aiagents_pay_bot?start=p_4ZES0XJN_pay</code></div>
+          </div>
+        </div></div>
+        <h3 class="rs-name"><span class="ru">Возьмите ссылку</span><span class="uk">Візьміть посилання</span></h3>
+        <p class="rs-text"><span class="ru">В партнерском боте, за минуту. Ссылка действует бессрочно.</span><span class="uk">У партнерському боті, за хвилину. Посилання діє безстроково.</span></p>
+        <div class="rs-res"><span class="chip g"><span class="ru">Ваш код в каждой ссылке</span><span class="uk">Ваш код у кожному посиланні</span></span></div>
+      </div>
+      <div class="rs rv" style="--d:4">
+        <div class="rs-n">2</div>
+        <div class="rs-vis bz"><div class="core">
+          <div class="rs-story"><img class="ru" src="img/storis-7-agentov-ru.jpg" alt="Сторис партнера"><img class="uk" src="img/storis-7-agentov-uk.jpg" alt="Сторіс партнера"><img class="bnr ru" src="img/26-saytov-ru.jpg" alt="Баннер"><img class="bnr uk" src="img/26-saytov-uk.jpg" alt="Банер"></div>
+        </div></div>
+        <h3 class="rs-name"><span class="ru">Поделитесь</span><span class="uk">Поділіться</span></h3>
+        <p class="rs-text"><span class="ru">В сторис, посте или личном сообщении. Тексты, баннеры и ролики уже готовы.</span><span class="uk">У сторіс, пості або особистому повідомленні. Тексти, банери й ролики вже готові.</span></p>
+        <div class="rs-res"><span class="chip g"><span class="ru">Друг закрепляется за вами с первого перехода</span><span class="uk">Друг закріплюється за вами з першого переходу</span></span></div>
+      </div>
+      <div class="rs rv" style="--d:6">
+        <div class="rs-n">3</div>
+        <div class="rs-vis bz"><div class="core">
+          <div class="tg"><b><span class="ru">✅ Бонус 90&nbsp;$ доступен к выплате.</span><span class="uk">✅ Бонус 90&nbsp;$ доступний до виплати.</span></b><small><span class="ru">Переведем 15-го числа. Напиши куратору, куда отправить: карта или USDT.</span><span class="uk">Переведемо 15-го числа. Напиши куратору, куди надіслати: картка або USDT.</span></small></div>
+        </div></div>
+        <h3 class="rs-name"><span class="ru">Получите бонус</span><span class="uk">Отримайте бонус</span></h3>
+        <p class="rs-text"><span class="ru">Через 14 дней после оплаты друга, когда закончится срок гарантии. Выплата 15-го числа.</span><span class="uk">Через 14 днів після оплати друга, коли закінчиться строк гарантії. Виплата 15-го числа.</span></p>
+        <div class="rs-res"><span class="chip g"><span class="ru">От&nbsp;30&nbsp;$ до&nbsp;312&nbsp;$ с оплаты</span><span class="uk">Від&nbsp;30&nbsp;$ до&nbsp;312&nbsp;$ з оплати</span></span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5. Что отправить другу -->
+<section class="sec"><div class="slide">
+  <div class="eyebrow rv"><span class="ru">Что отправить другу</span><span class="uk">Що надіслати другові</span></div>
+  <h2 class="title rv" style="--d:1"><span class="ru">Ссылка под <em>каждый</em> разговор</span><span class="uk">Посилання під <em>кожну</em> розмову</span></h2>
+  <p class="lead rv" style="--d:2"><span class="ru">Все ссылки ведут в бот оплаты и несут ваш код: друг открывает материал и закрепляется за вами.</span><span class="uk">Усі посилання ведуть у бот оплати й несуть ваш код: друг відкриває матеріал і закріплюється за вами.</span></p>
+  <div class="body" style="margin-top:56px">
+    <div class="links">
+      <div class="lk bz rv" style="--d:3"><div class="core">
+        <div class="lk-pic"><img class="ru" src="img/oblozhka-ru.jpg" alt=""><img class="uk" src="img/oblozhka-uk.jpg" alt=""><span class="lk-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span></div>
+        <div class="lk-body">
+          <div class="lk-sit"><span class="ru">Друг не слышал про AI&#8209;агентов</span><span class="uk">Друг не чув про AI&#8209;агентів</span></div>
+          <h3 class="lk-name"><span class="ru">Видео-презентация</span><span class="uk">Відеопрезентація</span></h3>
+          <p class="lk-text"><span class="ru">Влад показывает на реальном бизнесе, как агенты делают сайт, видео, рекламу и продажи, и сам рассказывает про тарифы.</span><span class="uk">Влад показує на реальному бізнесі, як агенти роблять сайт, відео, рекламу й продажі, і сам розповідає про тарифи.</span></p>
+          <code class="lk-code">?start=p_<span class="ru">КОД</span><span class="uk">КОД</span></code>
+        </div>
+      </div></div>
+      <div class="lk bz rv" style="--d:4"><div class="core">
+        <div class="lk-pic"><div class="lk-col"><div class="w1"><img src="img/tpark-demo.jpg" alt=""></div><div class="w2"><img src="img/drborodina.jpg" alt=""></div><div class="ph"><video src="video/beauty-avatar.mp4" poster="video/beauty-avatar.jpg" autoplay muted loop playsinline preload="metadata"></video></div></div></div>
+        <div class="lk-body">
+          <div class="lk-sit"><span class="ru">Друг сомневается</span><span class="uk">Друг вагається</span></div>
+          <h3 class="lk-name"><span class="ru">Кейсы участников</span><span class="uk">Кейси учасників</span></h3>
+          <p class="lk-text"><span class="ru">Ниша, сайты, ролики и слова самих участников: что агенты сделали в их бизнесе.</span><span class="uk">Ніша, сайти, ролики й слова самих учасників: що агенти зробили в їхньому бізнесі.</span></p>
+          <code class="lk-code">?start=p_КОД_cases</code>
+        </div>
+      </div></div>
+      <div class="lk bz rv" style="--d:5"><div class="core">
+        <div class="lk-pic"><div class="win"><div class="bar"><i></i><i></i><i></i><span>tpark-demo.vercel.app</span></div><div class="pic"><img class="long" src="img/tpark-demo-full.jpg" alt=""></div></div></div>
+        <div class="lk-body">
+          <div class="lk-sit"><span class="ru">Друг хочет продавать сайты</span><span class="uk">Друг хоче продавати сайти</span></div>
+          <h3 class="lk-name"><span class="ru">Сайты, которые собрал агент</span><span class="uk">Сайти, які зібрав агент</span></h3>
+          <p class="lk-text"><span class="ru">50 сайтов в 6 подборках: что можно продавать бизнесам как услугу.</span><span class="uk">50 сайтів у 6 добірках: що можна продавати бізнесам як послугу.</span></p>
+          <code class="lk-code">?start=p_КОД_sites</code>
+        </div>
+      </div></div>
+      <div class="lk bz rv" style="--d:6"><div class="core">
+        <div class="lk-pic"><div class="tar">
+          <div><span>🚀 <span class="ru">Старт</span><span class="uk">Старт</span></span><b class="nw">300&nbsp;$</b></div>
+          <div class="on"><span>🎯 <span class="ru">Система</span><span class="uk">Система</span></span><b class="nw">600&nbsp;$</b></div>
+          <div><span>🔥 <span class="ru">Под ключ</span><span class="uk">Під ключ</span></span><b class="nw">5,200&nbsp;$</b></div>
+          <div><span><span class="ru">Бронь места</span><span class="uk">Бронь місця</span></span><b class="nw">10&nbsp;$</b></div>
+        </div></div>
+        <div class="lk-body">
+          <div class="lk-sit"><span class="ru">Друг спрашивает, где купить</span><span class="uk">Друг питає, де купити</span></div>
+          <h3 class="lk-name"><span class="ru">Тарифы</span><span class="uk">Тарифи</span></h3>
+          <p class="lk-text"><span class="ru">Бот сразу покажет тарифы: оплатить, забронировать место за 10&nbsp;$ или написать менеджеру.</span><span class="uk">Бот одразу покаже тарифи: оплатити, забронювати місце за 10&nbsp;$ або написати менеджеру.</span></p>
+          <code class="lk-code">?start=p_КОД_pay</code>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 6. Промо-материалы -->
+<section class="sec"><div class="slide">
+  <div class="s6">
+    <div>
+      <div class="eyebrow rv"><span class="ru">Промо-материалы</span><span class="uk">Промоматеріали</span></div>
+      <h2 class="title rv" style="--d:1"><span class="ru">Все уже готово – <em>берите</em> и&nbsp;публикуйте</span><span class="uk">Усе вже готово – <em>беріть</em> і&nbsp;публікуйте</span></h2>
+      <p class="lead rv" style="--d:2"><span class="ru">Медиа-кит партнера: тексты, баннеры и ролики с работами агентов. Придумывать ничего не нужно.</span><span class="uk">Медіакіт партнера: тексти, банери й ролики з роботами агентів. Вигадувати нічого не потрібно.</span></p>
+      <ul class="kit">
+        <li class="rv" style="--d:3"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 10h16M4 15h10M4 20h7"/></svg></i><span class="ru">Сценарии постов</span><span class="uk">Сценарії постів</span></li>
+        <li class="rv" style="--d:4"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10 18.5h4"/></svg></i><span class="ru">Сторис</span><span class="uk">Сторіс</span></li>
+        <li class="rv" style="--d:5"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></i><span class="ru">Рилс</span><span class="uk">Рілс</span></li>
+        <li class="rv" style="--d:6"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 15l5-4 4 3 3-2 6 4"/></svg></i><span class="ru">Баннеры на RU и UA</span><span class="uk">Банери RU та UA</span></li>
+        <li class="rv" style="--d:7"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg></i><span class="ru">Ролики с работами агентов</span><span class="uk">Ролики з роботами агентів</span></li>
+        <li class="rv" style="--d:8"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h10"/></svg></i><span class="ru">План от ссылки до выплаты</span><span class="uk">План від посилання до виплати</span></li>
+      </ul>
+      <p class="note rv" style="--d:9"><span class="ru">Вместо пометки [ВАША РЕФЕРАЛЬНАЯ ССЫЛКА НА БОТА] вставьте свою ссылку: без нее покупка не попадет в ваши выплаты.</span><span class="uk">Замість позначки [ВАШЕ РЕФЕРАЛЬНЕ ПОСИЛАННЯ НА БОТА] вставте своє посилання: без нього покупка не потрапить у ваші виплати.</span></p>
+      <div class="rv" style="--d:10"><a class="btn gold" data-kit href="https://sofiialand.github.io/ai-agenty/partner-media-kit/" target="_blank" rel="noopener noreferrer"><span class="ru">Открыть медиа-кит</span><span class="uk">Відкрити медіакіт</span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></i></a></div>
+    </div>
+    <div class="stack rv" style="--d:3" aria-hidden="true">
+      <div class="st-1"><img class="ru" src="img/schet-podryadchikov-ru.jpg" alt=""><img class="uk" src="img/schet-podryadchikov-uk.jpg" alt=""></div>
+      <div class="st-2"><img class="ru" src="img/kassa-avtora-ru.jpg" alt=""><img class="uk" src="img/kassa-avtora-uk.jpg" alt=""></div>
+      <div class="st-3"><img class="ru" src="img/26-saytov-ru.jpg" alt=""><img class="uk" src="img/26-saytov-uk.jpg" alt=""></div>
+      <div class="st-4"><img class="ru" src="img/storis-novyy-agent-ru.jpg" alt=""><img class="uk" src="img/storis-novyy-agent-uk.jpg" alt=""></div>
+      <div class="st-5"><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" autoplay muted loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 7. Выплаты -->
+<section class="sec" id="pay"><div class="slide">
+  <div class="s7">
+    <div>
+      <div class="eyebrow rv"><span class="ru">Выплаты</span><span class="uk">Виплати</span></div>
+      <h2 class="title rv" style="--d:1"><span class="ru">Вы видите <em>каждый</em> шаг друга</span><span class="uk">Ви бачите <em>кожен</em> крок друга</span></h2>
+      <ol class="tl rv" style="--d:2">
+        <li data-i="0"><span class="tl-n">1</span><div><b><span class="ru">Друг перешел по ссылке</span><span class="uk">Друг перейшов за посиланням</span></b><p><span class="ru">Закрепляется за вами с первого перехода. Если он уже писал нам или бронировал место раньше, бонус не начисляется.</span><span class="uk">Закріплюється за вами з першого переходу. Якщо він уже писав нам або бронював місце раніше, бонус не нараховується.</span></p></div></li>
+        <li data-i="1"><span class="tl-n">2</span><div><b><span class="ru">Друг оплатил</span><span class="uk">Друг оплатив</span></b><p><span class="ru">Сразу, частями или рассрочкой банка. Рассрочка банка считается полной оплатой.</span><span class="uk">Одразу, частинами або розстрочкою банку. Розстрочка банку вважається повною оплатою.</span></p></div></li>
+        <li data-i="2"><span class="tl-n">3</span><div><b><span class="ru">14 дней гарантии</span><span class="uk">14 днів гарантії</span></b><p><span class="ru">Бонус ждет конца срока возврата. Если друг платит нам частями – последнего платежа.</span><span class="uk">Бонус чекає кінця строку повернення. Якщо друг платить нам частинами – останнього платежу.</span></p></div></li>
+        <li data-i="3"><span class="tl-n">4</span><div><b><span class="ru">Бонус к выплате</span><span class="uk">Бонус до виплати</span></b><p><span class="ru">Сумма переходит в «К выплате» в вашем кабинете партнера.</span><span class="uk">Сума переходить у «До виплати» у вашому кабінеті партнера.</span></p></div></li>
+        <li data-i="4"><span class="tl-n">5</span><div><b><span class="ru">Выплата 15-го числа</span><span class="uk">Виплата 15-го числа</span></b><p><span class="ru">Переводим на карту или в USDT.</span><span class="uk">Переказуємо на картку або в USDT.</span></p></div></li>
+      </ol>
+    </div>
+    <div class="rv" style="--d:3">
+      <div class="phone"><div class="scr">
+        <div class="scr-h"><i>AI</i><div><b><span class="ru">Партнерка · Система AI&#8209;агентов</span><span class="uk">Партнерка · Система AI&#8209;агентів</span></b><small>bot</small></div></div>
+        <div class="chat">
+          <div class="msg off" data-m="0">🔥 <span class="ru">По твоей ссылке пришел новый человек: смотрит видео-презентацию.</span><span class="uk">За твоїм посиланням прийшла нова людина: дивиться відеопрезентацію.</span></div>
+          <div class="msg off" data-m="1"><b><span class="ru">🎉 Оплата по твоей ссылке: «Система», +90&nbsp;$</span><span class="uk">🎉 Оплата за твоїм посиланням: «Система», +90&nbsp;$</span></b><small><span class="ru">Бонус начислим через 14 дней, когда закончится срок гарантии.</span><span class="uk">Бонус нарахуємо через 14 днів, коли закінчиться строк гарантії.</span></small></div>
+          <div class="msg off" data-m="2"><b><span class="ru">📊 Твой кабинет партнера</span><span class="uk">📊 Твій кабінет партнера</span></b><small class="row"><span><span class="ru">Перешли по ссылкам</span><span class="uk">Перейшли за посиланнями</span></span><span>14</span></small><small class="row"><span><span class="ru">Оплатили</span><span class="uk">Оплатили</span></span><span>2</span></small><small class="row"><span><span class="ru">Ждет конца гарантии</span><span class="uk">Чекає кінця гарантії</span></span><span class="nw">90&nbsp;$</span></small><small class="row"><span><span class="ru">К выплате 15-го числа</span><span class="uk">До виплати 15-го числа</span></span><span class="nw">30&nbsp;$</span></small></div>
+          <div class="msg off" data-m="3"><b><span class="ru">✅ Бонус 90&nbsp;$ доступен к выплате.</span><span class="uk">✅ Бонус 90&nbsp;$ доступний до виплати.</span></b><small><span class="ru">Переведем 15-го числа.</span><span class="uk">Переведемо 15-го числа.</span></small></div>
+          <div class="msg off" data-m="4"><b><span class="ru">Завтра выплата партнерам 💸</span><span class="uk">Завтра виплата партнерам 💸</span></b><small><span class="ru">К выплате у тебя 120&nbsp;$.</span><span class="uk">До виплати в тебе 120&nbsp;$.</span></small></div>
+        </div>
+      </div></div>
+      <p class="ph-cap"><span class="ru">Сообщения партнерского бота · суммы в примере</span><span class="uk">Повідомлення партнерського бота · суми в прикладі</span></p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 8. Правила -->
+<section class="sec"><div class="slide">
+  <div class="eyebrow rv"><span class="ru">Условия</span><span class="uk">Умови</span></div>
+  <h2 class="title rv" style="--d:1"><span class="ru">Правила <em>программы</em></span><span class="uk">Правила <em>програми</em></span></h2>
+  <div class="body">
+    <div class="rules">
+      <div class="rule bz rv" style="--d:2"><div class="core">
+        <h3><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></i><span class="ru">Бонус не начисляется, если</span><span class="uk">Бонус не нараховується, якщо</span></h3>
+        <ol>
+          <li><span class="ru">Друг вернул деньги по гарантии</span><span class="uk">Друг повернув гроші за гарантією</span></li>
+          <li><span class="ru">Покупка сделана по своей же ссылке</span><span class="uk">Покупку зроблено за власним посиланням</span></li>
+          <li><span class="ru">Друг писал нам или бронировал место до перехода по вашей ссылке</span><span class="uk">Друг писав нам або бронював місце до переходу за вашим посиланням</span></li>
+        </ol>
+      </div></div>
+      <div class="rule bz rv" style="--d:3"><div class="core">
+        <h3><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></i><span class="ru">Три правила для партнера</span><span class="uk">Три правила для партнера</span></h3>
+        <ol>
+          <li><span class="ru">Не спамить ссылкой</span><span class="uk">Не спамити посиланням</span></li>
+          <li><span class="ru">Не обещать доход: только цифры с сайта и кейсы участников</span><span class="uk">Не обіцяти дохід: лише цифри з сайту й кейси учасників</span></li>
+          <li><span class="ru">Не запускать рекламу на имя Влада Ясько и название «Система AI&#8209;агентов»</span><span class="uk">Не запускати рекламу на ім'я Влада Ясько та назву «Система AI&#8209;агентів»</span></li>
+        </ol>
+      </div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 9. Вопросы -->
+<section class="sec"><div class="slide">
+  <div class="eyebrow rv"><span class="ru">Частые вопросы</span><span class="uk">Часті питання</span></div>
+  <h2 class="title rv" style="--d:1"><span class="ru">Что спрашивают <em>партнеры</em></span><span class="uk">Що питають <em>партнери</em></span></h2>
+  <div class="body">
+    <div class="faq">
+      <div class="fq rv" style="--d:2"><q><span class="ru">Неловко советовать, я сам еще учусь</span><span class="uk">Ніяково радити, я сам ще вчуся</span></q><p><span class="ru">Расскажите, что агент уже сделал у вас: первый сайт, ролик, заявку. Опыт знакомого убеждает лучше рекламы.</span><span class="uk">Розкажіть, що агент уже зробив у вас: перший сайт, ролик, заявку. Досвід знайомого переконує краще за рекламу.</span></p></div>
+      <div class="fq rv" style="--d:3"><q><span class="ru">Я не умею продавать</span><span class="uk">Я не вмію продавати</span></q><p><span class="ru">И не нужно. Отправьте видео-презентацию: Влад сам показывает агентов и рассказывает про тарифы. На вопросы друга ответит менеджер.</span><span class="uk">І не потрібно. Надішліть відеопрезентацію: Влад сам показує агентів і розповідає про тарифи. На питання друга відповість менеджер.</span></p></div>
+      <div class="fq rv" style="--d:4"><q><span class="ru">Друг купит не сразу</span><span class="uk">Друг купить не одразу</span></q><p><span class="ru">Ссылка бессрочная: друг закреплен за вами с первого перехода. Купит через месяц – бонус ваш.</span><span class="uk">Посилання безстрокове: друг закріплений за вами з першого переходу. Купить через місяць – бонус ваш.</span></p></div>
+      <div class="fq rv" style="--d:5"><q><span class="ru">Сколько можно заработать?</span><span class="uk">Скільки можна заробити?</span></q><p><span class="ru">От <b class="nw">30&nbsp;$</b> до <b class="nw">312&nbsp;$</b> с каждой оплаты, в зависимости от тарифа. Бонус начисляем за каждого друга, который оплатил.</span><span class="uk">Від <b class="nw">30&nbsp;$</b> до <b class="nw">312&nbsp;$</b> з кожної оплати, залежно від тарифу. Бонус нараховуємо за кожного друга, який оплатив.</span></p></div>
+      <div class="fq rv" style="--d:6"><q><span class="ru">Как я узнаю, что друг оплатил?</span><span class="uk">Як я дізнаюся, що друг оплатив?</span></q><p><span class="ru">Бот пришлет сообщение сразу после оплаты. Переходы, оплаты и суммы видно в «Моем кабинете».</span><span class="uk">Бот надішле повідомлення одразу після оплати. Переходи, оплати й суми видно в «Моєму кабінеті».</span></p></div>
+      <div class="fq rv" style="--d:7"><q><span class="ru">Как получить деньги?</span><span class="uk">Як отримати гроші?</span></q><p><span class="ru">15-го числа, на карту или в USDT. Напишите куратору в боте, куда перевести.</span><span class="uk">15-го числа, на картку або в USDT. Напишіть куратору в боті, куди переказати.</span></p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 10. Финал -->
+<section class="sec s-fin"><div class="slide">
+  <div class="fin">
+    <div>
+      <div class="eyebrow rv"><span class="ru">Начните сегодня</span><span class="uk">Почніть сьогодні</span></div>
+      <h2 class="title rv" style="--d:1"><span class="ru">Возьмите свою <em>ссылку</em></span><span class="uk">Візьміть своє <em>посилання</em></span></h2>
+      <p class="lead rv" style="--d:2"><span class="ru">Партнерский бот выдаст ссылки за минуту. Тексты и баннеры – в&nbsp;<span class="nw">медиа-ките</span>.</span><span class="uk">Партнерський бот видасть посилання за хвилину. Тексти й банери – у&nbsp;медіакіті.</span></p>
+      <div class="fin-btns rv" style="--d:3">
+        <a class="btn gold" data-bot href="#" target="_blank" rel="noopener noreferrer"><span class="ru">Получить ссылку</span><span class="uk">Отримати посилання</span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></i></a>
+        <a class="btn ghost" data-kit href="https://sofiialand.github.io/ai-agenty/partner-media-kit/" target="_blank" rel="noopener noreferrer"><span class="ru">Открыть медиа-кит</span><span class="uk">Відкрити медіакіт</span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></i></a>
+      </div>
+    </div>
+    <div class="qr bz wait rv" style="--d:4"><div class="core">
+      <div class="qr-box" id="qr"><span class="ru">QR-код появится, когда будет готов бот</span><span class="uk">QR-код з'явиться, коли буде готовий бот</span></div>
+      <p><span class="ru">Наведите камеру – бот откроется сам</span><span class="uk">Наведіть камеру – бот відкриється сам</span></p>
+    </div></div>
+  </div>
+  <div class="mq" aria-hidden="true"><div class="mq-t">
+    <img src="img/gleb-ai-neo.jpg" alt=""><img src="img/fairyflowers.jpg" alt=""><img src="img/elenis-studio.jpg" alt=""><img src="img/infrasfera.jpg" alt=""><img src="img/toskana-immersive.jpg" alt=""><img src="img/roadtex-drivers.jpg" alt=""><img src="img/drborodina.jpg" alt=""><img src="img/flowerpower.jpg" alt=""><img src="img/grili.jpg" alt=""><img src="img/reifenservice.jpg" alt=""><img src="img/optika.jpg" alt=""><img src="img/knyzhkovyi.jpg" alt="">
+  </div></div>
+  <footer class="foot"><span class="ru">© 2026 · Система AI&#8209;агентов</span><span class="uk">© 2026 · Система AI&#8209;агентів</span><span class="ru">Партнерская программа</span><span class="uk">Партнерська програма</span></footer>
+</div></section>
+
+</main>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var counter = document.getElementById('counter'), prog = document.getElementById('prog');
+
+  /* масштаб слайда под окно */
+  function fit(){
+    var w = window.innerWidth, h = window.innerHeight;
+    var k = Math.min(w / 1920, h / 1080);
+    root.style.setProperty('--k', k);
+    root.style.setProperty('--W', (w / k) + 'px');
+    root.style.setProperty('--H', (h / k) + 'px');
+    root.style.setProperty('--ex', ((w / k - 1920) / 2) + 'px');
+    root.style.setProperty('--xh', (h / k - 1080) + 'px');
+  }
+  fit(); window.addEventListener('resize', fit);
+
+  /* бесконечные ленты: дублируем содержимое */
+  [].forEach.call(document.querySelectorAll('.wtrack, .mq-t'), function(t){
+    [].slice.call(t.children).forEach(function(c){ var k = c.cloneNode(true); k.setAttribute('aria-hidden','true'); t.appendChild(k); });
+  });
+
+  /* язык */
+  var btns = [].slice.call(document.querySelectorAll('[data-lang]'));
+  var KIT = 'https://sofiialand.github.io/ai-agenty/partner-media-kit/';
+  function setLang(l){
+    root.setAttribute('lang', l);
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-lang') === l ? 'true' : 'false'); });
+    [].forEach.call(document.querySelectorAll('[data-kit]'), function(a){ a.href = KIT + (l === 'uk' ? '?lang=uk' : ''); });
+    try { localStorage.setItem('lang', l); } catch(e){}
+    try { var u = new URL(location.href); if (l === 'uk') u.searchParams.set('lang','uk'); else u.searchParams.delete('lang'); history.replaceState(null, '', u); } catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
+  setLang(root.getAttribute('lang') === 'uk' ? 'uk' : 'ru');
+
+  /* бот партнерки и QR-код */
+  if (PARTNER_BOT) {
+    [].forEach.call(document.querySelectorAll('[data-bot]'), function(a){ a.href = PARTNER_BOT; });
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload = function(){ var box = document.getElementById('qr'); box.innerHTML = ''; box.parentNode.parentNode.classList.remove('wait'); new QRCode(box, { text: PARTNER_BOT, width: 528, height: 528, colorDark: '#0b0c0e', colorLight: '#ffffff' }); };
+    document.head.appendChild(s);
+  } else {
+    [].forEach.call(document.querySelectorAll('[data-bot]'), function(a){ a.removeAttribute('target'); a.addEventListener('click', function(e){ e.preventDefault(); }); });
+  }
+
+  /* номер слайда и полоса прогресса */
+  function current(){
+    var y = window.scrollY + window.innerHeight / 2, i = 0;
+    secs.forEach(function(s, n){ if (s.offsetTop <= y) i = n; });
+    return i;
+  }
+  function upd(){ var i = current(); if (counter) counter.textContent = (i + 1) + ' / ' + secs.length; if (prog) prog.style.width = ((i + 1) / secs.length * 100) + '%'; }
+  window.addEventListener('scroll', upd, { passive: true }); upd();
+
+  /* клавиши */
+  function go(d){ var i = Math.max(0, Math.min(secs.length - 1, current() + d)); secs[i].scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  document.addEventListener('keydown', function(e){
+    if (e.target.closest && e.target.closest('input,textarea')) return;
+    if (['ArrowDown','PageDown','ArrowRight',' '].indexOf(e.key) > -1) { e.preventDefault(); go(1); }
+    else if (['ArrowUp','PageUp','ArrowLeft'].indexOf(e.key) > -1) { e.preventDefault(); go(-1); }
+    else if (e.key === 'Home') { e.preventDefault(); secs[0].scrollIntoView({ behavior: 'smooth' }); }
+    else if (e.key === 'End') { e.preventDefault(); secs[secs.length-1].scrollIntoView({ behavior: 'smooth' }); }
+  });
+
+  /* появление слайда и счетчики сумм */
+  function count(el){
+    if (el._done) return; el._done = true;
+    var to = +el.getAttribute('data-to'), t0 = null;
+    function step(t){ if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1400); var e = 1 - Math.pow(1 - p, 4); el.textContent = Math.round(to * e); if (p < 1) requestAnimationFrame(step); }
+    el.textContent = '0'; requestAnimationFrame(step);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); [].forEach.call(en.target.querySelectorAll('.cnt'), function(c){ setTimeout(function(){ count(c); }, 600); }); } }); }, { threshold: 0.25 });
+    secs.forEach(function(s){ io.observe(s); });
+  } else { secs.forEach(function(s){ s.classList.add('in'); }); }
+})();
+</script>
+<script>
+/* выплаты: шаги идут по очереди, сообщения бота появляются вместе с шагом */
+(function(){
+  var sec = document.getElementById('pay'); if (!sec) return;
+  var steps = [].slice.call(sec.querySelectorAll('.tl li')), msgs = [].slice.call(sec.querySelectorAll('.msg'));
+  var cur = -1, hold = false;
+  function show(i){
+    cur = i;
+    steps.forEach(function(s, k){ s.classList.toggle('on', k === i); s.classList.toggle('done', k < i); });
+    msgs.forEach(function(m, k){ m.classList.toggle('off', k > i); m.classList.toggle('hot', k === i); });
+  }
+  show(0);
+  setInterval(function(){ if (!hold && sec.classList.contains('in')) show((cur + 1) % steps.length); }, 2800);
+  steps.forEach(function(s, k){
+    s.addEventListener('mouseenter', function(){ hold = true; show(k); });
+    s.addEventListener('mouseleave', function(){ hold = false; });
+  });
+})();
+</script>
+</body>
+</html>
