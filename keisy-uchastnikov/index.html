@@ -1202,5 +1202,18 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   });
 })();
 </script>
+<script>
+/* Ссылка партнёра: страница открыта по ?p=КОД (из бота партнёрки или с платформы) –
+   кнопки ведут в бот оплаты с меткой партнёра, и друг закрепляется за ним.
+   «Выбрать тариф» / «Отправить запрос» – сразу к тарифам (_pay), остальные – видео-презентация. */
+(function () {
+  var m = /[?&]p=([0-9A-Z]{8})(?:&|$)/.exec(location.search);
+  if (!m) return;
+  var bot = 'https://t.me/aiagents_pay_bot?start=p_' + m[1];
+  [].forEach.call(document.querySelectorAll('a[href^="https://t.me/aiagents_pay_bot"]'), function (a) {
+    a.href = bot + (/gold/.test(a.className) ? '_pay' : '');
+  });
+})();
+</script>
 </body>
 </html>

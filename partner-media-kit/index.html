@@ -765,5 +765,28 @@ button.asset-pic:hover img { transform: scale(1.03); }
   setLang(root.getAttribute('lang') === 'uk' ? 'uk' : 'ru');
 })();
 </script>
+<script>
+/* Ссылка партнёра: медиа-кит открыт по ?p=КОД (из бота партнёрки или с платформы) – вместо
+   пометки в каждом тексте стоит ссылка партнёра на бот, «Скопировать» копирует текст уже с ней. */
+(function () {
+  var m = /[?&]p=([0-9A-Z]{8})(?:&|$)/.exec(location.search);
+  if (!m) return;
+  var link = 't.me/aiagents_pay_bot?start=p_' + m[1];
+  var NOTE = {
+    ru: [/Вместо пометки <span class="ref">[^<]*<\/span> вставьте свою ссылку\./, 'Ваша ссылка уже стоит в каждом тексте: <span class="ref">' + link + '</span>.'],
+    uk: [/Замість позначки <span class="ref">[^<]*<\/span> вставте своє посилання\./, 'Ваше посилання вже стоїть у кожному тексті: <span class="ref">' + link + '</span>.']
+  };
+  [].forEach.call(document.querySelectorAll('.ru, .uk'), function (el) {
+    var rule = NOTE[el.classList.contains('uk') ? 'uk' : 'ru'];
+    if (rule[0].test(el.innerHTML)) el.innerHTML = el.innerHTML.replace(rule[0], rule[1]);
+  });
+  [].forEach.call(document.querySelectorAll('.ref'), function (el) {
+    if (/^\[/.test(el.textContent)) el.textContent = link;
+  });
+  [].forEach.call(document.querySelectorAll('a[href^="https://t.me/aiagents_pay_bot"]'), function (a) {
+    a.href = 'https://' + link;
+  });
+})();
+</script>
 </body>
 </html>
