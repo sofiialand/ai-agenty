@@ -128,28 +128,34 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .lab { position: absolute; left: 14px; bottom: 14px; z-index: 2; padding: 7px 12px; border-radius: 10px; background: rgba(11,12,14,0.78); border: 1px solid var(--line-2); font: 600 15px var(--display); color: var(--text); backdrop-filter: none; }
 
 /* ---------- 1. Обложка ---------- */
-.wall { position: absolute !important; z-index: 0 !important; inset: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 36%, #000 60%); mask-image: linear-gradient(90deg, transparent 36%, #000 60%); }
-.wall-in { position: absolute; top: -380px; left: calc(980px + var(--ex, 0px) * 1.4); width: 1700px; height: 1950px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 30px; transform: perspective(2600px) rotateX(16deg) rotateY(-18deg) rotateZ(9deg); transform-origin: 30% 40%; animation: wallIn 1.8s var(--ease) both; }
-@keyframes wallIn { from { opacity: 0; } to { opacity: 1; } }
-.wcol { overflow: hidden; }
-.wtrack { display: flex; flex-direction: column; gap: 30px; animation: wallUp 95s linear infinite; will-change: transform; }
-.wcol:nth-child(2) .wtrack { animation-name: wallDown; animation-duration: 115s; }
-.wcol:nth-child(3) .wtrack { animation-duration: 105s; }
-.wcol:nth-child(4) .wtrack { animation-name: wallDown; animation-duration: 125s; }
-@keyframes wallUp { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 15px)); } }
-@keyframes wallDown { from { transform: translateY(calc(-50% - 15px)); } to { transform: translateY(0); } }
-.wt { flex: none; aspect-ratio: 16 / 10; border-radius: 16px; overflow: hidden; background: #121418; border: 1px solid var(--line-2); box-shadow: 0 30px 60px -24px rgba(0,0,0,0.85); }
-.wt img, .wt video { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.wt.v { aspect-ratio: 9 / 13; border-color: rgba(var(--gold-rgb),0.45); }
-.cover-shade { position: absolute !important; z-index: 0 !important; inset: 0; pointer-events: none; background: radial-gradient(1000px 760px at 20% 52%, rgba(11,12,14,0.94), transparent 70%), linear-gradient(180deg, rgba(11,12,14,0) 72%, rgba(11,12,14,0.9)); }
-.cv { position: relative; z-index: 2; max-width: 1080px; }
-.cv-sys { font: 600 24px/1 var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--gold); text-shadow: 0 0 18px rgba(var(--gold-rgb),0.4); }
-.cv-h { margin-top: 36px; font: 800 136px/.94 var(--display); letter-spacing: -0.055em; color: var(--text); }
-.cv-h em { font-style: normal; color: var(--gold); text-shadow: 0 0 120px rgba(var(--gold-rgb),0.35); }
-.cv .lead { margin-top: 44px; max-width: 800px; font-size: 27px; }
-.cv .lead b { color: var(--gold); font-weight: 700; }
-.scroll-hint { position: absolute !important; left: calc(112px + var(--ex, 0px)); bottom: 48px; display: flex; align-items: center; gap: 12px; font: 500 14px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
-.scroll-hint span { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--line-2); font-size: 13px; letter-spacing: 0; }
+.hv { position: absolute !important; z-index: 0 !important; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
+.hv-scrim { position: absolute !important; z-index: 0 !important; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(7,8,10,.9) 0%, rgba(7,8,10,.66) 34%, rgba(7,8,10,.1) 62%, rgba(7,8,10,.38) 100%), linear-gradient(0deg, rgba(7,8,10,.88) 0%, rgba(7,8,10,0) 36%), linear-gradient(180deg, rgba(7,8,10,.6) 0%, rgba(7,8,10,0) 22%); }
+.sec-cover .slide::before { display: none; }
+.hv-top { position: absolute !important; left: calc(112px + var(--ex, 0px)); top: 40px; display: flex; flex-direction: column; gap: 2px; }
+.hv-top b { font: 600 22px/1.2 var(--display); letter-spacing: -0.01em; color: var(--cream); }
+.hv-top small { font: 500 13px var(--mono); letter-spacing: .08em; color: rgba(244,239,231,.75); }
+.hv-side { position: absolute !important; right: calc(112px + var(--ex, 0px)); top: 150px; width: 380px; padding: 24px 26px 26px; border-radius: 22px; background: rgba(7,8,10,.46); border: 1px solid rgba(244,239,231,.14); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.hv-side .k { font: 600 13px var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.hv-side .big { margin-top: 12px; font: 700 48px/1 var(--display); letter-spacing: -0.035em; color: var(--cream); }
+.hv-side .sub { margin-top: 8px; font: 500 16px var(--sans); color: rgba(244,239,231,.7); }
+.hv-side hr { height: 1px; margin: 20px 0; border: 0; background: rgba(244,239,231,.14); }
+.hv-side ul { display: grid; gap: 10px; margin-top: 14px; }
+.hv-side li { display: flex; justify-content: space-between; gap: 16px; font: 400 17px/1.35 var(--sans); color: rgba(244,239,231,.86); }
+.hv-side li span:last-child { flex: none; font: 500 13px var(--mono); color: rgba(244,239,231,.4); padding-top: 3px; }
+.hv-main { position: absolute !important; left: calc(112px + var(--ex, 0px)); bottom: 110px; max-width: 1120px; }
+.hv-eye { display: inline-flex; align-items: center; gap: 12px; height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid rgba(244,239,231,.22); background: rgba(7,8,10,.38); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font: 500 16px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: rgba(244,239,231,.82); }
+.hv-eye i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px rgba(var(--gold-rgb),.9); }
+.hv-h { margin-top: 26px; font: 600 80px/1.04 var(--display); letter-spacing: -0.035em; color: #fff; }
+.hv-h .hl { display: block; }
+.hv-h em { font-style: normal; background: linear-gradient(var(--gold), var(--gold)) 0 70% / 100% 90% no-repeat; color: var(--bg); padding: 0 .12em; border-radius: .08em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hv-bonus { display: flex; gap: 16px; align-items: center; max-width: 720px; margin-top: 32px; padding: 14px 22px 14px 14px; border-radius: 18px; border: 1px dashed rgba(var(--gold-rgb),.6); background: rgba(11,12,14,.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font: 400 19px/1.45 var(--sans); color: rgba(244,239,231,.9); }
+.hv-bonus i { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--gold); color: var(--bg); }
+.hv-bonus i svg { width: 22px; height: 22px; }
+.hv-btn { display: inline-flex; align-items: center; gap: 18px; height: 72px; margin-top: 34px; padding: 0 9px 0 32px; border-radius: 999px; background: var(--cream); color: var(--bg); font: 600 21px var(--sans); transition: transform .4s var(--spring); }
+.hv-btn i { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--gold); color: var(--bg); font-style: normal; font-size: 22px; transition: transform .4s var(--spring); }
+.hv-btn:hover { transform: translateY(-2px); }
+.hv-btn:hover i { transform: translateX(3px); }
+.hv-hint { position: absolute !important; left: 50%; bottom: 26px; transform: translateX(-50%); font: 500 13px var(--mono); letter-spacing: .3em; text-transform: uppercase; color: rgba(244,239,231,.5); }
 
 /* ---------- 2. Что рекомендуете ---------- */
 .agents { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; max-width: 1500px; }
@@ -344,7 +350,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .prog i { display: block; height: 100%; width: 0; background: var(--gold); box-shadow: 0 0 12px rgba(var(--gold-rgb),0.7); transition: width .6s var(--spring); }
 
 @media (prefers-reduced-motion: reduce) {
-  .wtrack, .mq-t, .road-line::after, .win .pic img.long, .stack > *, .eyebrow::before { animation: none !important; }
+  .mq-t, .road-line::after, .win .pic img.long, .stack > *, .eyebrow::before { animation: none !important; }
   .rv { transition: none; opacity: 1; transform: none; filter: none; }
 }
 
@@ -374,15 +380,20 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   .note::before { margin-top: 10px; width: 16px; }
   .rv { transform: translateY(24px); }
 
-  .sec-cover .slide { display: flex; flex-direction: column; }
-  .cover-shade, .scroll-hint { display: none; }
-  .wall { position: relative !important; inset: auto; order: 2; height: 360px; margin: 32px -16px 0; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
-  .wall-in { top: -120px; left: -60px; width: 760px; height: 900px; gap: 14px; transform: perspective(1400px) rotateX(14deg) rotateY(-14deg) rotateZ(8deg); }
-  .wtrack { gap: 14px; }
-  .wt { border-radius: 10px; }
-  .cv-sys { font-size: 13px; letter-spacing: .2em; }
-  .cv-h { margin-top: 18px; font-size: 54px; }
-  .cv .lead { margin-top: 18px; font-size: 16px; }
+  .sec-cover .slide { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 140px; padding-bottom: 40px; }
+  .hv { object-position: 62% 30%; }
+  .hv-scrim { background: linear-gradient(0deg, rgba(7,8,10,.96) 0%, rgba(7,8,10,.72) 45%, rgba(7,8,10,.1) 75%), linear-gradient(180deg, rgba(7,8,10,.6) 0%, rgba(7,8,10,0) 25%); }
+  .hv-top { left: 16px; top: 16px; }
+  .hv-top b { font-size: 16px; }
+  .hv-top small { font-size: 10px; }
+  .hv-side, .hv-hint { display: none; }
+  .hv-main { position: relative !important; left: auto; bottom: auto; }
+  .hv-eye { height: 30px; padding: 0 10px; font-size: 10.5px; gap: 8px; border-radius: 8px; }
+  .hv-h { margin-top: 16px; font-size: 32px; line-height: 1.08; }
+  .hv-bonus { margin-top: 18px; padding: 10px 14px 10px 10px; gap: 12px; font-size: 13.5px; border-radius: 14px; }
+  .hv-bonus i { width: 36px; height: 36px; border-radius: 10px; }
+  .hv-btn { height: 54px; margin-top: 20px; padding: 0 6px 0 22px; font-size: 15px; }
+  .hv-btn i { width: 42px; height: 42px; font-size: 18px; }
 
   .agents { gap: 6px; margin-top: 18px; }
   .agents .chip { height: 30px; font-size: 13px; }
@@ -499,56 +510,35 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
     <button type="button" data-lang="uk">UA</button>
   </div>
 </div>
-<div class="counter" id="counter">1 / 10</div>
+<div class="counter" id="counter">1 / 9</div>
 
 <main id="deck">
 
 <!-- 1. Обложка -->
 <section class="sec sec-cover"><div class="slide">
-  <div class="wall" aria-hidden="true"><div class="wall-in">
-    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/gleb-ai-neo.jpg" alt=""></div><div class="wt"><img src="img/expert-cosmetic.jpg" alt=""></div><div class="wt v"><video src="video/beauty-avatar.mp4" poster="video/beauty-avatar.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/toskana-immersive.jpg" alt=""></div><div class="wt"><img src="img/grili.jpg" alt=""></div><div class="wt"><img src="img/biblia.jpg" alt=""></div></div></div>
-    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/fairyflowers.jpg" alt=""></div><div class="wt v"><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/roadtex-drivers.jpg" alt=""></div><div class="wt"><img src="img/ekotermo.jpg" alt=""></div><div class="wt"><img src="img/nikrasova.jpg" alt=""></div><div class="wt"><img src="img/optika.jpg" alt=""></div></div></div>
-    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/elenis-studio.jpg" alt=""></div><div class="wt"><img src="img/drborodina.jpg" alt=""></div><div class="wt v"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/reifenservice.jpg" alt=""></div><div class="wt"><img src="img/tvdom.jpg" alt=""></div><div class="wt"><img src="img/sushi.jpg" alt=""></div></div></div>
-    <div class="wcol"><div class="wtrack"><div class="wt"><img src="img/infrasfera.jpg" alt=""></div><div class="wt"><img src="img/flowerpower.jpg" alt=""></div><div class="wt v"><video src="video/konsultant.mp4" poster="video/konsultant.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="wt"><img src="img/jitlife.jpg" alt=""></div><div class="wt"><img src="img/tevoma.jpg" alt=""></div><div class="wt"><img src="img/rdtaxes.jpg" alt=""></div></div></div>
-  </div></div>
-  <div class="cover-shade" aria-hidden="true"></div>
-  <div class="cv">
-    <div class="cv-sys rv"><span class="ru">7 AI&#8209;агентов</span><span class="uk">7 AI&#8209;агентів</span></div>
-    <h1 class="cv-h rv" style="--d:1"><span class="ru">Партнерская<br><em>программа</em></span><span class="uk">Партнерська<br><em>програма</em></span></h1>
-    <p class="lead rv" style="--d:2"><span class="ru">Рекомендуйте систему друзьям и получайте до&nbsp;<b class="nw">312&nbsp;$</b> с каждой оплаты по вашей ссылке. Продавать не нужно: систему показывает видео-презентация Влада Ясько, на вопросы отвечает менеджер.</span><span class="uk">Рекомендуйте систему друзям і отримуйте до&nbsp;<b class="nw">312&nbsp;$</b> з кожної оплати за вашим посиланням. Продавати не потрібно: систему показує відеопрезентація Влада Ясько, на питання відповідає менеджер.</span></p>
+  <video class="hv" src="video/hero.mp4" poster="video/hero.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <div class="hv-scrim" aria-hidden="true"></div>
+  <div class="hv-top"><b>Влад Ясько</b><small><span class="ru">Система AI&#8209;агентов</span><span class="uk">Система AI&#8209;агентів</span></small></div>
+  <aside class="hv-side rv" style="--d:3">
+    <div class="k"><span class="ru">Ваш бонус</span><span class="uk">Ваш бонус</span></div>
+    <div class="big nw"><span class="ru">до</span><span class="uk">до</span>&nbsp;312&nbsp;$</div>
+    <div class="sub"><span class="ru">с каждой оплаты друга</span><span class="uk">з кожної оплати друга</span></div>
+    <hr>
+    <div class="k"><span class="ru">Что вы получаете</span><span class="uk">Що ви отримуєте</span></div>
+    <ul>
+      <li><span><span class="ru">Бонус с первой оплаты друга</span><span class="uk">Бонус з першої оплати друга</span></span><span>01</span></li>
+      <li><span><span class="ru">Ссылку, которая действует бессрочно</span><span class="uk">Посилання, яке діє безстроково</span></span><span>02</span></li>
+      <li><span><span class="ru">Готовые тексты, баннеры и ролики</span><span class="uk">Готові тексти, банери й ролики</span></span><span>03</span></li>
+      <li><span><span class="ru">Выплату 15-го числа на карту или в USDT</span><span class="uk">Виплату 15-го числа на картку або в USDT</span></span><span>04</span></li>
+    </ul>
+  </aside>
+  <div class="hv-main">
+    <span class="hv-eye rv"><i></i><span class="ru">7 AI&#8209;агентов</span><span class="uk">7 AI&#8209;агентів</span></span>
+    <h1 class="hv-h rv" style="--d:1"><span class="ru"><span class="hl"><em>Партнерская программа</em>:</span> <span class="hl">рекомендуйте систему и&nbsp;получайте</span> <span class="hl">до&nbsp;<span class="nw">312&nbsp;$</span> с&nbsp;каждой оплаты друга</span></span><span class="uk"><span class="hl"><em>Партнерська програма</em>:</span> <span class="hl">рекомендуйте систему й&nbsp;отримуйте</span> <span class="hl">до&nbsp;<span class="nw">312&nbsp;$</span> з&nbsp;кожної оплати друга</span></span></h1>
+    <div class="hv-bonus rv" style="--d:2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span><span class="ru">Продавать не нужно: систему показывает видео-презентация Влада Ясько, на вопросы отвечает менеджер</span><span class="uk">Продавати не потрібно: систему показує відеопрезентація Влада Ясько, на питання відповідає менеджер</span></span></div>
+    <div class="rv" style="--d:3"><a class="hv-btn" data-bot href="#" target="_blank" rel="noopener noreferrer"><span class="ru">Получить ссылку</span><span class="uk">Отримати посилання</span><i>&#8594;</i></a></div>
   </div>
-  <div class="scroll-hint"><span>↓</span><span class="ru" style="all:unset">Листайте стрелками</span><span class="uk" style="all:unset">Гортайте стрілками</span></div>
-</div></section>
-
-<!-- 2. Что вы рекомендуете -->
-<section class="sec"><div class="slide">
-  <div class="eyebrow rv"><span class="ru">Что вы рекомендуете</span><span class="uk">Що ви рекомендуєте</span></div>
-  <h2 class="title rv" style="--d:1"><span class="ru">7 AI&#8209;агентов, которые делают услуги <em>целиком</em></span><span class="uk">7 AI&#8209;агентів, які роблять послуги <em>повністю</em></span></h2>
-  <p class="lead rv" style="--d:2"><span class="ru">Агентов ставят в свой бизнес вместо подрядчиков или продают как услугу. Восьмой агент в подарок ищет клиентов.</span><span class="uk">Агентів ставлять у свій бізнес замість підрядників або продають як послугу. Восьмий агент у подарунок шукає клієнтів.</span></p>
-  <div class="agents rv" style="--d:3">
-    <span class="chip"><span class="ru">Сайты</span><span class="uk">Сайти</span></span>
-    <span class="chip">Монтаж</span>
-    <span class="chip"><span class="ru">Продающие видео</span><span class="uk">Продаючі відео</span></span>
-    <span class="chip">Консультант</span>
-    <span class="chip"><span class="ru">Продавец в мессенджерах</span><span class="uk">Продавець у месенджерах</span></span>
-    <span class="chip">Реклама</span>
-    <span class="chip">SEO</span>
-    <span class="chip g"><span class="ru">+ AI&#8209;Охотник в подарок</span><span class="uk">+ AI&#8209;Мисливець у подарунок</span></span>
-  </div>
-  <div class="s2">
-    <div class="yts">
-      <div class="yt rv" style="--d:4"><strong class="nw">85,509&nbsp;$</strong><p><span class="ru">принесла система в бизнесе Влада Ясько</span><span class="uk">принесла система в бізнесі Влада Ясько</span></p></div>
-      <div class="yt rv" style="--d:5"><strong class="nw"><span class="ru">26&nbsp;сайтов</span><span class="uk">26&nbsp;сайтів</span></strong><p><span class="ru">собрали участники потока за первые 10&nbsp;дней</span><span class="uk">зібрали учасники потоку за перші 10&nbsp;днів</span></p></div>
-      <div class="yt rv" style="--d:6"><strong class="nw"><span class="ru">14&nbsp;дней</span><span class="uk">14&nbsp;днів</span></strong><p><span class="ru">на пробу: если не подойдет, вернем 100% оплаты</span><span class="uk">на пробу: якщо не підійде, повернемо 100% оплати</span></p></div>
-      <div class="yt rv" style="--d:7"><strong class="nw"><span class="ru">2&nbsp;месяца</span><span class="uk">2&nbsp;місяці</span></strong><p><span class="ru">с куратором и разбором задач каждую неделю</span><span class="uk">з куратором і розбором задач щотижня</span></p></div>
-    </div>
-    <div class="bento rv" style="--d:5">
-      <div class="bn-a"><video src="video/konsultant.mp4" poster="video/konsultant.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="lab"><span class="ru">AI&#8209;консультант отвечает клиентам</span><span class="uk">AI&#8209;консультант відповідає клієнтам</span></span></div>
-      <div class="bn-b"><div class="win"><div class="bar"><i></i><i></i><i></i><span>elenis.studio</span></div><div class="pic"><img class="long" src="img/elenis-studio-full.jpg" alt=""></div></div><span class="lab"><span class="ru">Сайт участника, собранный агентом</span><span class="uk">Сайт учасниці, зібраний агентом</span></span></div>
-      <div><video src="video/oplaty-ot-prodavca.mp4" poster="video/oplaty-ot-prodavca.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="lab"><span class="ru">Оплаты от AI&#8209;продавца</span><span class="uk">Оплати від AI&#8209;продавця</span></span></div>
-      <div><video src="video/montazh-posle.mp4" poster="video/montazh-posle.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="lab"><span class="ru">Ролик после AI&#8209;монтажа</span><span class="uk">Ролик після AI&#8209;монтажу</span></span></div>
-    </div>
-  </div>
+  <div class="hv-hint"><span class="ru">листайте</span><span class="uk">гортайте</span></div>
 </div></section>
 
 <!-- 3. Бонус -->
