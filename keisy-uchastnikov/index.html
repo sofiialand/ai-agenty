@@ -591,6 +591,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 #case2 .lead { max-width: 1400px; font-size: 24px; margin-top: 16px; }
 .c2-reel { position: relative; overflow: hidden; display: grid; grid-template-columns: 146px minmax(0,1fr); gap: 32px; align-items: center; padding: 16px 32px 16px 16px; border-radius: 30px; background: linear-gradient(120deg, rgba(var(--gold-rgb),0.10), rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.015)); border: 1px solid rgba(var(--gold-rgb),0.22); box-shadow: 0 30px 60px -30px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.06); }
 .c2-reel-t { position: relative; display: flex; flex-direction: column; align-items: flex-start; }
+.c2-agent { margin-bottom: 12px; font: 500 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
 .c2-reel .phone { width: 146px; padding: 6px; border-radius: 27px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07), 0 0 0 2px #8b9099, 0 0 0 3px #2a2b2f, 0 24px 50px -16px rgba(0,0,0,0.85); }
 .c2-reel .phone-screen { border-radius: 22px; }
 .c2-reel .phone-island { top: 11px; width: 50px; height: 14px; }
@@ -697,6 +698,16 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   #nishi .idx-q2 { margin-top: 24px; }
 }
 /* меню слева */
+/* режим «кейсы одного агента»: показываем только его кейсы, слайд = кейс */
+body[data-agent="1"] .sec:not([data-ag~="1"]):not([data-ag~="all"]),
+body[data-agent="2"] .sec:not([data-ag~="2"]):not([data-ag~="all"]),
+body[data-agent="3"] .sec:not([data-ag~="3"]):not([data-ag~="all"]) { display: none; }
+.agbar { position: fixed; z-index: 11; left: 50%; top: 20px; transform: translateX(-50%); display: none; align-items: center; gap: 14px; height: 38px; padding: 0 6px 0 18px; border-radius: 999px; border: 1px solid rgba(var(--gold-rgb),0.45); background: rgba(18,20,24,0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); white-space: nowrap; }
+body[data-agent] .agbar { display: flex; }
+.agbar-t > span { display: none; font: 600 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+body[data-agent="1"] .agbar-t > [data-a="1"], body[data-agent="2"] .agbar-t > [data-a="2"], body[data-agent="3"] .agbar-t > [data-a="3"] { display: inline; }
+.agbar-x { height: 28px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--text); color: var(--bg); font: 600 12px var(--mono); letter-spacing: .06em; cursor: pointer; }
+@media (max-width: 640px) { .agbar { top: 52px; height: 32px; padding-left: 12px; gap: 8px; } .agbar-t > span, .agbar-x { font-size: 10px; } }
 .menu-btn { position: fixed; z-index: 12; left: 20px; top: 20px; display: inline-flex; align-items: center; gap: 10px; height: 38px; padding: 0 16px 0 42px; border-radius: 999px; border: 1px solid var(--glass-border-bright); background: rgba(18,20,24,0.85); color: var(--text); font: 600 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .menu-btn i { position: absolute; left: 15px; width: 16px; height: 2px; border-radius: 2px; background: var(--gold); }
 .menu-btn i:nth-child(1) { top: 13px; } .menu-btn i:nth-child(2) { top: 18px; } .menu-btn i:nth-child(3) { top: 23px; }
@@ -822,18 +833,19 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   <a class="dr-i" href="#case16"><b>16</b><span class="ru">Книга рецептов</span><span class="uk">Книга рецептів</span></a>
   <a class="dr-i" href="#more"><b>+</b><span class="ru">Еще 6 ниш</span><span class="uk">Ще 6 ніш</span></a>
   <a class="dr-top" href="#agenty"><span class="ru">Кейсы по агентам</span><span class="uk">Кейси за агентами</span></a>
-  <a class="dr-i" href="#ag-sites"><b>1</b><span class="ru">AI-сайты</span><span class="uk">AI-сайти</span></a>
-  <a class="dr-i" href="#ag-montazh"><b>2</b><span class="ru">AI-монтаж</span><span class="uk">AI-монтаж</span></a>
-  <a class="dr-i" href="#ag-video"><b>3</b><span class="ru">Продающие AI-видео</span><span class="uk">Продаючі AI-відео</span></a>
+  <a class="dr-i" href="#agent-1"><b>1</b><span class="ru">AI-сайты</span><span class="uk">AI-сайти</span></a>
+  <a class="dr-i" href="#agent-2"><b>2</b><span class="ru">AI-монтаж</span><span class="uk">AI-монтаж</span></a>
+  <a class="dr-i" href="#agent-3"><b>3</b><span class="ru">Продающие AI-видео</span><span class="uk">Продаючі AI-відео</span></a>
   <a class="dr-top" href="#cta"><span class="ru">Как сделать так же</span><span class="uk">Як зробити так само</span></a>
 </div></nav>
+<div class="agbar"><span class="agbar-t"><span data-a="1"><span class="ru">Кейсы агента 1 · AI-сайты</span><span class="uk">Кейси агента 1 · AI-сайти</span></span><span data-a="2"><span class="ru">Кейсы агента 2 · AI-монтаж</span><span class="uk">Кейси агента 2 · AI-монтаж</span></span><span data-a="3"><span class="ru">Кейсы агента 3 · Продающие AI-видео</span><span class="uk">Кейси агента 3 · Продаючі AI-відео</span></span></span><button type="button" class="agbar-x"><span class="ru">Все кейсы</span><span class="uk">Усі кейси</span></button></div>
 <div class="ctrl">
   <div class="seg" role="group" aria-label="Язык">
     <button type="button" data-lang="ru">RU</button>
     <button type="button" data-lang="uk">UA</button>
   </div>
 </div>
-<div class="counter" id="counter">1 / 19</div>
+<div class="counter" id="counter">1 / 17</div>
 
 <main id="deck">
 
@@ -849,7 +861,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   <div class="cover2">
       <div class="eyebrow"><span class="ru">Система AI-агентов · кейсы участников</span><span class="uk">Система AI-агентів · кейси учасників</span></div>
       <h1 class="title"><span class="ru">Первые <em>результаты</em></span><span class="uk">Перші <em>результати</em></span></h1>
-      <p class="lead"><span class="ru">Сайты для своего бизнеса и для клиентов, первые ролики и сделка, которую AI-продавец закрыл без собственника. Каждая работа открывается по ссылке.</span><span class="uk">Сайти для свого бізнесу і для клієнтів, перші ролики та угода, яку AI-продавець закрив без власника. Кожна робота відкривається за посиланням.</span></p>
+      <p class="lead"><span class="ru">Сайты для своего бизнеса и для клиентов, первые ролики и сделка, которую AI-продавец закрыл без собственника.</span><span class="uk">Сайти для свого бізнесу і для клієнтів, перші ролики та угода, яку AI-продавець закрив без власника.</span></p>
       <div class="cover-meta">
         <span class="tag"><span class="ru">26 сайтов</span><span class="uk">26 сайтів</span></span>
         <span class="tag"><span class="ru">18 участников</span><span class="uk">18 учасників</span></span>
@@ -864,15 +876,15 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   <h2 class="title"><span class="ru">Выберите <em>агента</em></span><span class="uk">Оберіть <em>агента</em></span></h2>
   <p class="lead"><span class="ru">Каждую неделю участники получают нового агента. Вот что уже собрали первые три.</span><span class="uk">Щотижня учасники отримують нового агента. Ось що вже зібрали перші три.</span></p>
   <div class="body ag3">
-      <a class="agc" href="#ag-sites">
+      <a class="agc" href="#agent-1">
         <span class="agc-m"><img src="img/flowerpower.jpg" alt=""></span>
         <span class="agc-b"><span class="agc-n"><span class="ru">Агент 1</span><span class="uk">Агент 1</span></span><b><span class="ru">AI-сайты</span><span class="uk">AI-сайти</span></b><span class="agc-c"><span class="ru">26 сайтов</span><span class="uk">26 сайтів</span></span><small><span class="ru">Сайт с формой заявки, квизом и аналитикой – для своего бизнеса и для клиентов.</span><span class="uk">Сайт із формою заявки, квізом і аналітикою – для свого бізнесу та для клієнтів.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </a>
-      <a class="agc" href="#ag-montazh">
+      <a class="agc" href="#agent-2">
         <span class="agc-m"><video src="video/beauty-raschet.mp4" poster="video/beauty-raschet.jpg" autoplay muted loop playsinline preload="metadata"></video></span>
-        <span class="agc-b"><span class="agc-n"><span class="ru">Агент 2</span><span class="uk">Агент 2</span></span><b><span class="ru">AI-монтаж</span><span class="uk">AI-монтаж</span></b><span class="agc-c"><span class="ru">7 роликов</span><span class="uk">7 роликів</span></span><small><span class="ru">Ролики для Reels и Shorts из своего видео: субтитры, перебивки, анимация.</span><span class="uk">Ролики для Reels і Shorts зі свого відео: субтитри, перебивки, анімація.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+        <span class="agc-b"><span class="agc-n"><span class="ru">Агент 2</span><span class="uk">Агент 2</span></span><b><span class="ru">AI-монтаж</span><span class="uk">AI-монтаж</span></b><span class="agc-c"><span class="ru">6 роликов</span><span class="uk">6 роликів</span></span><small><span class="ru">Ролики для Reels и Shorts из своего видео: субтитры, перебивки, анимация.</span><span class="uk">Ролики для Reels і Shorts зі свого відео: субтитри, перебивки, анімація.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </a>
-      <a class="agc" href="#ag-video">
+      <a class="agc" href="#agent-3">
         <span class="agc-m"><video src="video/avatar-recepty.mp4" poster="video/avatar-recepty.jpg" autoplay muted loop playsinline preload="metadata"></video></span>
         <span class="agc-b"><span class="agc-n"><span class="ru">Агент 3</span><span class="uk">Агент 3</span></span><b><span class="ru">Продающие AI-видео</span><span class="uk">Продаючі AI-відео</span></b><span class="agc-c"><span class="ru">1&nbsp;123 подписчика за сутки</span><span class="uk">1&nbsp;123 підписники за добу</span></span><small><span class="ru">Видео без камеры и съемок: AI-аватар, сцены, озвучка.</span><span class="uk">Відео без камери та зйомок: AI-аватар, сцени, озвучка.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </a>
@@ -931,7 +943,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 3. Кейс 1: ивент-агентство -->
-<section class="sec" id="case1"><div class="slide story">
+<section class="sec" id="case1" data-ag="1 2"><div class="slide story">
   <div class="eyebrow"><span class="ru">Кейс 1 · ивент-агентство · Бали</span><span class="uk">Кейс 1 · івент-агенція · Балі</span></div>
   <h2 class="title"><span class="ru">Ивент-агентство на Бали: AI-продавец закрыл сделку без собственника</span><span class="uk">Івент-агенція на Балі: AI-продавець закрив угоду без власника</span></h2>
   <p class="lead"><span class="ru">Бизнес: праздники на Бали, 15 лет в ивентах, в ChatGPT – первое место по детским праздникам на острове. За две недели потока – пять результатов.</span><span class="uk">Бізнес: свята на Балі, 15 років в івентах, у ChatGPT – перше місце з дитячих свят на острові. За два тижні потоку – п'ять результатів.</span></p>
@@ -942,7 +954,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 5. Бьюти-компания -->
-<section class="sec sec-tall" id="case2"><div class="slide">
+<section class="sec sec-tall" id="case2" data-ag="1 2 3"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 2 · бьюти-компания, несколько стран</span><span class="uk">Кейс 2 · б'юті-компанія, кілька країн</span></div>
   <h2 class="title"><span class="ru">Три сайта за 3&nbsp;часа и два ролика без съемок</span><span class="uk">Три сайти за 3&nbsp;години і два ролики без зйомок</span></h2>
   <p class="lead"><span class="ru">Бизнес: косметика для профессионалов и свой салон, компания работает в нескольких странах. Цель на потоке – упаковать свои решения в продукт для мастеров.</span><span class="uk">Бізнес: косметика для професіоналів і власний салон, компанія працює в кількох країнах. Мета на потоці – упакувати свої рішення в продукт для майстрів.</span></p>
@@ -965,15 +977,15 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
       </div>
     </div>
     <div class="c2-reels">
-      <div class="c2-h"><span class="tag"><span class="ru">Агент «AI&#8209;монтаж»</span><span class="uk">Агент «AI&#8209;монтаж»</span></span><span class="c2-hint"><span class="ru">Два ролика без съемок</span><span class="uk">Два ролики без зйомок</span></span></div>
+      <div class="c2-h"><span class="tag"><span class="ru">Ролики</span><span class="uk">Ролики</span></span><span class="c2-hint"><span class="ru">Два ролика без съемок</span><span class="uk">Два ролики без зйомок</span></span></div>
       <div class="c2-ph">
         <div class="c2-reel">
           <div class="phone"><div class="phone-screen"><video src="video/beauty-raschet.mp4" poster="video/beauty-raschet.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div>
-          <div class="c2-reel-t"><span class="tag"><span class="ru">Анимация</span><span class="uk">Анімація</span></span><b><span class="ru">Ролик для мастеров</span><span class="uk">Ролик для майстрів</span></b><small><span class="ru">Считает реальную цену шугаринга</span><span class="uk">Рахує реальну ціну шугарингу</span></small></div>
+          <div class="c2-reel-t"><span class="c2-agent"><span class="ru">Агент «AI&#8209;монтаж»</span><span class="uk">Агент «AI&#8209;монтаж»</span></span><span class="tag"><span class="ru">Анимация</span><span class="uk">Анімація</span></span><b><span class="ru">Ролик для мастеров</span><span class="uk">Ролик для майстрів</span></b><small><span class="ru">Считает реальную цену шугаринга</span><span class="uk">Рахує реальну ціну шугарингу</span></small></div>
         </div>
         <div class="c2-reel">
           <div class="phone"><div class="phone-screen"><video src="video/beauty-avatar.mp4" poster="video/beauty-avatar.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div>
-          <div class="c2-reel-t"><span class="tag tag-gold"><span class="ru">AI-аватар, не съемка</span><span class="uk">AI-аватар, не зйомка</span></span><b><span class="ru">Розыгрыш выходных</span><span class="uk">Розіграш вікенду</span></b><small><span class="ru">Основательница ничего не записывала</span><span class="uk">Засновниця нічого не записувала</span></small></div>
+          <div class="c2-reel-t"><span class="c2-agent"><span class="ru">Агент «Продающие AI&#8209;видео»</span><span class="uk">Агент «Продаючі AI&#8209;відео»</span></span><span class="tag tag-gold"><span class="ru">AI-аватар, не съемка</span><span class="uk">AI-аватар, не зйомка</span></span><b><span class="ru">Розыгрыш выходных</span><span class="uk">Розіграш вікенду</span></b><small><span class="ru">Основательница ничего не записывала</span><span class="uk">Засновниця нічого не записувала</span></small></div>
         </div>
         <div class="lq c2-q"><q><span class="ru">Я вчера собирала 3&nbsp;сайта около 3&nbsp;часов</span><span class="uk">Я вчора збирала 3&nbsp;сайти близько 3&nbsp;годин</span></q><span><span class="ru">участница, 5 ноября</span><span class="uk">учасниця, 5 листопада</span></span></div>
       </div>
@@ -982,7 +994,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 10. Новичок -->
-<section class="sec" id="case9"><div class="slide">
+<section class="sec" id="case9" data-ag="1"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 3 · агентство недвижимости, 16 лет на рынке</span><span class="uk">Кейс 3 · агенція нерухомості, 16 років на ринку</span></div>
   <h2 class="title"><span class="ru">Первый сайт у участницы, которая не знала, как поднять руку в Zoom</span><span class="uk">Перший сайт в учасниці, яка не знала, як підняти руку в Zoom</span></h2>
   <div class="body split">
@@ -1002,7 +1014,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 12. Кейс 4: площадка Tesla -->
-<section class="sec sec-tall" id="case14"><div class="slide">
+<section class="sec sec-tall" id="case14" data-ag="1 2"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 4 · площадка Tesla, Киев</span><span class="uk">Кейс 4 · майданчик Tesla, Київ</span></div>
   <h2 class="title"><span class="ru">Два лендинга, ролик и новое позиционирование</span><span class="uk">Два лендинги, ролик і нове позиціонування</span></h2>
   <p class="lead"><span class="ru">Бизнес: площадка в Киеве, где в наличии больше 50 Tesla. За неделю – два лендинга, первый ролик и разбор маркетинга.</span><span class="uk">Бізнес: майданчик у Києві, де в наявності понад 50 Tesla. За тиждень – два лендинги, перший ролик і розбір маркетингу.</span></p>
@@ -1017,7 +1029,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 6. Кейсы 5–6: один участник, врач-клиент и проект жены -->
-<section class="sec sec-tall" id="case3"><div class="slide">
+<section class="sec sec-tall" id="case3" data-ag="1"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейсы 5–6 · один участник, два бизнеса</span><span class="uk">Кейси 5–6 · один учасник, два бізнеси</span></div>
   <h2 class="title"><span class="ru">Сайт клиенту-врачу и лендинг с оплатой для жены</span><span class="uk">Сайт клієнтці-лікарці й лендинг з оплатою для дружини</span></h2>
   <div class="body twin">
@@ -1039,7 +1051,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 7. До и после -->
-<section class="sec sec-tall" id="case4"><div class="slide">
+<section class="sec sec-tall" id="case4" data-ag="1 2"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 7 · найм водителей, логистика в США</span><span class="uk">Кейс 7 · найм водіїв, логістика в США</span></div>
   <h2 class="title"><span class="ru">Одна задача: что собирает Claude без агента и что с агентом</span><span class="uk">Одна задача: що збирає Claude без агента і що з агентом</span></h2>
   <div class="body">
@@ -1065,7 +1077,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 8. Германия -->
-<section class="sec" id="case5"><div class="slide">
+<section class="sec" id="case5" data-ag="1"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 8 · мобильный шиномонтаж, Германия</span><span class="uk">Кейс 8 · мобільний шиномонтаж, Німеччина</span></div>
   <h2 class="title"><span class="ru">Сайт соседу – сразу со страницами, которых требует закон Германии</span><span class="uk">Сайт сусіду – одразу зі сторінками, яких вимагає закон Німеччини</span></h2>
   <div class="body split">
@@ -1087,7 +1099,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 9. Недигитальные ниши -->
-<section class="sec sec-tall" id="case6"><div class="slide">
+<section class="sec sec-tall" id="case6" data-ag="1 3"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейсы 9–11 · промышленность и торговля</span><span class="uk">Кейси 9–11 · промисловість і торгівля</span></div>
   <h2 class="title"><span class="ru">Трубы, грили и обогрев: сайты для недигитальных ниш</span><span class="uk">Труби, грилі та обігрів: сайти для нецифрових ніш</span></h2>
   <div class="body trio">
@@ -1112,7 +1124,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 11. Как продают сайты -->
-<section class="sec sec-tall" id="case10"><div class="slide">
+<section class="sec sec-tall" id="case10" data-ag="1"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейсы 12–14 · цветочный магазин, книга для предпринимателей, клиника косметологии</span><span class="uk">Кейси 12–14 · квітковий магазин, книга для підприємців, клініка косметології</span></div>
   <h2 class="title"><span class="ru">Готовый сайт до разговора о цене: два способа предложить его клиенту</span><span class="uk">Готовий сайт до розмови про ціну: два способи запропонувати його клієнту</span></h2>
   <div class="body">
@@ -1129,7 +1141,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 13. Кейс 15: музыкальный релиз -->
-<section class="sec" id="case15"><div class="slide">
+<section class="sec" id="case15" data-ag="2"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 15 · музыкальный релиз, DJ</span><span class="uk">Кейс 15 · музичний реліз, DJ</span></div>
   <h2 class="title"><span class="ru">Ролик к треку: агент сам услышал биты в&nbsp;mp3</span><span class="uk">Ролик до треку: агент сам почув біти в&nbsp;mp3</span></h2>
   <div class="body split">
@@ -1145,7 +1157,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- Кейс 16: книга рецептов -->
-<section class="sec sec-tall" id="case16"><div class="slide">
+<section class="sec sec-tall" id="case16" data-ag="3"><div class="slide">
   <div class="eyebrow"><span class="ru">Кейс 16 · книга рецептов, здоровое питание</span><span class="uk">Кейс 16 · книга рецептів, здорове харчування</span></div>
   <h2 class="title"><span class="ru">Рилс с AI-аватаром за сутки принес 1&nbsp;123 подписчика</span><span class="uk">Рілс з AI-аватаром за добу приніс 1&nbsp;123 підписники</span></h2>
   <p class="lead"><span class="ru">Бизнес: книга рецептов здорового питания. Ролик собрал агент «Продающие AI&#8209;видео»: в кадре AI-аватар автора, в конце призыв написать «МЕНЮ» в комментариях.</span><span class="uk">Бізнес: книга рецептів здорового харчування. Ролик зібрав агент «Продаючі AI&#8209;відео»: у кадрі AI-аватар авторки, наприкінці заклик написати «МЕНЮ» в коментарях.</span></p>
@@ -1165,7 +1177,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- 12. Галерея -->
-<section class="sec sec-tall" id="more"><div class="slide">
+<section class="sec sec-tall" id="more" data-ag="1"><div class="slide">
   <div class="eyebrow"><span class="ru">Еще работы потока</span><span class="uk">Ще роботи потоку</span></div>
   <h2 class="title"><span class="ru">Шесть ниш – шесть сайтов участников</span><span class="uk">Шість ніш – шість сайтів учасників</span></h2>
   <div class="body gal">
@@ -1179,7 +1191,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </div></section>
 
 <!-- Агент 1: все сайты -->
-<section class="sec" id="ag-sites"><div class="slide">
+<section class="sec" id="ag-sites" data-ag="1"><div class="slide">
   <div class="eyebrow"><span class="ru">Агент 1 · AI-сайты · 26 сайтов за 10 дней</span><span class="uk">Агент 1 · AI-сайти · 26 сайтів за 10 днів</span></div>
   <h2 class="title"><span class="ru">Каждый сайт можно открыть и пролистать</span><span class="uk">Кожен сайт можна відкрити й погортати</span></h2>
   <div class="all">
@@ -1211,34 +1223,8 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   </div>
 </div></section>
 
-<!-- Агент 2: AI-монтаж -->
-<section class="sec" id="ag-montazh"><div class="slide">
-  <div class="eyebrow"><span class="ru">Агент 2 · AI-монтаж</span><span class="uk">Агент 2 · AI-монтаж</span></div>
-  <h2 class="title"><span class="ru">7 роликов от 5 участников за первые три дня</span><span class="uk">7 роликів від 5 учасників за перші три дні</span></h2>
-  <p class="lead"><span class="ru">Нажмите на подпись под роликом, чтобы открыть кейс.</span><span class="uk">Натисніть на підпис під роликом, щоб відкрити кейс.</span></p>
-  <div class="body reels7">
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/montazh-prazdnik.mp4" poster="video/montazh-prazdnik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case1"><small><span class="ru">Ивент-агентство</span><span class="uk">Івент-агенція</span></small><b><span class="ru">Праздники на Бали</span><span class="uk">Свята на Балі</span></b></a></div>
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case1"><small><span class="ru">Ивент-агентство</span><span class="uk">Івент-агенція</span></small><b><span class="ru">Ролик без съемок</span><span class="uk">Ролик без зйомок</span></b></a></div>
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/beauty-raschet.mp4" poster="video/beauty-raschet.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case2"><small><span class="ru">Бьюти-компания</span><span class="uk">Б'юті-компанія</span></small><b><span class="ru">Ролик для мастеров</span><span class="uk">Ролик для майстрів</span></b></a></div>
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/beauty-avatar.mp4" poster="video/beauty-avatar.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case2"><small><span class="ru">Бьюти-компания</span><span class="uk">Б'юті-компанія</span></small><b><span class="ru">С AI-аватаром</span><span class="uk">З AI-аватаром</span></b></a></div>
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case14"><small><span class="ru">Площадка Tesla</span><span class="uk">Майданчик Tesla</span></small><b><span class="ru">Первый ролик</span><span class="uk">Перший ролик</span></b></a></div>
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/roadtex-vakansiya.mp4" poster="video/roadtex-vakansiya.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case4"><small><span class="ru">Найм водителей</span><span class="uk">Найм водіїв</span></small><b><span class="ru">Ролик-вакансия</span><span class="uk">Ролик-вакансія</span></b></a></div>
-    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/dj-reliz.mp4" poster="video/dj-reliz.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case15"><small><span class="ru">Музыкальный релиз</span><span class="uk">Музичний реліз</span></small><b><span class="ru">Под биты трека</span><span class="uk">Під біти треку</span></b></a></div>
-  </div>
-</div></section>
-
-<!-- Агент 3: продающие AI-видео -->
-<section class="sec" id="ag-video"><div class="slide">
-  <div class="eyebrow"><span class="ru">Агент 3 · Продающие AI-видео</span><span class="uk">Агент 3 · Продаючі AI-відео</span></div>
-  <h2 class="title"><span class="ru">Видео без камеры и съемок</span><span class="uk">Відео без камери та зйомок</span></h2>
-  <div class="body vids2">
-    <div class="v2"><div class="phone"><div class="phone-screen"><video src="video/avatar-recepty.mp4" poster="video/avatar-recepty.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="v2-t"><span class="tag"><span class="ru">Книга рецептов</span><span class="uk">Книга рецептів</span></span><b><span class="ru">Рилс с AI-аватаром автора</span><span class="uk">Рілс з AI-аватаром авторки</span></b><p><span class="ru">95&nbsp;046 просмотров и 1&nbsp;123 подписки за сутки</span><span class="uk">95&nbsp;046 переглядів і 1&nbsp;123 підписки за добу</span></p><a class="agc-go" href="#case16"><span class="ru">Открыть кейс</span><span class="uk">Відкрити кейс</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
-    <div class="v2"><div class="phone"><div class="phone-screen"><video src="video/obogrev-reklama.mp4" poster="video/obogrev-reklama.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="v2-t"><span class="tag"><span class="ru">Обогрев дома без света</span><span class="uk">Обігрів дому без світла</span></span><b><span class="ru">Продающий ролик без съемок</span><span class="uk">Продаючий ролик без зйомок</span></b><p><span class="ru">Семья ужинает у печи, когда отключили свет</span><span class="uk">Родина вечеряє біля печі, коли вимкнули світло</span></p><a class="agc-go" href="#case6"><span class="ru">Открыть кейс</span><span class="uk">Відкрити кейс</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
-  </div>
-</div></section>
-
 <!-- 14. Как сделать так же -->
-<section class="sec" id="cta"><div class="slide slide-cta">
+<section class="sec" id="cta" data-ag="all"><div class="slide slide-cta">
   <div class="glass cta">
     <div class="eyebrow"><span class="ru">Как сделать так же</span><span class="uk">Як зробити так само</span></div>
     <h2 class="title"><span class="ru">Вы можете так же</span><span class="uk">Ви можете так само</span></h2>
@@ -1272,7 +1258,10 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 <script>
 (function(){
   var root = document.documentElement;
-  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var all = [].slice.call(document.querySelectorAll('.sec'));
+  var secs = all;
+  function vis(){ secs = all.filter(function(x){ return getComputedStyle(x).display !== 'none'; }); }
+  window.__vis = function(){ vis(); upd(); };
   var counter = document.getElementById('counter');
 
   /* масштаб слайда под окно */
@@ -1391,6 +1380,30 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   b.addEventListener('click', function(){ d.classList.add('open'); });
   d.addEventListener('click', function(e){ if (e.target === d || e.target.closest('.dr-close') || e.target.closest('a')) close(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+<script>
+/* кейсы по агенту: тот же показ «слайд = кейс», лишние слайды скрыты */
+(function(){
+  var body = document.body;
+  function first(){ var s = [].filter.call(document.querySelectorAll('.sec'), function(x){ return getComputedStyle(x).display !== 'none'; }); return s[0]; }
+  function setAgent(n){
+    if (n) body.setAttribute('data-agent', n); else body.removeAttribute('data-agent');
+    if (window.__vis) window.__vis();
+    window.dispatchEvent(new Event('resize'));
+  }
+  function open(n){ setAgent(n); var f = first(); if (f) window.scrollTo(0, f.offsetTop); }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]'); if (!a) return;
+    var h = a.getAttribute('href'), m = h.match(/^#agent-(\d)$/);
+    if (m) { e.preventDefault(); open(m[1]); history.replaceState(null, '', location.pathname + location.search + h); return; }
+    if (body.hasAttribute('data-agent')) { var t = document.querySelector(h); if (t && getComputedStyle(t).display === 'none') setAgent(null); }
+  });
+  document.querySelector('.agbar-x').addEventListener('click', function(){
+    setAgent(null); history.replaceState(null, '', location.pathname + location.search);
+    var t = document.getElementById('agenty'); if (t) window.scrollTo(0, t.offsetTop);
+  });
+  var m = location.hash.match(/^#agent-(\d)$/); if (m) open(m[1]);
 })();
 </script>
 </body>
