@@ -549,9 +549,10 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 .sec-tall { --h0: 1540px; height: calc(max(var(--h0), var(--H, 1080px)) * var(--k, .5)); }
 .sec-tall .slide { height: max(var(--h0), var(--H, 1080px)); }
 #case4.sec-tall { --h0: 1320px; }
-#case2.sec-tall { --h0: 1400px; }
+#case2.sec-tall { --h0: 1430px; }
+#case16.sec-tall { --h0: 1200px; }
 #case3.sec-tall { --h0: 1280px; }
-#case6.sec-tall { --h0: 1260px; }
+#case6.sec-tall { --h0: 1500px; }
 #more.sec-tall { --h0: 1600px; }
 #case10.sec-tall { --h0: 1180px; }
 .tp-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 400px; gap: 40px; align-items: start; }
@@ -695,6 +696,95 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   #nishi .gc b { font-size: 17px; }
   #nishi .idx-q2 { margin-top: 24px; }
 }
+/* меню слева */
+.menu-btn { position: fixed; z-index: 12; left: 20px; top: 20px; display: inline-flex; align-items: center; gap: 10px; height: 38px; padding: 0 16px 0 42px; border-radius: 999px; border: 1px solid var(--glass-border-bright); background: rgba(18,20,24,0.85); color: var(--text); font: 600 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.menu-btn i { position: absolute; left: 15px; width: 16px; height: 2px; border-radius: 2px; background: var(--gold); }
+.menu-btn i:nth-child(1) { top: 13px; } .menu-btn i:nth-child(2) { top: 18px; } .menu-btn i:nth-child(3) { top: 23px; }
+.drawer { position: fixed; z-index: 20; inset: 0; pointer-events: none; }
+.drawer::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.55); opacity: 0; transition: opacity .3s; }
+.dr-in { position: absolute; left: 0; top: 0; bottom: 0; width: 340px; overflow-y: auto; padding: 72px 20px 28px; background: #101216; border-right: 1px solid var(--glass-border-bright); transform: translateX(-100%); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.drawer.open { pointer-events: auto; }
+.drawer.open::before { opacity: 1; }
+.drawer.open .dr-in { transform: none; }
+.dr-close { position: absolute; right: 16px; top: 16px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--glass-border-bright); background: none; color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; }
+.dr-top { display: block; margin: 22px 0 8px; font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.dr-top:first-of-type { margin-top: 0; }
+.dr-i { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 8px; align-items: center; padding: 9px 10px; border-radius: 10px; font: 500 15px/1.3 var(--display); color: var(--text-mid); transition: background .2s, color .2s; }
+.dr-i b { font: 600 13px var(--mono); color: var(--text-dim); }
+.dr-i:hover { background: rgba(var(--gold-rgb),0.1); color: var(--text); }
+/* выбор агента */
+#agenty .title em { font-style: normal; background: none; color: var(--gold); -webkit-text-fill-color: var(--gold); }
+.ag3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 36px; }
+.agc { display: flex; flex-direction: column; border-radius: 26px; overflow: hidden; border: 1px solid var(--glass-border-bright); background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); box-shadow: 0 30px 60px -30px rgba(0,0,0,0.85); transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .25s; }
+.agc:hover { transform: translateY(-8px); border-color: rgba(var(--gold-rgb),0.6); }
+.agc-m { display: block; height: calc(300px + var(--xh, 0px) * .35); overflow: hidden; background: #000; }
+.agc-m img, .agc-m video { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.agc-b { display: flex; flex-direction: column; align-items: flex-start; padding: 28px 32px 32px; }
+.agc-n { font: 600 14px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.agc b { margin-top: 10px; font: 700 36px/1.15 var(--display); letter-spacing: -0.02em; }
+.agc-c { margin-top: 14px; padding: 6px 14px; border-radius: 10px; background: var(--gold); color: #15100c; font: 800 22px var(--display); letter-spacing: -0.01em; }
+.agc small { margin-top: 16px; font: 400 19px/1.5 var(--sans); color: var(--text-mid); }
+.agc-go { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; font: 600 18px var(--display); color: var(--gold); }
+.agc-go svg { width: 20px; height: 20px; }
+/* агент 2: ролики */
+.reels7 { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 24px; }
+.r7 .phone { width: 100%; padding: 6px; border-radius: 28px; }
+.r7 .phone-screen { border-radius: 22px; }
+.r7 .phone-island { top: 11px; width: 52px; height: 15px; }
+.r7 .snd { bottom: 12px; height: 24px; padding: 0 9px; font-size: 9.5px; }
+.r7 a { display: block; margin-top: 18px; }
+.r7 small { display: block; font: 500 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.r7 b { display: block; margin-top: 6px; font: 600 19px/1.3 var(--display); }
+.r7 a:hover b { color: var(--gold); }
+/* агент 3: видео */
+.vids2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.v2 { display: grid; grid-template-columns: calc(300px + var(--xh, 0px) * .25) minmax(0,1fr); gap: 40px; align-items: center; }
+.v2-t { display: flex; flex-direction: column; align-items: flex-start; }
+.v2-t b { margin-top: 18px; font: 700 34px/1.2 var(--display); letter-spacing: -0.02em; }
+.v2-t p { margin-top: 12px; font-size: 21px; line-height: 1.5; color: var(--text-mid); }
+/* кейс 16 */
+.c16 { display: grid; grid-template-columns: 300px minmax(0,1fr) 330px; gap: 56px; align-items: center; }
+.c16-ph { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.c16-ph .phone { width: 300px; }
+.c16-yts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.c16-yts .yt { padding: 26px 28px; }
+.c16-yts .yt strong { font-size: 64px; white-space: nowrap; }
+.c16-yts .yt p { font-size: 18px; }
+.c16-mid .lq { margin-top: 40px; }
+.c16-mid .lq q { font-size: 26px; }
+.c16-proof { margin: 0; }
+.c16-proof img { width: 100%; border-radius: 22px; border: 1px solid var(--glass-border-bright); box-shadow: 0 30px 60px -24px rgba(0,0,0,0.8); }
+.c16-proof figcaption { margin-top: 12px; font: 500 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); text-align: center; }
+/* ролик агента 3 в кейсе 11 */
+.mini-reel { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 20px; align-items: center; margin-top: 24px; }
+.mini-reel .phone { width: 110px; padding: 5px; border-radius: 22px; }
+.mini-reel .phone-screen { border-radius: 18px; }
+.mini-reel .phone-island { top: 9px; width: 38px; height: 11px; }
+.mini-reel .snd { display: none; }
+.mini-reel b { display: block; margin-top: 10px; font: 600 20px/1.3 var(--display); }
+.mini-reel small { display: block; margin-top: 6px; font-size: 16px; line-height: 1.45; color: var(--text-mid); }
+@media (max-width: 640px) {
+  .menu-btn { left: 12px; top: 12px; height: 32px; }
+  .menu-btn i:nth-child(1) { top: 10px; } .menu-btn i:nth-child(2) { top: 15px; } .menu-btn i:nth-child(3) { top: 20px; }
+  .dr-in { width: 86vw; }
+  .ag3, .vids2 { grid-template-columns: minmax(0,1fr); gap: 20px; }
+  .agc-m { height: 200px; }
+  .agc b { font-size: 22px; }
+  .agc-c { font-size: 16px; }
+  .agc small { font-size: 14px; }
+  .agc-b { padding: 18px 18px 20px; }
+  .reels7 { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .r7 b { font-size: 14px; }
+  .v2 { grid-template-columns: 150px minmax(0,1fr); gap: 16px; }
+  .v2-t b { font-size: 18px; }
+  .v2-t p { font-size: 14px; }
+  .c16 { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  .c16-ph .phone { width: 210px; }
+  .c16-yts .yt strong { font-size: 32px; }
+  .c16-yts .yt p { font-size: 12px; }
+  .c16-mid .lq q { font-size: 17px; }
+  .c16-proof img { max-width: 240px; margin: 0 auto; display: block; }
+}
 /* окно сайта: везде одна высота, страница сайта сама прокручивается */
 .shot.std { height: auto !important; }
 .shot.std .pic { flex: none !important; height: 440px !important; aspect-ratio: auto !important; --ph: 440px; }
@@ -715,13 +805,35 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
 </head>
 <body>
 
+<button type="button" class="menu-btn" aria-label="Меню"><i></i><i></i><i></i><span><span class="ru">Меню</span><span class="uk">Меню</span></span></button>
+<nav class="drawer" aria-label="Меню кейсов"><div class="dr-in">
+  <button type="button" class="dr-close" aria-label="Закрыть">×</button>
+  <a class="dr-top" href="#nishi"><span class="ru">Кейсы по нишам</span><span class="uk">Кейси за нішами</span></a>
+  <a class="dr-i" href="#case1"><b>1</b><span class="ru">Ивент-агентство, Бали</span><span class="uk">Івент-агенція, Балі</span></a>
+  <a class="dr-i" href="#case2"><b>2</b><span class="ru">Бьюти-компания</span><span class="uk">Б'юті-компанія</span></a>
+  <a class="dr-i" href="#case9"><b>3</b><span class="ru">Агентство недвижимости</span><span class="uk">Агенція нерухомості</span></a>
+  <a class="dr-i" href="#case14"><b>4</b><span class="ru">Площадка Tesla, Киев</span><span class="uk">Майданчик Tesla, Київ</span></a>
+  <a class="dr-i" href="#case3"><b>5–6</b><span class="ru">Врач и программа медитаций</span><span class="uk">Лікарка і програма медитацій</span></a>
+  <a class="dr-i" href="#case4"><b>7</b><span class="ru">Найм водителей, США</span><span class="uk">Найм водіїв, США</span></a>
+  <a class="dr-i" href="#case5"><b>8</b><span class="ru">Шиномонтаж, Германия</span><span class="uk">Шиномонтаж, Німеччина</span></a>
+  <a class="dr-i" href="#case6"><b>9–11</b><span class="ru">Трубы, грили, обогрев</span><span class="uk">Труби, грилі, обігрів</span></a>
+  <a class="dr-i" href="#case10"><b>12–14</b><span class="ru">Цветы, книга, косметология</span><span class="uk">Квіти, книга, косметологія</span></a>
+  <a class="dr-i" href="#case15"><b>15</b><span class="ru">Музыкальный релиз, DJ</span><span class="uk">Музичний реліз, DJ</span></a>
+  <a class="dr-i" href="#case16"><b>16</b><span class="ru">Книга рецептов</span><span class="uk">Книга рецептів</span></a>
+  <a class="dr-i" href="#more"><b>+</b><span class="ru">Еще 6 ниш</span><span class="uk">Ще 6 ніш</span></a>
+  <a class="dr-top" href="#agenty"><span class="ru">Кейсы по агентам</span><span class="uk">Кейси за агентами</span></a>
+  <a class="dr-i" href="#ag-sites"><b>1</b><span class="ru">AI-сайты</span><span class="uk">AI-сайти</span></a>
+  <a class="dr-i" href="#ag-montazh"><b>2</b><span class="ru">AI-монтаж</span><span class="uk">AI-монтаж</span></a>
+  <a class="dr-i" href="#ag-video"><b>3</b><span class="ru">Продающие AI-видео</span><span class="uk">Продаючі AI-відео</span></a>
+  <a class="dr-top" href="#cta"><span class="ru">Как сделать так же</span><span class="uk">Як зробити так само</span></a>
+</div></nav>
 <div class="ctrl">
   <div class="seg" role="group" aria-label="Язык">
     <button type="button" data-lang="ru">RU</button>
     <button type="button" data-lang="uk">UA</button>
   </div>
 </div>
-<div class="counter" id="counter">1 / 15</div>
+<div class="counter" id="counter">1 / 19</div>
 
 <main id="deck">
 
@@ -752,7 +864,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
     <div>
       <div class="eyebrow"><span class="ru">Кейсы участников</span><span class="uk">Кейси учасників</span></div>
       <h2 class="title"><span class="ru">Найдите свою <em>нишу</em></span><span class="uk">Знайдіть свою <em>нішу</em></span></h2>
-      <p class="idx-lead"><span class="ru">21 бизнес из разных стран. Листайте галерею и нажмите на свою нишу, чтобы открыть кейс.</span><span class="uk">21 бізнес із різних країн. Гортайте галерею й натисніть на свою нішу, щоб відкрити кейс.</span></p>
+      <p class="idx-lead"><span class="ru">22 бизнеса из разных стран. Листайте галерею и нажмите на свою нишу, чтобы открыть кейс.</span><span class="uk">22 бізнеси з різних країн. Гортайте галерею й натисніть на свою нішу, щоб відкрити кейс.</span></p>
       <div class="gal2-bar">
         <button type="button" class="gal2-btn" data-dir="-1" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
         <button type="button" class="gal2-btn" data-dir="1" aria-label="Вперед"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -784,6 +896,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
         <a class="gc" href="#case10" draggable="false"><span class="gc-pic"><img src="img/biblia.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">13</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Кейс 13</span><span class="uk">Кейс 13</span></span><b><span class="ru">Книга для предпринимателей</span><span class="uk">Книга для підприємців</span></b><small><span class="ru">Новая версия старого сайта</span><span class="uk">Нова версія старого сайту</span></small></span></a>
         <a class="gc" href="#case10" draggable="false"><span class="gc-pic"><img src="img/nikrasova.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">14</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Кейс 14</span><span class="uk">Кейс 14</span></span><b><span class="ru">Клиника косметологии</span><span class="uk">Клініка косметології</span></b><small><span class="ru">Новая версия старого сайта</span><span class="uk">Нова версія старого сайту</span></small></span></a>
         <a class="gc" href="#case15" draggable="false"><span class="gc-pic"><img src="img/dj-reliz.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">15</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Кейс 15</span><span class="uk">Кейс 15</span></span><b><span class="ru">Музыкальный релиз, DJ</span><span class="uk">Музичний реліз, DJ</span></b><small><span class="ru">Ролик под биты трека из mp3</span><span class="uk">Ролик під біти треку з mp3</span></small></span></a>
+        <a class="gc" href="#case16" draggable="false"><span class="gc-pic"><img src="img/avatar-recepty.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">16</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Кейс 16</span><span class="uk">Кейс 16</span></span><b><span class="ru">Книга рецептов</span><span class="uk">Книга рецептів</span></b><small><span class="ru">1&nbsp;123 подписчика за сутки</span><span class="uk">1&nbsp;123 підписники за добу</span></small></span></a>
         <a class="gc" href="#more" draggable="false"><span class="gc-pic"><img src="img/sushi.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">+</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Сайт участника</span><span class="uk">Сайт учасника</span></span><b><span class="ru">Доставка суши</span><span class="uk">Доставка суші</span></b><small><span class="ru">Варшава, сайт с корзиной</span><span class="uk">Варшава, сайт із кошиком</span></small></span></a>
         <a class="gc" href="#more" draggable="false"><span class="gc-pic"><img src="img/rdtaxes.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">+</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Сайт участника</span><span class="uk">Сайт учасника</span></span><b><span class="ru">Налоговые услуги</span><span class="uk">Податкові послуги</span></b><small><span class="ru">США, отчетность для бизнеса</span><span class="uk">США, звітність для бізнесу</span></small></span></a>
         <a class="gc" href="#more" draggable="false"><span class="gc-pic"><img src="img/optika.jpg" alt="" loading="lazy" draggable="false"><span class="gc-num">+</span></span><span class="gc-body"><span class="gc-lab"><span class="ru">Сайт участника</span><span class="uk">Сайт учасника</span></span><b><span class="ru">Оптика</span><span class="uk">Оптика</span></b><small><span class="ru">Проверка зрения и очки</span><span class="uk">Перевірка зору й окуляри</span></small></span></a>
@@ -794,6 +907,27 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
     </div>
   </div>
   <figure class="idx-q2"><span class="q2-mark" aria-hidden="true">“</span><div><blockquote><span class="ru">Когда я смотрела ваши сайты, мне хотелось начать продавать цветы, орешки, потом начать заниматься фурами</span><span class="uk">Коли я дивилася ваші сайти, мені хотілося почати продавати квіти, горішки, потім зайнятися фурами</span></blockquote><figcaption><span class="ru">Участница, агентство недвижимости</span><span class="uk">Учасниця, агенція нерухомості</span></figcaption></div></figure>
+</div></section>
+
+<!-- Кейсы по агентам -->
+<section class="sec" id="agenty"><div class="slide">
+  <div class="eyebrow"><span class="ru">Кейсы по агентам</span><span class="uk">Кейси за агентами</span></div>
+  <h2 class="title"><span class="ru">Выберите <em>агента</em></span><span class="uk">Оберіть <em>агента</em></span></h2>
+  <p class="lead"><span class="ru">Каждую неделю участники получают нового агента. Вот что уже собрали первые три.</span><span class="uk">Щотижня учасники отримують нового агента. Ось що вже зібрали перші три.</span></p>
+  <div class="body ag3">
+      <a class="agc" href="#ag-sites">
+        <span class="agc-m"><img src="img/flowerpower.jpg" alt=""></span>
+        <span class="agc-b"><span class="agc-n"><span class="ru">Агент 1</span><span class="uk">Агент 1</span></span><b><span class="ru">AI-сайты</span><span class="uk">AI-сайти</span></b><span class="agc-c"><span class="ru">26 сайтов</span><span class="uk">26 сайтів</span></span><small><span class="ru">Сайт с формой заявки, квизом и аналитикой – для своего бизнеса и для клиентов.</span><span class="uk">Сайт із формою заявки, квізом і аналітикою – для свого бізнесу та для клієнтів.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="agc" href="#ag-montazh">
+        <span class="agc-m"><video src="video/beauty-raschet.mp4" poster="video/beauty-raschet.jpg" autoplay muted loop playsinline preload="metadata"></video></span>
+        <span class="agc-b"><span class="agc-n"><span class="ru">Агент 2</span><span class="uk">Агент 2</span></span><b><span class="ru">AI-монтаж</span><span class="uk">AI-монтаж</span></b><span class="agc-c"><span class="ru">7 роликов</span><span class="uk">7 роликів</span></span><small><span class="ru">Ролики для Reels и Shorts из своего видео: субтитры, перебивки, анимация.</span><span class="uk">Ролики для Reels і Shorts зі свого відео: субтитри, перебивки, анімація.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="agc" href="#ag-video">
+        <span class="agc-m"><video src="video/avatar-recepty.mp4" poster="video/avatar-recepty.jpg" autoplay muted loop playsinline preload="metadata"></video></span>
+        <span class="agc-b"><span class="agc-n"><span class="ru">Агент 3</span><span class="uk">Агент 3</span></span><b><span class="ru">Продающие AI-видео</span><span class="uk">Продаючі AI-відео</span></b><span class="agc-c"><span class="ru">1&nbsp;123 подписчика за сутки</span><span class="uk">1&nbsp;123 підписники за добу</span></span><small><span class="ru">Видео без камеры и съемок: AI-аватар, сцены, озвучка.</span><span class="uk">Відео без камери та зйомок: AI-аватар, сцени, озвучка.</span></small><span class="agc-go"><span class="ru">Смотреть кейсы</span><span class="uk">Дивитися кейси</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+  </div>
 </div></section>
 
 <!-- 3. Кейс 1: ивент-агентство -->
@@ -968,6 +1102,7 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
     <div>
       <a class="shot std" href="https://ekotermo-teplo.vercel.app/" target="_blank" rel="noopener"><div class="bar"><i></i><i></i><i></i><span>ekotermo-teplo.vercel.app</span></div><div class="pic"><img class="long" src="img/ekotermo-full.jpg" alt=""></div></a>
       <div class="cap"><span class="ru">Обогрев дома без света</span><span class="uk">Обігрів дому без світла</span><small><span class="ru">Первый экран начинается с боли клиента: «Світло вимкнули. А вдома холодно».</span><span class="uk">Перший екран починається з болю клієнта: «Світло вимкнули. А вдома холодно».</span></small></div>
+      <div class="mini-reel"><div class="phone"><div class="phone-screen"><video src="video/obogrev-reklama.mp4" poster="video/obogrev-reklama.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div><span class="tag tag-gold"><span class="ru">Агент 3</span><span class="uk">Агент 3</span></span><b><span class="ru">Продающий ролик без съемок</span><span class="uk">Продаючий ролик без зйомок</span></b><small><span class="ru">Свет отключили, а дома тепло: семья ужинает у печи.</span><span class="uk">Світло вимкнули, а вдома тепло: родина вечеряє біля печі.</span></small></div></div>
     </div>
   </div>
   <div class="duo">
@@ -1009,6 +1144,26 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   </div>
 </div></section>
 
+<!-- Кейс 16: книга рецептов -->
+<section class="sec sec-tall" id="case16"><div class="slide">
+  <div class="eyebrow"><span class="ru">Кейс 16 · книга рецептов, здоровое питание</span><span class="uk">Кейс 16 · книга рецептів, здорове харчування</span></div>
+  <h2 class="title"><span class="ru">Рилс с AI-аватаром за сутки принес 1&nbsp;123 подписчика</span><span class="uk">Рілс з AI-аватаром за добу приніс 1&nbsp;123 підписники</span></h2>
+  <p class="lead"><span class="ru">Бизнес: книга рецептов здорового питания. Ролик собрал агент «Продающие AI&#8209;видео»: в кадре AI-аватар автора, в конце призыв написать «МЕНЮ» в комментариях.</span><span class="uk">Бізнес: книга рецептів здорового харчування. Ролик зібрав агент «Продаючі AI&#8209;відео»: у кадрі AI-аватар авторки, наприкінці заклик написати «МЕНЮ» в коментарях.</span></p>
+  <div class="body c16">
+    <div class="c16-ph"><div class="phone"><div class="phone-screen"><video src="video/avatar-recepty.mp4" poster="video/avatar-recepty.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><span class="tag tag-gold"><span class="ru">AI-аватар, не съемка</span><span class="uk">AI-аватар, не зйомка</span></span></div>
+    <div class="c16-mid">
+      <div class="c16-yts">
+        <div class="yt"><strong>95&nbsp;046</strong><p><span class="ru">просмотров</span><span class="uk">переглядів</span></p></div>
+        <div class="yt"><strong>1&nbsp;123</strong><p><span class="ru">подписки за сутки</span><span class="uk">підписки за добу</span></p></div>
+        <div class="yt"><strong>917</strong><p><span class="ru">комментариев: люди пишут «МЕНЮ»</span><span class="uk">коментарів: люди пишуть «МЕНЮ»</span></p></div>
+        <div class="yt"><strong>24&nbsp;с</strong><p><span class="ru">в среднем смотрят ролик</span><span class="uk">в середньому дивляться ролик</span></p></div>
+      </div>
+      <div class="lq"><q><span class="ru">ИИшный рилс с аватаром за сутки принес больше 1000 подписчиков</span><span class="uk">ШІшний рілс з аватаром за добу приніс понад 1000 підписників</span></q><span><span class="ru">участница, о ролике</span><span class="uk">учасниця, про ролик</span></span></div>
+    </div>
+    <figure class="c16-proof"><img src="img/avatar-stats.jpg" alt=""><figcaption><span class="ru">Статистика ролика в Instagram</span><span class="uk">Статистика ролика в Instagram</span></figcaption></figure>
+  </div>
+</div></section>
+
 <!-- 12. Галерея -->
 <section class="sec sec-tall" id="more"><div class="slide">
   <div class="eyebrow"><span class="ru">Еще работы потока</span><span class="uk">Ще роботи потоку</span></div>
@@ -1023,9 +1178,9 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   </div>
 </div></section>
 
-<!-- 13. Все сайты -->
-<section class="sec"><div class="slide">
-  <div class="eyebrow"><span class="ru">И это лишь за первые две недели из восьми</span><span class="uk">І це лише за перші два тижні з восьми</span></div>
+<!-- Агент 1: все сайты -->
+<section class="sec" id="ag-sites"><div class="slide">
+  <div class="eyebrow"><span class="ru">Агент 1 · AI-сайты · 26 сайтов за 10 дней</span><span class="uk">Агент 1 · AI-сайти · 26 сайтів за 10 днів</span></div>
   <h2 class="title"><span class="ru">Каждый сайт можно открыть и пролистать</span><span class="uk">Кожен сайт можна відкрити й погортати</span></h2>
   <div class="all">
     <a class="mini" href="https://gleb-ai-neo.vercel.app/" target="_blank" rel="noopener"><div class="pic"><img src="img/gleb-ai-neo.jpg" alt="" loading="lazy"></div><b><span class="ru">Ивент-агентство, Бали</span><span class="uk">Івент-агенція, Балі</span></b></a>
@@ -1056,8 +1211,34 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
   </div>
 </div></section>
 
+<!-- Агент 2: AI-монтаж -->
+<section class="sec" id="ag-montazh"><div class="slide">
+  <div class="eyebrow"><span class="ru">Агент 2 · AI-монтаж</span><span class="uk">Агент 2 · AI-монтаж</span></div>
+  <h2 class="title"><span class="ru">7 роликов от 5 участников за первые три дня</span><span class="uk">7 роликів від 5 учасників за перші три дні</span></h2>
+  <p class="lead"><span class="ru">Нажмите на подпись под роликом, чтобы открыть кейс.</span><span class="uk">Натисніть на підпис під роликом, щоб відкрити кейс.</span></p>
+  <div class="body reels7">
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/montazh-prazdnik.mp4" poster="video/montazh-prazdnik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case1"><small><span class="ru">Ивент-агентство</span><span class="uk">Івент-агенція</span></small><b><span class="ru">Праздники на Бали</span><span class="uk">Свята на Балі</span></b></a></div>
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/montazh-neo.mp4" poster="video/montazh-neo.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case1"><small><span class="ru">Ивент-агентство</span><span class="uk">Івент-агенція</span></small><b><span class="ru">Ролик без съемок</span><span class="uk">Ролик без зйомок</span></b></a></div>
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/beauty-raschet.mp4" poster="video/beauty-raschet.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case2"><small><span class="ru">Бьюти-компания</span><span class="uk">Б'юті-компанія</span></small><b><span class="ru">Ролик для мастеров</span><span class="uk">Ролик для майстрів</span></b></a></div>
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/beauty-avatar.mp4" poster="video/beauty-avatar.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case2"><small><span class="ru">Бьюти-компания</span><span class="uk">Б'юті-компанія</span></small><b><span class="ru">С AI-аватаром</span><span class="uk">З AI-аватаром</span></b></a></div>
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/tpark-rolik.mp4" poster="video/tpark-rolik.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case14"><small><span class="ru">Площадка Tesla</span><span class="uk">Майданчик Tesla</span></small><b><span class="ru">Первый ролик</span><span class="uk">Перший ролик</span></b></a></div>
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/roadtex-vakansiya.mp4" poster="video/roadtex-vakansiya.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case4"><small><span class="ru">Найм водителей</span><span class="uk">Найм водіїв</span></small><b><span class="ru">Ролик-вакансия</span><span class="uk">Ролик-вакансія</span></b></a></div>
+    <div class="r7"><div class="phone"><div class="phone-screen"><video src="video/dj-reliz.mp4" poster="video/dj-reliz.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><a href="#case15"><small><span class="ru">Музыкальный релиз</span><span class="uk">Музичний реліз</span></small><b><span class="ru">Под биты трека</span><span class="uk">Під біти треку</span></b></a></div>
+  </div>
+</div></section>
+
+<!-- Агент 3: продающие AI-видео -->
+<section class="sec" id="ag-video"><div class="slide">
+  <div class="eyebrow"><span class="ru">Агент 3 · Продающие AI-видео</span><span class="uk">Агент 3 · Продаючі AI-відео</span></div>
+  <h2 class="title"><span class="ru">Видео без камеры и съемок</span><span class="uk">Відео без камери та зйомок</span></h2>
+  <div class="body vids2">
+    <div class="v2"><div class="phone"><div class="phone-screen"><video src="video/avatar-recepty.mp4" poster="video/avatar-recepty.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="v2-t"><span class="tag"><span class="ru">Книга рецептов</span><span class="uk">Книга рецептів</span></span><b><span class="ru">Рилс с AI-аватаром автора</span><span class="uk">Рілс з AI-аватаром авторки</span></b><p><span class="ru">95&nbsp;046 просмотров и 1&nbsp;123 подписки за сутки</span><span class="uk">95&nbsp;046 переглядів і 1&nbsp;123 підписки за добу</span></p><a class="agc-go" href="#case16"><span class="ru">Открыть кейс</span><span class="uk">Відкрити кейс</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+    <div class="v2"><div class="phone"><div class="phone-screen"><video src="video/obogrev-reklama.mp4" poster="video/obogrev-reklama.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="phone-island"></div><button type="button" class="snd"><span class="s-on"><span class="ru">Включить звук</span><span class="uk">Увімкнути звук</span></span><span class="s-off"><span class="ru">Выключить звук</span><span class="uk">Вимкнути звук</span></span></button></div><div class="v2-t"><span class="tag"><span class="ru">Обогрев дома без света</span><span class="uk">Обігрів дому без світла</span></span><b><span class="ru">Продающий ролик без съемок</span><span class="uk">Продаючий ролик без зйомок</span></b><p><span class="ru">Семья ужинает у печи, когда отключили свет</span><span class="uk">Родина вечеряє біля печі, коли вимкнули світло</span></p><a class="agc-go" href="#case6"><span class="ru">Открыть кейс</span><span class="uk">Відкрити кейс</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+  </div>
+</div></section>
+
 <!-- 14. Как сделать так же -->
-<section class="sec"><div class="slide slide-cta">
+<section class="sec" id="cta"><div class="slide slide-cta">
   <div class="glass cta">
     <div class="eyebrow"><span class="ru">Как сделать так же</span><span class="uk">Як зробити так само</span></div>
     <h2 class="title"><span class="ru">Вы можете так же</span><span class="uk">Ви можете так само</span></h2>
@@ -1200,6 +1381,16 @@ html[lang="uk"] .ru, html[lang="ru"] .uk { display: none !important; }
       if (on) { v.muted = false; b.classList.add('on'); try { v.currentTime = 0; } catch(err){} var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); }
     });
   });
+})();
+</script>
+<script>
+/* меню слева */
+(function(){
+  var d = document.querySelector('.drawer'), b = document.querySelector('.menu-btn'); if (!d || !b) return;
+  function close(){ d.classList.remove('open'); }
+  b.addEventListener('click', function(){ d.classList.add('open'); });
+  d.addEventListener('click', function(e){ if (e.target === d || e.target.closest('.dr-close') || e.target.closest('a')) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
 })();
 </script>
 </body>
