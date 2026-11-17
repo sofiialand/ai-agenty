@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Фокус-группа · Система AI-агентов</title>
+<meta name="description" content="Внедрите AI в бизнес за 1,5 месяца вместе с экспертами Системы">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--warm:#b4a497;--warm-ink:#15100c;--cream:#f4efe7;--cream-2:#e7e0d6;--cream-soft:#cabfb1;--cool:#c2ccd2;--ink:#0b0c0e;--ink-2:#16181c;--gold:#fdd506;--gold-deep:#e6be00;--glass-dark:rgba(12,11,10,.55);--gdb:rgba(244,239,231,.14);--maxw:1200px;--pad:clamp(16px,5vw,64px);--r:26px;--r-sm:14px;--ease:cubic-bezier(.22,.61,.36,1);--sans:"Inter",system-ui,sans-serif;--display:"Inter Tight","Inter",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--warm-ink);background:var(--cream);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.5}
+a{color:inherit}img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.03em;margin:0;font-weight:700}
+h2{font-size:clamp(30px,4vw,52px);line-height:1.06}
+h3{font-size:20px;line-height:1.15;letter-spacing:-.02em}
+.hl{background:linear-gradient(var(--gold),var(--gold)) 0 .17em/100% 1.03em no-repeat;color:var(--ink);padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.nw{white-space:nowrap}
+section{padding:clamp(56px,7vw,96px) 0;position:relative}
+.dark{background:var(--ink);color:var(--cream)}.cool{background:var(--cool)}.cream{background:var(--cream)}.warm{background:var(--warm)}
+.eb{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;margin-bottom:18px}
+.eb:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(253,213,6,.25)}
+.head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:40px}
+.head1{grid-template-columns:1fr;gap:20px}.head1 p{max-width:620px}
+@media (min-width:641px){.nwd{white-space:nowrap}}
+.head p{margin:0;font-size:16px;line-height:1.55;opacity:.8}
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--cream);color:var(--ink);text-decoration:none;font-weight:600;border-radius:999px;padding:8px 8px 8px 24px;font-size:16px;border:0;cursor:pointer;transition:transform .3s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn i{width:42px;height:42px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-style:normal;font-size:18px}
+.btn.gold{background:var(--gold)}.btn.gold i{background:var(--ink);color:var(--gold)}
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:40;padding:12px 0;transition:background .3s}
+nav.solid{background:rgba(11,12,14,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--gdb)}
+nav .wrap{max-width:1440px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:600;line-height:1.15;color:var(--cream);text-decoration:none}.logo small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;opacity:.8;text-transform:uppercase}
+.nav-r{display:flex;align-items:center;gap:12px}
+.lang{display:flex;background:var(--glass-dark);border:1px solid var(--gdb);border-radius:999px;padding:4px}
+.lang button{background:none;border:0;color:var(--cream);font-family:var(--mono);font-size:12px;letter-spacing:.1em;padding:7px 12px;border-radius:999px;cursor:pointer;opacity:.7}
+.lang button[aria-pressed="true"]{background:var(--gold);color:var(--ink);opacity:1}
+nav .btn{padding:5px 5px 5px 18px;font-size:14px}nav .btn i{width:34px;height:34px;font-size:15px}
+/* hero */
+.hero{--hbg:#140e0a;min-height:max(640px,100vh);padding:116px 0 56px;color:var(--cream);display:flex;align-items:flex-start;background:var(--hbg);overflow:hidden}
+.hero-stage{position:absolute;inset:0;z-index:0;overflow:hidden}
+.pbox{position:absolute;right:0;top:21.5%;height:100%;aspect-ratio:1672/941;container-type:size;transform-origin:70% 80%;animation:plate-in 2.2s var(--ease) both}
+.pbox .hp{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none;user-select:none}
+.pbox .hp-bg{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10%);mask-image:linear-gradient(to bottom,transparent 0,#000 10%)}
+.hero:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(20,14,10,.88) 0%,rgba(20,14,10,.6) 30%,rgba(20,14,10,0) 50%),linear-gradient(0deg,rgba(20,14,10,.5) 0%,rgba(20,14,10,0) 18%);pointer-events:none}
+.hero .wrap>div>*{animation:rise .9s var(--ease) both}
+.hero .wrap>div>*:nth-child(2){animation-delay:.12s}.hero .wrap>div>*:nth-child(3){animation-delay:.24s}.hero .wrap>div>*:nth-child(4){animation-delay:.36s}.hero .wrap>div>*:nth-child(5){animation-delay:.48s}
+@keyframes plate-in{from{transform:scale(1.07)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pbox,.hero .wrap>div>*{animation:none}}.hero .wrap{max-width:1440px;position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,520px);justify-content:start;gap:40px;align-items:start;width:100%}
+
+.hero .eb{background:var(--glass-dark);border:1px solid var(--gdb);border-radius:10px;padding:8px 14px}
+.hero h1{font-size:clamp(34px,3.9vw,54px);line-height:1.04}
+.hero .sub b{color:var(--cream);font-weight:600;display:inline-block;margin-bottom:8px}
+.hero .sub{font-size:18px;line-height:1.5;max-width:580px;margin:20px 0 0;color:var(--cream-soft)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;max-width:540px}
+.seg div{background:var(--glass-dark);border:1px solid var(--gdb);border-radius:var(--r-sm);padding:14px 16px;font-size:14px;line-height:1.45;color:var(--cream-soft)}
+.seg b{color:var(--gold);display:block;margin-bottom:4px;font-weight:600}
+.cta-row{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.micro{font-size:13px;opacity:.75}
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cmp>div{border-radius:var(--r);padding:28px}
+.cmp .a{background:var(--cream-2)}.cmp .b{background:var(--ink);color:var(--cream)}
+.cmp .t{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;margin-bottom:18px;opacity:.7}
+.cmp .b .t{color:var(--gold);opacity:1}
+.cmp ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cmp li{display:flex;gap:12px;font-size:15px;line-height:1.45}
+.cmp li:before{content:"";flex:none;width:20px;height:20px;border-radius:50%;margin-top:1px;border:1.5px solid rgba(21,16,12,.35)}
+.cmp .b li:before{border:0;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%230b0c0e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.plate{margin-top:20px;background:var(--gold);color:var(--ink);border-radius:var(--r);padding:28px 32px;font-size:17px;line-height:1.45;font-weight:500}
+/* how */
+.how{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:40px;align-items:center}
+.steps{display:grid;gap:16px}
+.step{display:grid;grid-template-columns:52px 1fr;gap:16px;background:rgba(255,255,255,.55);border-radius:var(--r);padding:22px 24px}
+.step .n{width:52px;height:52px;border-radius:14px;background:var(--ink);color:var(--gold);display:grid;place-items:center;font-family:var(--mono);font-size:15px}
+.step h3{margin:4px 0 8px}
+.step p{margin:0;font-size:15px;opacity:.85}
+.how figure{margin:0;border-radius:var(--r);overflow:hidden;box-shadow:0 24px 60px rgba(11,12,14,.25);aspect-ratio:4/5}
+.how figure img{width:100%;height:100%;object-fit:cover;transition:transform 6s var(--ease)}
+.how figure:hover img{transform:scale(1.04)}
+/* mini-group */
+.grp{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grp div{background:#fff;border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;box-shadow:0 10px 30px rgba(21,16,12,.06)}
+.grp i{width:44px;height:44px;border-radius:12px;background:var(--gold);display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:14px;color:var(--ink);margin-bottom:4px}
+.grp b{font-family:var(--display);font-size:19px;letter-spacing:-.02em;line-height:1.2}
+.grp span{font-size:15px;opacity:.8}
+/* team */
+.team{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tc{border-radius:var(--r);padding:28px;background:#fff;box-shadow:0 10px 30px rgba(21,16,12,.06)}
+.tc.t2{background:var(--ink);color:var(--cream);border:1px solid rgba(253,213,6,.42);box-shadow:0 24px 60px rgba(11,12,14,.25)}
+.tc-h{display:flex;gap:14px;align-items:center;margin-bottom:20px}
+.tc-h i{flex:none;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:700;font-size:18px}
+.tc-h b{display:block;font-family:var(--display);font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.tc-h small{display:block;font-size:13px;opacity:.7;margin-top:2px}
+.tc .txt{margin:0;font-size:15px;line-height:1.5;color:var(--cream-soft)}
+.tc .lbl{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--gold);margin:24px 0 4px}
+.tc ol{list-style:none;margin:0;padding:0}
+.tc li{display:grid;grid-template-columns:32px 1fr;gap:8px;padding:12px 0;border-top:1px solid rgba(21,16,12,.1);font-size:15px;line-height:1.45}
+.tc li:first-child{border-top:0}
+.tc li span{font-family:var(--mono);font-size:12px;color:rgba(21,16,12,.5);padding-top:2px}
+.tc.t2 li{border-color:var(--gdb)}.tc.t2 li span{color:var(--gold)}
+/* directions */
+.dirs{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.dir{grid-column:span 2;background:var(--ink-2);border:1px solid var(--gdb);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:14px;transition:border-color .3s,transform .3s var(--ease)}
+.dir:nth-child(4),.dir:nth-child(5){grid-column:span 3}
+.dir:hover{border-color:rgba(253,213,6,.5);transform:translateY(-3px)}
+.dir .n{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.12em}
+.dir p{margin:0;font-size:15px;color:var(--cream-soft);line-height:1.5}
+.dir .lead{margin-top:auto;padding-top:14px;border-top:1px solid var(--gdb);font-size:14px;color:var(--cream)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;border:1px solid rgba(253,213,6,.45);color:var(--gold);border-radius:999px;padding:5px 10px}
+.dir.vlad{background:linear-gradient(135deg,#17140d 0%,#121110 55%,#1b1710 100%);border-color:rgba(253,213,6,.42)}
+/* results */
+.res{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.res div{background:#fff;border-radius:var(--r);padding:24px;display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;box-shadow:0 10px 30px rgba(21,16,12,.06)}
+.res i{width:44px;height:44px;border-radius:12px;background:var(--gold);display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:14px;color:var(--ink)}
+.res b{display:block;font-family:var(--display);font-size:19px;letter-spacing:-.02em;line-height:1.2;margin:2px 0 6px}
+.res span{font-size:15px;opacity:.8}
+.note{margin-top:20px;background:var(--ink);color:var(--cream);border-radius:var(--r);padding:28px 32px;font-size:16px;line-height:1.55}
+.note b{color:var(--gold)}
+/* price */
+.price{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:center}
+.incl{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:14px}
+.incl li{display:flex;gap:14px;font-size:16px;line-height:1.45;color:var(--warm-ink)}
+.incl li:before{content:"";flex:none;width:22px;height:22px;border-radius:50%;margin-top:1px;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%230b0c0e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.pcard{position:relative;color:var(--cream);background:linear-gradient(160deg,#211c10 0%,#141310 55%,#17150f 100%);border:1px solid rgba(253,213,6,.55);border-radius:var(--r-lg,34px);padding:40px 36px;box-shadow:0 0 0 6px rgba(253,213,6,.18),0 30px 70px rgba(11,12,14,.32);display:flex;flex-direction:column;gap:18px}
+.pmono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--gold)}
+.pbig{font-family:var(--display);font-weight:800;font-size:clamp(64px,7vw,88px);line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap}
+.prow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.pold{font-size:15px;color:var(--cream-soft)}.pold s{color:var(--cream);opacity:.6}
+.psave{background:var(--gold);color:var(--ink);font-weight:600;font-size:13px;border-radius:999px;padding:6px 12px;white-space:nowrap}
+.pdur{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--cream);border-top:1px solid var(--gdb);padding-top:18px;margin-top:4px}
+.pbtn{justify-content:space-between;margin-top:6px;font-size:17px;padding:10px 10px 10px 28px}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.cin,.cout{min-width:0;background:var(--ink-2);border:1px solid var(--gdb);border-radius:var(--r);padding:28px}
+.cin{display:grid;gap:32px;align-content:start}
+.fld label{display:flex;justify-content:space-between;gap:16px;align-items:baseline;font-size:15px;line-height:1.4;color:var(--cream-soft);margin-bottom:16px}
+.fld output{font-family:var(--display);font-weight:700;font-size:22px;color:var(--cream);white-space:nowrap}
+.fld input{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:0;background:linear-gradient(var(--gold),var(--gold)) 0/var(--p,50%) 100% no-repeat,rgba(244,239,231,.15);cursor:pointer}
+.fld input::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:4px solid var(--ink);box-shadow:0 0 0 1px var(--gold)}
+.fld input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--gold);border:4px solid var(--ink)}
+.fld .mm{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--cream-soft);opacity:.6;margin-top:10px}
+.cout{display:flex;flex-direction:column;gap:24px}
+.sav .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--gold)}
+.sav .big{font-family:var(--display);font-weight:800;font-size:clamp(44px,5vw,64px);line-height:1;letter-spacing:-.03em;color:var(--gold);margin:10px 0 8px;white-space:nowrap}
+.sav p{margin:0;font-size:14px;color:var(--cream-soft)}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tile{background:var(--gold);color:var(--ink);border-radius:18px;padding:18px;min-width:0}
+.tile b{display:block;font-family:var(--display);font-size:26px;letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
+.tile>span{display:block;font-size:13px;line-height:1.35;margin-top:8px}
+.cost{font-size:15px;color:var(--cream);border-top:1px solid var(--gdb);padding-top:20px}
+.cost b{white-space:nowrap}
+.disc{margin:0;font-size:13px;line-height:1.5;color:var(--cream-soft);opacity:.75}
+/* author */
+.author{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.author h2 .hl{display:inline-block}
+.author p{font-size:17px;line-height:1.55;margin:20px 0 0}
+.author figure{margin:0;border-radius:var(--r);overflow:hidden;aspect-ratio:3/2;box-shadow:0 24px 60px rgba(11,12,14,.3)}
+.author figure img{width:100%;height:100%;object-fit:cover}
+/* experts slider */
+.exp-track{display:flex;gap:64px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none}
+.exp-track::-webkit-scrollbar{display:none}
+.exp{flex:0 0 100%;scroll-snap-align:start;padding:4px 2px 24px}
+.author figure.ph{display:grid;place-items:center;border:1.5px dashed rgba(21,16,12,.45);box-shadow:none;background:rgba(244,239,231,.35);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(21,16,12,.6)}
+.exp-nav{display:flex;align-items:center;gap:16px;margin-top:16px}
+.exp-arr{width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:var(--gold);font-size:18px;cursor:pointer;transition:transform .3s var(--ease),opacity .3s}
+.exp-arr:hover{transform:translateY(-2px)}.exp-arr:disabled{opacity:.3;cursor:default;transform:none}
+.exp-dots{display:flex;gap:8px}
+.exp-dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:rgba(21,16,12,.25);cursor:pointer;transition:width .3s var(--ease),background .3s}
+.exp-dots button[aria-current="true"]{width:28px;border-radius:5px;background:var(--ink)}
+.exp-count{font-family:var(--mono);font-size:12px;letter-spacing:.12em;margin-left:auto;margin-right:8px}
+/* faq */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{background:#fff;border-radius:var(--r-sm);padding:0 24px;box-shadow:0 6px 20px rgba(21,16,12,.05)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 0;font-weight:600;font-size:16px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-size:18px;transition:transform .3s var(--ease)}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq p{margin:0;padding:0 0 20px;font-size:15px;opacity:.85;max-width:720px}
+/* final */
+.final{background:#0b0c0e url(https://aiagentsystem.site/media-v4/nc/nc-stage-hall.jpg) center/cover no-repeat;color:var(--cream);text-align:center}
+.final:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.86),rgba(11,12,14,.94))}
+.final .wrap{position:relative;max-width:820px}
+.final .eb{color:var(--gold)}
+.final p{font-size:17px;line-height:1.55;color:var(--cream-soft);margin:20px auto 0;max-width:640px}
+.final .price s{opacity:.6;margin-right:6px}
+.final .price{margin-top:28px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
+.final .cta-row{justify-content:center}
+footer{background:var(--ink);color:var(--cream-soft);font-size:13px;padding:24px 0;border-top:1px solid var(--gdb)}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+/* narrow desktop: keep two columns */
+@media (max-width:900px){.hero{flex-direction:column;align-items:stretch;min-height:0;padding:64px 0 44px}.hero:after{display:none}.hero-stage{position:relative;inset:auto;height:62vw;max-height:520px;container-type:inline-size;margin-bottom:8px}.pbox{right:auto;left:-68.4cqw;top:-13.5cqw;width:171cqw;height:auto;transform-origin:50% 80%}.hero .wrap{max-width:var(--maxw)}.price{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}.pcard{padding:28px 24px}.pbig{font-size:56px}.incl li{font-size:15px}.tiles{grid-template-columns:minmax(0,1fr)}.tile{display:flex;align-items:center;gap:16px}.tile b{flex:none;min-width:96px}.tile>span{margin:0}.dirs{grid-template-columns:1fr 1fr}.dir,.dir:nth-child(4),.dir:nth-child(5){grid-column:span 1}.dir.vlad{grid-column:span 2}}
+/* phone */
+@media (max-width:640px){
+ body{font-size:15px}
+ .hero{padding:68px 0 40px}
+ .hero .wrap,.head,.cmp,.how,.res,.author{grid-template-columns:1fr}
+ .hero .wrap{gap:28px}
+ .hero .sub{font-size:16px}
+ .seg{grid-template-columns:1fr}
+ .head{gap:16px;margin-bottom:28px}
+ .dirs{grid-template-columns:1fr}.dir.vlad{grid-column:span 1}
+ .grp{grid-template-columns:1fr}
+ .team{grid-template-columns:1fr}.tc{padding:24px}
+ .calc{grid-template-columns:minmax(0,1fr)}
+ .price{grid-template-columns:minmax(0,1fr);gap:32px}.pcard{padding:28px 24px}.cin,.cout{padding:24px}.tile{padding:14px}.tile b{font-size:21px}
+ .cmp>div,.plate,.note{padding:24px}
+ .how figure{aspect-ratio:4/3}
+ .step{grid-template-columns:40px 1fr;gap:14px;padding:20px}.step .n{width:40px;height:40px;border-radius:12px;font-size:13px}
+ .author{gap:28px}
+ .logo small{display:none}
+ nav .btn span{display:none}nav .btn{padding:4px}
+ .hero .eb{letter-spacing:.08em;font-size:11px}
+ .seg div{font-size:16px}
+ nav .btn{padding:5px}nav .btn i{width:40px;height:40px}.lang button{padding:14px 12px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+ <div class="wrap">
+  <a class="logo" href="#top">Влад Ясько<small data-k="logo">Фокус-группа</small></a>
+  <div class="nav-r">
+   <div class="lang" role="group" aria-label="Язык">
+    <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+    <button type="button" data-lang="uk" aria-pressed="false">UA</button>
+   </div>
+   <a class="btn cta" href="https://t.me/aiagents_pay_bot" target="_blank" rel="noopener"><span data-k="cta">Занять место</span><i>→</i></a>
+  </div>
+ </div>
+</nav>
+
+<header class="hero" id="top">
+ <div class="hero-stage" aria-hidden="true">
+  <div class="pbox">
+   <img class="hp hp-bg" src="hero.webp" alt="" width="1672" height="941" fetchpriority="high">
+  </div>
+ </div>
+ <div class="wrap">
+  <div>
+   <div class="eb" data-k="hero.eb">Фокус-группа · Система AI-агентов</div>
+   <h1 data-k="hero.h1">Внедрите AI в бизнес <span class="hl nw">за 1,5 месяца</span> вместе с&nbsp;экспертами Системы</h1>
+   <p class="sub" data-k="hero.sub"><b>Агенты у вас уже есть. На фокус-группе вы получаете еще больше: стратегию и индивидуальные решения.</b><br>Пять экспертов изучают ваш бизнес, составляют план внедрения, каждую неделю разбирают результаты и планируют следующий шаг.</p>
+   <div class="seg">
+    <div data-k="seg1"><b>Внедряете вы</b>сами или руками своей команды</div>
+    <div data-k="seg2"><b>Ведут эксперты</b>маркетинг, трафик, продажи, контент, автоматизация</div>
+   </div>
+   <div class="cta-row">
+    <a class="btn gold cta" href="https://t.me/aiagents_pay_bot" target="_blank" rel="noopener"><span data-k="cta">Занять место</span><i>→</i></a>
+   </div>
+  </div>
+ </div>
+</header>
+
+<section class="cream">
+ <div class="wrap">
+  <div class="head rv">
+   <div>
+    <div class="eb" data-k="cmp.eb">Чем отличается</div>
+    <h2 data-k="cmp.h2">Система дает агентов. <span class="hl">Фокус-группа – результат в бизнесе</span></h2>
+   </div>
+  </div>
+  <div class="cmp rv">
+   <div class="a">
+    <div class="t" data-k="cmp.lt">Система</div>
+    <ul>
+     <li data-k="cmp.l1">7 агентов и видеоинструкции к ним</li>
+     <li data-k="cmp.l2">Ставите и настраиваете сами</li>
+     <li data-k="cmp.l3">Сами решаете, какого агента и куда внедрять</li>
+     <li data-k="cmp.l4">Вопросы задаете на Q&amp;A и куратору</li>
+    </ul>
+   </div>
+   <div class="b">
+    <div class="t" data-k="cmp.rt">Фокус-группа</div>
+    <ul>
+     <li data-k="cmp.r1">Эксперты изучают ваш бизнес до старта</li>
+     <li data-k="cmp.r2">План: каких агентов внедрять под вашу цель и в каком порядке</li>
+     <li data-k="cmp.r3">Каждую неделю эксперт разбирает ваше задание и дает следующий шаг</li>
+     <li data-k="cmp.r4">Пять экспертов, у каждого свое направление</li>
+    </ul>
+   </div>
+  </div>
+  <div class="plate rv" data-k="cmp.note">Фокус-группа для тех, кому нужен кратный рост, системность и индивидуальные решения.</div>
+ </div>
+</section>
+
+<section class="cool">
+ <div class="wrap how">
+  <div>
+   <div class="rv">
+    <div class="eb" data-k="how.eb">Формат</div>
+    <h2 data-k="how.h2" style="margin-bottom:32px">Как проходит <span class="hl nw">фокус-группа</span></h2>
+   </div>
+   <div class="steps">
+    <div class="step rv"><div class="n">01</div><div><h3 data-k="s1.t">Разбор бизнеса</h3><p data-k="s1.p">До старта эксперты погружаются в контекст задач, целей и вашего бизнеса в целом.</p></div></div>
+    <div class="step rv"><div class="n">02</div><div><h3 data-k="s2.t">План внедрения</h3><p data-k="s2.p">Под вашу цель составляем план: каких агентов и какие процессы внедряете, в каком порядке и что должно получиться на каждом шаге.</p></div></div>
+    <div class="step rv"><div class="n">03</div><div><h3 data-k="s3.t">Сессия раз в неделю</h3><p data-k="s3.p">На сессии получаете задание для внедрения и делаете его за неделю. На следующей сессии эксперт разбирает результат на вашем примере и дает следующий шаг.</p></div></div>
+   </div>
+  </div>
+  <figure class="rv"><img src="https://aiagentsystem.site/media-v4/nc/nc-office-teach.jpg" alt="" loading="lazy"></figure>
+ </div>
+</section>
+
+<section class="dark">
+ <div class="wrap">
+  <div class="head head1 rv">
+   <div>
+    <div class="eb" data-k="dirs.eb">5 направлений</div>
+    <h2 data-k="dirs.h2"><span class="nwd">Пять направлений бизнеса,</span><br><span class="hl nwd">с&nbsp;каждым работает эксперт</span></h2>
+   </div>
+   <p data-k="dirs.sub">Каждый эксперт ведет свою зону: разбирает ваши задания по ней и показывает, как довести агента до результата.</p>
+  </div>
+  <div class="dirs">
+   <article class="dir vlad rv">
+    <div class="n">01</div>
+    <h3 data-k="d1.t">Маркетинг и упаковка</h3>
+    <p data-k="d1.p">Разбираем, кому и что вы продаете, собираем оффер и сайт. Готовите ТЗ на тест новой связки: какой оффер, кому и где показываем.</p>
+    <div class="chips"><span data-k="c.site">AI-сайты</span></div>
+    <div class="lead" data-k="d1.l">Ведет Влад Ясько, автор системы</div>
+   </article>
+   <article class="dir rv">
+    <div class="n">02</div>
+    <h3 data-k="d2.t">Трафик</h3>
+    <p data-k="d2.p">Запускаете рекламу в Instagram и Facebook и SEO, чтобы вас находили в Google и в нейросетях.</p>
+    <div class="chips"><span data-k="c.ads">AI-реклама</span><span>AI-SEO</span></div>
+    <div class="lead" data-k="d2.l">Ведет таргетолог-практик</div>
+   </article>
+   <article class="dir rv">
+    <div class="n">03</div>
+    <h3 data-k="d3.t">Продажи</h3>
+    <p data-k="d3.p">AI-консультант отвечает на сайте и по телефону, AI-продавец ведет переписку в мессенджерах и доводит клиента до оплаты.</p>
+    <div class="chips"><span>AI-консультант</span><span data-k="c.sales">AI-продавец</span><span>AI-Охотник</span></div>
+    <div class="lead" data-k="d3.l">Ведет эксперт по продажам</div>
+   </article>
+   <article class="dir rv">
+    <div class="n">04</div>
+    <h3 data-k="d4.t">Контент и SMM</h3>
+    <p data-k="d4.p">Продающие AI-видео и монтаж роликов: контент выходит регулярно, без съемочной группы и монтажера.</p>
+    <div class="chips"><span data-k="c.video">AI-видео</span><span>AI-монтаж</span></div>
+    <div class="lead" data-k="d4.l">Ведет эксперт по видео</div>
+   </article>
+   <article class="dir rv">
+    <div class="n">05</div>
+    <h3 data-k="d5.t">Автоматизация</h3>
+    <p data-k="d5.p">Находим рутину, которую можно отдать AI. Вы автоматизируете как минимум один бизнес-процесс.</p>
+    <div class="chips"><span>Claude</span><span data-k="c.proc">ваши процессы</span></div>
+    <div class="lead" data-k="d5.l">Ведет технический специалист системы</div>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section class="cream">
+ <div class="wrap">
+  <div class="head rv">
+   <div>
+    <div class="eb" data-k="grp.eb">Мини-группа</div>
+    <h2 data-k="grp.h2">Формат мини-группы.<br><span class="hl">Решения – индивидуальные</span></h2>
+   </div>
+   <p data-k="grp.sub">Каждый участник приходит со своей задачей, и эксперт разбирает ее на примере его бизнеса. Группа дает то, чего нет один на один:</p>
+  </div>
+  <div class="grp">
+   <div class="rv"><i>01</i><b data-k="g1.t">Вы видите другие бизнесы изнутри</b><span data-k="g1.p">Процессы и задачи других участников: за одну сессию вы разбираете не один случай, а десять.</span></div>
+   <div class="rv"><i>02</i><b data-k="g2.t">Берете решения, которые уже проверили</b><span data-k="g2.p">Участники внедряют и тестируют решения в своем бизнесе. Вы видите, что сработало, и применяете у себя.</span></div>
+   <div class="rv"><i>03</i><b data-k="g3.t">Внедряете только успешный опыт</b><span data-k="g3.p">Чужие ошибки вы видите на сессии, а не повторяете у себя. Время и деньги уходят только на то, что дало результат.</span></div>
+  </div>
+  <div class="plate rv" data-k="grp.note">Один на один вы проверяете каждую гипотезу сами. В мини-группе 10 бизнесов тестируют решения параллельно, и на каждой сессии вы видите итоги.</div>
+ </div>
+</section>
+
+<section class="cool">
+ <div class="wrap">
+  <div class="head rv">
+   <div>
+    <div class="eb" data-k="tm.eb">Формат участия</div>
+    <h2 data-k="tm.h2">Принимайте участие самостоятельно <span class="hl">или с&nbsp;командой</span></h2>
+   </div>
+  </div>
+  <div class="team">
+   <div class="tc rv">
+    <div class="tc-h"><i>1</i><div><b data-k="tm1.t">Самостоятельно</b><small data-k="tm1.s">Вы и ваша задача</small></div></div>
+    <ol>
+     <li><span>01</span><div data-k="tm1.1">До старта эксперты погружаются в контекст ваших задач и целей.</div></li>
+     <li><span>02</span><div data-k="tm1.2">На сессии эксперт разбирает именно ваш запрос.</div></li>
+     <li><span>03</span><div data-k="tm1.3">Видите задачи и решения других участников и берете у них то, что сработало.</div></li>
+    </ol>
+   </div>
+   <div class="tc t2 rv">
+    <div class="tc-h"><i>2</i><div><b data-k="tm2.t">С командой</b><small data-k="tm2.s">Результат руками ваших людей</small></div></div>
+    <p class="txt" data-k="tm2.p">Заходите с сотрудниками. Маркетолог вместе с экспертом запускает рекламу и SEO, менеджер по продажам настраивает AI-продавца, SMM-специалист – AI-видео и монтаж. Каждый внедряет агентов в своей зоне.</p>
+    <div class="lbl" data-k="tm2.l">Почему командой выгоднее</div>
+    <ol>
+     <li><span>01</span><div data-k="tm2.1">Вы остаетесь на уровне управления, а не в настройках.</div></li>
+     <li><span>02</span><div data-k="tm2.2">Не тонете в текучке: агентов настраивают сотрудники.</div></li>
+     <li><span>03</span><div data-k="tm2.3">Агенты внедряются сразу в нескольких зонах бизнеса, и результат появляется быстрее.</div></li>
+     <li><span>04</span><div data-k="tm2.4">Люди ценят, что вы вкладываетесь в их развитие, и остаются с вами.</div></li>
+    </ol>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="cream">
+ <div class="wrap">
+  <div class="head rv">
+   <div>
+    <div class="eb" data-k="res.eb">Результат</div>
+    <h2 data-k="res.h2">Что будет в вашем бизнесе <span class="hl nw">через 1,5 месяца</span></h2>
+   </div>
+   <p data-k="res.sub">Набор зависит от вашей цели. Как минимум:</p>
+  </div>
+  <div class="res">
+   <div class="rv"><i>01</i><p style="margin:0"><b data-k="r1.t">Автоматизирован один бизнес-процесс</b><span data-k="r1.p">Рутину делает AI, а не сотрудник</span></p></div>
+   <div class="rv"><i>02</i><p style="margin:0"><b data-k="r2.t">Готово ТЗ на тест новой связки</b><span data-k="r2.p">Оффер, аудитория и площадка, где его показываете</span></p></div>
+   <div class="rv"><i>03</i><p style="margin:0"><b data-k="r3.t">Настроен источник заявок</b><span data-k="r3.p">Реклама в Instagram и Facebook или SEO</span></p></div>
+   <div class="rv"><i>04</i><p style="margin:0"><b data-k="r4.t">Собран отдел продаж на AI</b><span data-k="r4.p">Консультант и продавец отвечают клиентам и ведут их к оплате</span></p></div>
+  </div>
+  <div class="note rv" data-k="res.note"><b>Внедряете вы.</b> Эксперты разбирают ваш случай и говорят, что делать, но работу за вас не делают. Нужно, чтобы агентов настроила наша команда, – это тариф «Под ключ».</div>
+ </div>
+</section>
+
+<section class="cool price-sec">
+ <div class="wrap price">
+  <div class="rv">
+   <div class="eb" data-k="pr.eb">Стоимость</div>
+   <h2 data-k="pr.h2">Что входит <span class="hl">в участие</span></h2>
+   <ul class="incl">
+    <li data-k="pr.1">Разбор вашего бизнеса до старта</li>
+    <li data-k="pr.2">Индивидуальный план внедрения агентов</li>
+    <li data-k="pr.3">6 сессий: задание для внедрения и разбор результата</li>
+    <li data-k="pr.4">5 экспертов: маркетинг, трафик, продажи, контент, автоматизация</li>
+    <li data-k="pr.5">Мини-группа до 10 участников</li>
+    <li data-k="pr.6">Можно зайти с командой</li>
+   </ul>
+  </div>
+  <div class="pcard rv">
+   <div class="pmono" data-k="side.mono">Цена для участников Системы</div>
+   <div class="pbig">3,500&nbsp;$</div>
+   <div class="prow"><span class="pold" data-k="side.full"><s>5,000&nbsp;$</s> полная цена</span><span class="psave" data-k="pr.save">экономия 1,500&nbsp;$</span></div>
+   <div class="pdur" data-k="pr.dur">1,5 месяца · 6 сессий · 10 мест</div>
+   <a class="btn gold cta pbtn" href="https://t.me/aiagents_pay_bot" target="_blank" rel="noopener"><span data-k="cta">Занять место</span><i>→</i></a>
+  </div>
+ </div>
+</section>
+
+<section class="dark">
+ <div class="wrap">
+  <div class="head rv">
+   <div>
+    <div class="eb" data-k="cl.eb">Окупаемость</div>
+    <h2 data-k="cl.h2">Посчитайте, за сколько <span class="hl">окупится фокус-группа</span></h2>
+   </div>
+   <p data-k="cl.sub">Агенты забирают работу, за которую вы сейчас платите подрядчикам и сотрудникам, и снимают рутину. Двигайте ползунки под свои цифры.</p>
+  </div>
+  <div class="calc rv">
+   <div class="cin">
+    <div class="fld">
+     <label for="cM"><span data-k="cl.m">Сколько платите команде и подрядчикам в месяц</span><output id="oM"></output></label>
+     <input type="range" id="cM" min="500" max="20000" step="100" value="5000">
+     <div class="mm"><span>500&nbsp;$</span><span>20,000&nbsp;$</span></div>
+    </div>
+    <div class="fld">
+     <label for="cH"><span data-k="cl.h">Сколько часов в неделю уходит на рутину у вас и команды</span><output><span id="oH"></span>&nbsp;<span data-k="u.h">ч</span></output></label>
+     <input type="range" id="cH" min="5" max="80" step="1" value="20">
+     <div class="mm"><span>5</span><span>80</span></div>
+    </div>
+    <div class="fld">
+     <label for="cS"><span data-k="cl.s">Какую часть этого реально отдать AI-агентам</span><output id="oS"></output></label>
+     <input type="range" id="cS" min="10" max="60" step="5" value="25">
+     <div class="mm"><span>10%</span><span>60%</span></div>
+    </div>
+   </div>
+   <div class="cout">
+    <div class="sav">
+     <div class="mono" data-k="cl.sav">Экономия за год</div>
+     <div class="big" id="rSav"></div>
+     <p data-k="cl.savp">в той зоне, за которую вы уже платите</p>
+    </div>
+    <div class="tiles">
+     <div class="tile"><b><span id="rH"></span>&nbsp;<span data-k="u.h2">ч</span></b><span data-k="cl.t1">освобождается за год</span></div>
+     <div class="tile"><b><span id="rP"></span>&nbsp;<span data-k="u.mo">мес.</span></b><span data-k="cl.t2">срок окупаемости фокус-группы</span></div>
+     <div class="tile"><b>×<span id="rX"></span></b><span data-k="cl.t3">столько раз окупается участие за первый год</span></div>
+    </div>
+    <div class="cost" data-k="cl.cost">Стоимость участия для участников Системы: <b>3,500&nbsp;$</b></div>
+    <p class="disc" data-k="cl.disc">Расчет по вашим цифрам и вашей оценке того, что можно отдать AI-агентам. Это ориентир масштаба, а не гарантия: экономику считаем на вашем случае.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="warm">
+ <div class="wrap rv">
+  <div class="exp-track" id="expTrack">
+   <article class="exp author" aria-label="1 / 5">
+    <div>
+     <div class="eb" data-k="au.eb">Автор системы</div>
+     <h2><span class="hl">Влад Ясько</span></h2>
+     <p data-k="au.p">14 лет в маркетинге. Собрал Систему AI-агентов: семь агентов делают работу подрядчиков – сайты, видео, монтаж, рекламу, SEO, консультации и продажи. На фокус-группе ведет маркетинг и упаковку.</p>
+    </div>
+    <figure><img src="https://aiagentsystem.site/media-v4/nc/nc-stage-portrait.jpg" alt="Влад Ясько" loading="lazy"></figure>
+   </article>
+   <article class="exp author" aria-label="2 / 5">
+    <div>
+     <div class="eb" data-k="e2.eb">Эксперт · Трафик</div>
+     <h2><span class="hl" data-k="e2.n">Имя эксперта</span></h2>
+     <p data-k="e2.p">Здесь будет опыт эксперта и его кейсы. На фокус-группе ведет трафик: рекламу в Instagram и Facebook и SEO.</p>
+    </div>
+    <figure class="ph"><span data-k="ph">Фото эксперта</span></figure>
+   </article>
+   <article class="exp author" aria-label="3 / 5">
+    <div>
+     <div class="eb" data-k="e3.eb">Эксперт · Продажи</div>
+     <h2><span class="hl" data-k="e3.n">Имя эксперта</span></h2>
+     <p data-k="e3.p">Здесь будет опыт эксперта и его кейсы. На фокус-группе ведет продажи: AI-консультанта и AI-продавца.</p>
+    </div>
+    <figure class="ph"><span data-k="ph">Фото эксперта</span></figure>
+   </article>
+   <article class="exp author" aria-label="4 / 5">
+    <div>
+     <div class="eb" data-k="e4.eb">Эксперт · Контент и SMM</div>
+     <h2><span class="hl" data-k="e4.n">Имя эксперта</span></h2>
+     <p data-k="e4.p">Здесь будет опыт эксперта и его кейсы. На фокус-группе ведет контент: продающие AI-видео и монтаж.</p>
+    </div>
+    <figure class="ph"><span data-k="ph">Фото эксперта</span></figure>
+   </article>
+   <article class="exp author" aria-label="5 / 5">
+    <div>
+     <div class="eb" data-k="e5.eb">Эксперт · Автоматизация</div>
+     <h2><span class="hl" data-k="e5.n">Имя эксперта</span></h2>
+     <p data-k="e5.p">Здесь будет опыт эксперта и его кейсы. На фокус-группе ведет автоматизацию бизнес-процессов.</p>
+    </div>
+    <figure class="ph"><span data-k="ph">Фото эксперта</span></figure>
+   </article>
+  </div>
+  <div class="exp-nav">
+   <button type="button" class="exp-arr" id="expPrev" aria-label="Назад">←</button>
+   <div class="exp-dots" id="expDots"></div>
+   <span class="exp-count" id="expCount">01 / 05</span>
+   <button type="button" class="exp-arr" id="expNext" aria-label="Вперед">→</button>
+  </div>
+ </div>
+</section>
+
+<section class="cream">
+ <div class="wrap">
+  <div class="head rv">
+   <div>
+    <div class="eb" data-k="faq.eb">Вопросы</div>
+    <h2 data-k="faq.h2">Частые вопросы</h2>
+   </div>
+  </div>
+  <div class="faq rv">
+   <details><summary data-k="q1">Чем фокус-группа отличается от Q&amp;A?</summary><p data-k="a1">На Q&amp;A вы задаете вопрос и получаете ответ. На фокус-группе эксперты знают ваш бизнес с первого разбора, ведут вас по плану и каждую неделю разбирают, что вы внедрили.</p></details>
+   <details><summary data-k="q2">Вы внедрите агентов за меня?</summary><p data-k="a2">Нет. Внедряете вы или ваша команда, эксперты подсказывают на вашем примере. Если нужно, чтобы агентов настроила наша команда, выбирайте тариф «Под ключ».</p></details>
+   <details><summary data-k="q4">Сколько времени это займет?</summary><p data-k="a4">Одна сессия в неделю и время на задание для внедрения между сессиями.</p></details>
+   <details><summary data-k="q5">Я установил еще не всех агентов. Можно идти?</summary><p data-k="a5">Да. В плане внедрения мы выбираем агентов под вашу цель и начинаем с тех, которые быстрее дадут результат.</p></details>
+   <details><summary data-k="q6">Почему всего 10 мест?</summary><p data-k="a6">На каждой сессии эксперты разбирают задание каждого участника. Больше 10 человек за одну сессию так не разобрать.</p></details>
+  </div>
+ </div>
+</section>
+
+<section class="final">
+ <div class="wrap rv">
+  <div class="eb" data-k="fin.eb">10 мест в группе</div>
+  <h2 data-k="fin.h2">Нам нужен <span class="hl">ваш результат</span></h2>
+  <p data-k="fin.p">Ваш кейс – это то, с чем мы придем к следующему потоку. Поэтому каждую неделю эксперты разбирают задание каждого участника, а не отвечают на общие вопросы.</p>
+  <div class="price" data-k="fin.price"><s>5,000&nbsp;$</s> 3,500&nbsp;$ для участников Системы · 1,5&nbsp;месяца · 6&nbsp;сессий</div>
+  <div class="cta-row">
+   <a class="btn gold cta" href="https://t.me/aiagents_pay_bot" target="_blank" rel="noopener"><span data-k="cta">Занять место</span><i>→</i></a>
+  </div>
+ </div>
+</section>
+
+<footer><div class="wrap" data-k="foot">Влад Ясько · Система AI-агентов</div></footer>
+
+<script>
+(function(){
+var UK={
+"logo":"Фокус-група",
+"cta":"Зайняти місце",
+"hero.eb":"Фокус-група · Система AI-агентів",
+"hero.h1":"Впровадьте AI в бізнес <span class=\"hl nw\">за 1,5 місяця</span> разом з&nbsp;експертами Системи",
+"hero.sub":"<b>Агенти у вас уже є. На фокус-групі ви отримуєте ще більше: стратегію та індивідуальні рішення.</b><br>П'ять експертів вивчають ваш бізнес, складають план впровадження, щотижня розбирають результати й планують наступний крок.",
+"seg1":"<b>Впроваджуєте ви</b>самі або руками своєї команди",
+"seg2":"<b>Ведуть експерти</b>маркетинг, трафік, продажі, контент, автоматизація",
+"side.mono":"Ціна для учасників Системи",
+"side.full":"<s>5,000&nbsp;$</s> повна ціна",
+"cmp.eb":"Чим відрізняється",
+"cmp.h2":"Система дає агентів. <span class=\"hl\">Фокус-група – результат у бізнесі</span>",
+"cmp.lt":"Система",
+"cmp.l1":"7 агентів і відеоінструкції до них",
+"cmp.l2":"Ставите й налаштовуєте самі",
+"cmp.l3":"Самі вирішуєте, якого агента й куди впроваджувати",
+"cmp.l4":"Питання ставите на Q&amp;A і куратору",
+"cmp.rt":"Фокус-група",
+"cmp.r1":"Експерти вивчають ваш бізнес до старту",
+"cmp.r2":"План: яких агентів впроваджувати під вашу ціль і в якому порядку",
+"cmp.r3":"Щотижня експерт розбирає ваше завдання й дає наступний крок",
+"cmp.r4":"П'ять експертів, у кожного свій напрям",
+"cmp.note":"Фокус-група для тих, кому потрібне кратне зростання, системність та індивідуальні рішення.",
+"how.eb":"Формат",
+"how.h2":"Як проходить <span class=\"hl nw\">фокус-група</span>",
+"s1.t":"Розбір бізнесу",
+"s1.p":"До старту експерти занурюються в контекст задач, цілей і вашого бізнесу загалом.",
+"s2.t":"План впровадження",
+"s2.p":"Під вашу ціль складаємо план: яких агентів і які процеси впроваджуєте, в якому порядку і що має вийти на кожному кроці.",
+"s3.t":"Сесія раз на тиждень",
+"s3.p":"На сесії отримуєте завдання для впровадження й виконуєте його за тиждень. На наступній сесії експерт розбирає результат на вашому прикладі й дає наступний крок.",
+"grp.eb":"Міні-група",
+"grp.h2":"Формат міні-групи.<br><span class=\"hl\">Рішення – індивідуальні</span>",
+"grp.sub":"Кожен учасник приходить зі своєю задачею, і експерт розбирає її на прикладі його бізнесу. Група дає те, чого немає один на один:",
+"g1.t":"Ви бачите інші бізнеси зсередини",
+"g1.p":"Процеси й задачі інших учасників: за одну сесію ви розбираєте не один випадок, а десять.",
+"g2.t":"Берете рішення, які вже перевірили",
+"g2.p":"Учасники впроваджують і тестують рішення у своєму бізнесі. Ви бачите, що спрацювало, і застосовуєте у себе.",
+"g3.t":"Впроваджуєте лише успішний досвід",
+"g3.p":"Чужі помилки ви бачите на сесії, а не повторюєте у себе. Час і гроші йдуть лише на те, що дало результат.",
+"grp.note":"Один на один ви перевіряєте кожну гіпотезу самі. У міні-групі 10 бізнесів тестують рішення паралельно, і на кожній сесії ви бачите підсумки.",
+"tm.eb":"Формат участі",
+"tm.h2":"Беріть участь самостійно <span class=\"hl\">або з&nbsp;командою</span>",
+"tm1.t":"Самостійно","tm1.s":"Ви і ваша задача",
+"tm1.1":"До старту експерти занурюються в контекст ваших задач і цілей.",
+"tm1.2":"На сесії експерт розбирає саме ваш запит.",
+"tm1.3":"Бачите задачі й рішення інших учасників і берете в них те, що спрацювало.",
+"tm2.t":"З командою","tm2.s":"Результат руками ваших людей",
+"tm2.p":"Заходьте зі співробітниками. Маркетолог разом з експертом запускає рекламу і SEO, менеджер із продажів налаштовує AI-продавця, SMM-спеціаліст – AI-відео й монтаж. Кожен впроваджує агентів у своїй зоні.",
+"tm2.l":"Чому командою вигідніше",
+"tm2.1":"Ви залишаєтеся на рівні управління, а не в налаштуваннях.",
+"tm2.2":"Не тонете в текучці: агентів налаштовують співробітники.",
+"tm2.3":"Агенти впроваджуються одразу в кількох зонах бізнесу, і результат з'являється швидше.",
+"tm2.4":"Люди цінують, що ви вкладаєтеся в їхній розвиток, і залишаються з вами.",
+"dirs.eb":"5 напрямів",
+"dirs.h2":"<span class=\"nwd\">П'ять напрямів бізнесу,</span><br><span class=\"hl nwd\">з&nbsp;кожним працює експерт</span>",
+"dirs.sub":"Кожен експерт веде свою зону: розбирає ваші завдання з неї і показує, як довести агента до результату.",
+"d1.t":"Маркетинг і упаковка",
+"d1.p":"Розбираємо, кому і що ви продаєте, збираємо офер і сайт. Готуєте ТЗ на тест нової зв'язки: який офер, кому і де показуємо.",
+"d1.l":"Веде Влад Ясько, автор системи",
+"c.site":"AI-сайти",
+"d2.t":"Трафік",
+"d2.p":"Запускаєте рекламу в Instagram і Facebook та SEO, щоб вас знаходили в Google і в нейромережах.",
+"d2.l":"Веде таргетолог-практик",
+"c.ads":"AI-реклама",
+"d3.t":"Продажі",
+"d3.p":"AI-консультант відповідає на сайті й телефоном, AI-продавець веде листування в месенджерах і доводить клієнта до оплати.",
+"d3.l":"Веде експерт із продажів",
+"c.sales":"AI-продавець",
+"d4.t":"Контент і SMM",
+"d4.p":"Продаючі AI-відео й монтаж роликів: контент виходить регулярно, без знімальної групи і монтажера.",
+"d4.l":"Веде експерт із відео",
+"c.video":"AI-відео",
+"d5.t":"Автоматизація",
+"d5.p":"Знаходимо рутину, яку можна віддати AI. Ви автоматизуєте щонайменше один бізнес-процес.",
+"d5.l":"Веде технічний спеціаліст системи",
+"c.proc":"ваші процеси",
+"res.eb":"Результат",
+"res.h2":"Що буде у вашому бізнесі <span class=\"hl nw\">через 1,5 місяця</span>",
+"res.sub":"Набір залежить від вашої цілі. Щонайменше:",
+"r1.t":"Автоматизовано один бізнес-процес",
+"r1.p":"Рутину робить AI, а не співробітник",
+"r2.t":"Готове ТЗ на тест нової зв'язки",
+"r2.p":"Офер, аудиторія і майданчик, де ви його показуєте",
+"r3.t":"Налаштовано джерело заявок",
+"r3.p":"Реклама в Instagram і Facebook або SEO",
+"r4.t":"Зібрано відділ продажів на AI",
+"r4.p":"Консультант і продавець відповідають клієнтам і ведуть їх до оплати",
+"res.note":"<b>Впроваджуєте ви.</b> Експерти розбирають ваш випадок і кажуть, що робити, але роботу за вас не виконують. Потрібно, щоб агентів налаштувала наша команда, – це тариф «Під ключ».",
+"pr.eb":"Вартість",
+"pr.h2":"Що входить <span class=\"hl\">в участь</span>",
+"pr.1":"Розбір вашого бізнесу до старту",
+"pr.2":"Індивідуальний план впровадження агентів",
+"pr.3":"6 сесій: завдання для впровадження і розбір результату",
+"pr.4":"5 експертів: маркетинг, трафік, продажі, контент, автоматизація",
+"pr.5":"Міні-група до 10 учасників",
+"pr.6":"Можна зайти з командою",
+"pr.save":"економія 1,500&nbsp;$",
+"pr.dur":"1,5 місяця · 6 сесій · 10 місць",
+"cl.eb":"Окупність",
+"cl.h2":"Порахуйте, за скільки <span class=\"hl\">окупиться фокус-група</span>",
+"cl.sub":"Агенти забирають роботу, за яку ви зараз платите підрядникам і співробітникам, і знімають рутину. Рухайте повзунки під свої цифри.",
+"cl.m":"Скільки платите команді й підрядникам на місяць",
+"cl.h":"Скільки годин на тиждень іде на рутину у вас і команди",
+"cl.s":"Яку частину цього реально віддати AI-агентам",
+"u.h":"год","u.h2":"год","u.mo":"міс.",
+"cl.sav":"Економія за рік",
+"cl.savp":"у тій зоні, за яку ви вже платите",
+"cl.t1":"звільняється за рік",
+"cl.t2":"термін окупності фокус-групи",
+"cl.t3":"стільки разів окупається участь за перший рік",
+"cl.cost":"Вартість участі для учасників Системи: <b>3,500&nbsp;$</b>",
+"cl.disc":"Розрахунок за вашими цифрами і вашою оцінкою того, що можна віддати AI-агентам. Це орієнтир масштабу, а не гарантія: економіку рахуємо на вашому випадку.",
+"au.eb":"Автор системи",
+"au.p":"14 років у маркетингу. Зібрав Систему AI-агентів: сім агентів виконують роботу підрядників – сайти, відео, монтаж, рекламу, SEO, консультації та продажі. На фокус-групі веде маркетинг і упаковку.",
+"ph":"Фото експерта",
+"e2.eb":"Експерт · Трафік","e2.n":"Ім'я експерта","e2.p":"Тут буде досвід експерта і його кейси. На фокус-групі веде трафік: рекламу в Instagram і Facebook та SEO.",
+"e3.eb":"Експерт · Продажі","e3.n":"Ім'я експерта","e3.p":"Тут буде досвід експерта і його кейси. На фокус-групі веде продажі: AI-консультанта й AI-продавця.",
+"e4.eb":"Експерт · Контент і SMM","e4.n":"Ім'я експерта","e4.p":"Тут буде досвід експерта і його кейси. На фокус-групі веде контент: продаючі AI-відео й монтаж.",
+"e5.eb":"Експерт · Автоматизація","e5.n":"Ім'я експерта","e5.p":"Тут буде досвід експерта і його кейси. На фокус-групі веде автоматизацію бізнес-процесів.",
+"faq.eb":"Питання",
+"faq.h2":"Часті питання",
+"q1":"Чим фокус-група відрізняється від Q&amp;A?",
+"a1":"На Q&amp;A ви ставите питання й отримуєте відповідь. На фокус-групі експерти знають ваш бізнес із першого розбору, ведуть вас за планом і щотижня розбирають, що ви впровадили.",
+"q2":"Ви впровадите агентів за мене?",
+"a2":"Ні. Впроваджуєте ви або ваша команда, експерти підказують на вашому прикладі. Якщо потрібно, щоб агентів налаштувала наша команда, обирайте тариф «Під ключ».",
+"q4":"Скільки часу це забере?",
+"a4":"Одна сесія на тиждень і час на завдання для впровадження між сесіями.",
+"q5":"Я встановив ще не всіх агентів. Можна йти?",
+"a5":"Так. У плані впровадження ми обираємо агентів під вашу ціль і починаємо з тих, які швидше дадуть результат.",
+"q6":"Чому лише 10 місць?",
+"a6":"На кожній сесії експерти розбирають завдання кожного учасника. Більше 10 людей за одну сесію так не розібрати.",
+"fin.eb":"10 місць у групі",
+"fin.h2":"Нам потрібен <span class=\"hl\">ваш результат</span>",
+"fin.p":"Ваш кейс – це те, з чим ми прийдемо до наступного потоку. Тому щотижня експерти розбирають завдання кожного учасника, а не відповідають на загальні питання.",
+"fin.price":"<s>5,000&nbsp;$</s> 3,500&nbsp;$ для учасників Системи · 1,5&nbsp;місяця · 6&nbsp;сесій",
+"foot":"Влад Ясько · Система AI-агентів"
+};
+var TITLE={ru:document.title,uk:"Фокус-група · Система AI-агентів"};
+var els=[].slice.call(document.querySelectorAll('[data-k]'));
+els.forEach(function(el){el._ru=el.innerHTML});
+var btns=[].slice.call(document.querySelectorAll('.lang button'));
+function setLang(l,push){
+ els.forEach(function(el){var k=el.getAttribute('data-k');el.innerHTML=(l==='uk'&&UK[k]!=null)?UK[k]:el._ru});
+ document.documentElement.lang=l;document.title=TITLE[l];
+ btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-lang')===l))});
+ if(push){try{var u=new URL(location.href);if(l==='uk')u.searchParams.set('lang','uk');else u.searchParams.delete('lang');history.replaceState(null,'',u)}catch(e){}}
+}
+btns.forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'),true)})});
+var q=null;try{q=new URLSearchParams(location.search).get('lang')}catch(e){}
+setLang(q==='uk'||q==='ua'?'uk':'ru',false);
+var tr=document.getElementById('expTrack');
+if(tr){var sl=[].slice.call(tr.children),dots=document.getElementById('expDots'),cnt=document.getElementById('expCount'),pv=document.getElementById('expPrev'),nx=document.getElementById('expNext');
+ function pad(n){return (n<10?'0':'')+n}
+ sl.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',String(i+1));b.addEventListener('click',function(){go(i)});dots.appendChild(b)});
+ function cur(){var b=0,d=1e9;sl.forEach(function(s,k){var x=Math.abs(s.offsetLeft-sl[0].offsetLeft-tr.scrollLeft);if(x<d){d=x;b=k}});return b}
+ function go(i){i=Math.max(0,Math.min(sl.length-1,i));tr.scrollTo({left:sl[i].offsetLeft-sl[0].offsetLeft})}
+ function upd(){var i=cur();[].forEach.call(dots.children,function(b,k){b.setAttribute('aria-current',String(k===i))});cnt.textContent=pad(i+1)+' / '+pad(sl.length);pv.disabled=i===0;nx.disabled=i===sl.length-1}
+ pv.addEventListener('click',function(){go(cur()-1)});nx.addEventListener('click',function(){go(cur()+1)});
+ tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd)},{passive:true});window.addEventListener('resize',upd);upd();}
+var PRICE=3500;
+function money(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,',')+'\u00a0$'}
+var cM=document.getElementById('cM'),cH=document.getElementById('cH'),cS=document.getElementById('cS');
+function calc(){
+ [cM,cH,cS].forEach(function(i){i.style.setProperty('--p',((i.value-i.min)/(i.max-i.min)*100)+'%')});
+ var m=+cM.value,h=+cH.value,s=+cS.value/100,sav=m*12*s;
+ document.getElementById('oM').textContent=money(m);
+ document.getElementById('oH').textContent=h;
+ document.getElementById('oS').textContent=Math.round(s*100)+'%';
+ document.getElementById('rSav').textContent=money(sav);
+ document.getElementById('rH').textContent=String(Math.round(h*52*s)).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+ document.getElementById('rP').textContent=Math.max(1,Math.ceil(PRICE/(sav/12)));
+ document.getElementById('rX').textContent=(Math.round(sav/PRICE*10)/10).toString().replace('.',',');
+}
+if(cM){[cM,cH,cS].forEach(function(i){i.addEventListener('input',calc)});calc();}
+var nav=document.getElementById('nav');
+function onScroll(){nav.classList.toggle('solid',window.scrollY>40)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+var rv=[].slice.call(document.querySelectorAll('.rv'));
+if('IntersectionObserver' in window){
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+ rv.forEach(function(el){io.observe(el)});
+}else{rv.forEach(function(el){el.classList.add('in')})}
+})();
+</script>
+</body>
+</html>
